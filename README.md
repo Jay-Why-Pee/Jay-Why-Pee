@@ -14,3 +14,519 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV 모터 업계 최신 뉴스</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-tab {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-tab:hover, .filter-tab.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        .news-grid {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .news-item {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .news-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .news-badge.breaking {
+            background: #e74c3c;
+            animation: pulse 2s infinite;
+        }
+
+        .news-badge.tech {
+            background: #9b59b6;
+        }
+
+        .news-badge.market {
+            background: #27ae60;
+        }
+
+        .news-badge.korea {
+            background: #f39c12;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .news-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .news-summary {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .news-source {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .news-date {
+            font-style: italic;
+        }
+
+        .more-btn {
+            display: block;
+            margin: 40px auto;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .impact-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .high-impact {
+            background: #e74c3c;
+        }
+
+        .medium-impact {
+            background: #f39c12;
+        }
+
+        .low-impact {
+            background: #27ae60;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .news-item {
+                padding: 20px;
+            }
+            
+            .filter-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡🔋 EV 모터 업계 최신 뉴스</h1>
+            <p>글로벌 전기차 모터 시장의 핫이슈와 기술 트렌드</p>
+        </div>
+
+        <div class="filter-tabs">
+            <div class="filter-tab active" data-filter="all">전체</div>
+            <div class="filter-tab" data-filter="breaking">속보</div>
+            <div class="filter-tab" data-filter="tech">기술혁신</div>
+            <div class="filter-tab" data-filter="market">시장동향</div>
+            <div class="filter-tab" data-filter="korea">국내뉴스</div>
+        </div>
+
+        <button class="back-btn hidden" id="backBtn">← 주요 뉴스로 돌아가기</button>
+
+        <div class="news-grid" id="newsGrid">
+            <!-- 주요 뉴스 5개 -->
+            <div class="news-item" data-category="breaking">
+                <span class="news-badge breaking">
+                    <span class="impact-indicator high-impact"></span>속보
+                </span>
+                <h2 class="news-title">테슬라, 희토류 없는 모터 기술로 95% 효율성 달성</h2>
+                <p class="news-summary">테슬라가 2025년 1월 희토류를 사용하지 않는 혁신적인 모터 기술을 발표했습니다. 이 기술은 95%의 효율성을 달성하여 기존 PMSM 모터의 한계를 극복했으며, 원재료 비용 절감과 공급망 안정성 확보에 큰 기여할 것으로 예상됩니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Market Business Insights</span>
+                    <span class="news-date">2025.01.15</span>
+                </div>
+            </div>
+
+            <div class="news-item" data-category="tech">
+                <span class="news-badge tech">
+                    <span class="impact-indicator high-impact"></span>기술혁신
+                </span>
+                <h2 class="news-title">BMW, i7 시리즈에 혁신적인 액시얼 플럭스 모터 도입</h2>
+                <p class="news-summary">BMW가 2024년 11월 i7 시리즈에 차세대 액시얼 플럭스 모터를 적용했다고 발표했습니다. 이 모터는 기존 레디얼 플럭스 모터 대비 30% 향상된 효율성과 컴팩트한 설계를 자랑하며, 프리미엄 EV 세그먼트에 새로운 기준을 제시하고 있습니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Market Business Insights</span>
+                    <span class="news-date">2024.11.20</span>
+                </div>
+            </div>
+
+            <div class="news-item" data-category="market">
+                <span class="news-badge market">
+                    <span class="impact-indicator high-impact"></span>M&A
+                </span>
+                <h2 class="news-title">보그워너, 산트롤 인수로 전기 모빌리티 포트폴리오 확장</h2>
+                <p class="news-summary">보그워너가 32억 달러 규모로 모터 제조업체 산트롤을 인수한다고 발표했습니다. 이번 인수를 통해 보그워너는 전기차 모터 기술 역량을 대폭 강화하고 글로벌 e-모빌리티 시장에서의 경쟁력을 높일 계획입니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Market Business Insights</span>
+                    <span class="news-date">2024.11.15</span>
+                </div>
+            </div>
+
+            <div class="news-item" data-category="tech">
+                <span class="news-badge tech">
+                    <span class="impact-indicator medium-impact"></span>배터리
+                </span>
+                <h2 class="news-title">CATL, 1500km 주행 가능한 차세대 배터리 기술 발표</h2>
+                <p class="news-summary">세계 최대 EV 배터리 제조업체 CATL이 단일 충전으로 1500km 주행이 가능한 혁신적인 배터리 기술을 공개했습니다. 테슬라, 현대, 토요타 등 주요 자동차 제조업체들이 이 기술 도입을 검토 중이며, EV 주행거리 한계 극복의 새로운 전환점이 될 것으로 전망됩니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">CarsGuide Australia</span>
+                    <span class="news-date">2025.04.22</span>
+                </div>
+            </div>
+
+            <div class="news-item" data-category="market">
+                <span class="news-badge market">
+                    <span class="impact-indicator medium-impact"></span>시장동향
+                </span>
+                <h2 class="news-title">현대차그룹, 2024년 테슬라 제외 글로벌 EV 판매 1위 달성</h2>
+                <p class="news-summary">현대차그룹이 2024년 테슛라를 제외한 글로벌 EV 시장에서 판매량 1위를 기록했다고 발표했습니다. 아이오닉 5, 아이오닉 6 등의 인기 모델과 차별화된 E-GMP 플랫폼 기술력이 성공 요인으로 분석되며, 2025년에도 강력한 경쟁력을 유지할 것으로 예상됩니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">InsideEVs</span>
+                    <span class="news-date">2025.01.17</span>
+                </div>
+            </div>
+
+            <!-- 추가 뉴스 25개 (더보기 클릭시 표시) -->
+            <div class="news-item hidden extended" data-category="breaking">
+                <span class="news-badge breaking">
+                    <span class="impact-indicator high-impact"></span>신제품
+                </span>
+                <h2 class="news-title">테슬라 모델Y 주니퍼, 2025년 개선된 승차감으로 출시</h2>
+                <p class="news-summary">테슬라가 2024년 10월부터 생산을 시작한 모델Y 주니퍼가 드디어 출시되었습니다. 개선된 승차감과 새로운 디자인 언어를 적용하여 세계 베스트셀링 EV의 지위를 더욱 공고히 할 것으로 예상됩니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">MotorTrend</span>
+                    <span class="news-date">2025.07.29</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="market">
+                <span class="news-badge market">
+                    <span class="impact-indicator medium-impact"></span>규제
+                </span>
+                <h2 class="news-title">유럽 CO2 배출 규제 강화로 2025년 EV 점유율 25% 전망</h2>
+                <p class="news-summary">유럽의 엄격한 CO2 배출 기준 적용으로 2025년 EV 판매 점유율이 25%에 달할 것으로 예상됩니다. 2030년에는 60% 가까이 증가할 전망이며, 이는 EV 모터 시장의 급속한 성장을 이끌 핵심 동력이 될 것으로 분석됩니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Virta Global</span>
+                    <span class="news-date">2025.08.04</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="tech">
+                <span class="news-badge tech">
+                    <span class="impact-indicator medium-impact"></span>액시얼 플럭스
+                </span>
+                <h2 class="news-title">액시얼 플럭스 및 인휠 모터, EV 시장의 차세대 대안으로 부상</h2>
+                <p class="news-summary">IDTechEx 보고서에 따르면 기존 온보드 레디얼 플럭스 모터의 대안으로 액시얼 플럭스와 인휠 모터가 큰 관심을 받고 있습니다. 초기 단계이지만 시장 채택이 증가하고 있어 향후 EV 모터 기술의 다양성을 크게 높일 것으로 전망됩니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">IDTechEx</span>
+                    <span class="news-date">2024.08.27</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="korea">
+                <span class="news-badge korea">
+                    <span class="impact-indicator medium-impact"></span>국내
+                </span>
+                <h2 class="news-title">현대 아이오닉5 N, 641마력 고성능 전기 SUV로 스포츠카 시장 진출</h2>
+                <p class="news-summary">현대자동차가 아이오닉5의 고성능 버전인 아이오닉5 N을 출시했습니다. 641마력의 강력한 출력을 자랑하며 전기차도 스포츠카만큼 흥미진진할 수 있음을 입증하고 있습니다. 이는 전기차 모터 기술의 새로운 가능성을 보여주는 사례입니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Car and Driver</span>
+                    <span class="news-date">2025.08.08</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="market">
+                <span class="news-badge market">
+                    <span class="impact-indicator medium-impact"></span>신흥시장
+                </span>
+                <h2 class="news-title">아시아 신흥국 EV 판매 40% 급증, 40만 대 돌파</h2>
+                <p class="news-summary">중국을 제외한 아시아 신흥국의 전기차 판매가 2024년 40만 대에 달해 전년 대비 40% 이상 급증했습니다. 인도는 약 10만 대로 2%의 점유율을 기록했으며, 이 지역의 EV 모터 수요도 크게 증가할 것으로 예상됩니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">IEA Global EV Outlook</span>
+                    <span class="news-date">2025.03.15</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="tech">
+                <span class="news-badge tech">
+                    <span class="impact-indicator low-impact"></span>신기술
+                </span>
+                <h2 class="news-title">테슬라, 2025년 6월 차세대 소형 전기차 생산 시작 예정</h2>
+                <p class="news-summary">테슬라가 2024년 발표한 차세대 컴팩트 전기차가 2025년 6월부터 생산에 들어간다고 밝혔습니다. 2만5천 달러 가격대의 저렴한 모델로 EV 대중화에 크게 기여할 것으로 기대되며, 새로운 모터 기술도 적용될 예정입니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">IEA Global EV Outlook</span>
+                    <span class="news-date">2025.02.10</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="market">
+                <span class="news-badge market">
+                    <span class="impact-indicator medium-impact"></span>영국시장
+                </span>
+                <h2 class="news-title">영국 EV 점유율 30% 돌파, 전년 대비 6%p 상승</h2>
+                <p class="news-summary">영국의 2024년 EV 판매 점유율이 30%에 근접하며 2023년 24%에서 크게 상승했습니다. 유럽에서 가장 빠른 성장세를 보이고 있어 EV 모터 제조업체들의 주요 타겟 시장으로 부상하고 있습니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Virta Global</span>
+                    <span class="news-date">2025.01.20</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="breaking">
+                <span class="news-badge breaking">
+                    <span class="impact-indicator high-impact"></span>신모델
+                </span>
+                <h2 class="news-title">BMW 비전 노이에 클라세 X, 2025년 말 iX3로 양산 예정</h2>
+                <p class="news-summary">BMW의 혁신적인 비전 노이에 클라세 X 컨셉트카가 2025년 말 iX3 모델명으로 양산될 예정입니다. 새로운 디자인 언어와 함께 차세대 전기 파워트레인 기술이 적용될 것으로 알려져 업계의 주목을 받고 있습니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Car and Driver</span>
+                    <span class="news-date">2025.01.05</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="tech">
+                <span class="news-badge tech">
+                    <span class="impact-indicator low-impact"></span>파워트레인
+                </span>
+                <h2 class="news-title">차세대 EV 트레일시커, 듀얼 모터로 375마력 구현</h2>
+                <p class="news-summary">새로 공개된 전기차 트레일시커가 듀얼 모터 시스템으로 375마력을 발휘하며 0-60mph 가속을 4.4초에 달성한다고 발표했습니다. 74.7kWh 배터리로 260마일 이상의 주행거리를 제공하며 3,500파운드 견인 능력도 갖췄습니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">U.S. News</span>
+                    <span class="news-date">2024.12.21</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="market">
+                <span class="news-badge market">
+                    <span class="impact-indicator low-impact"></span>시장전망
+                </span>
+                <h2 class="news-title">2025년 EV 기술 혁신, 소비자 선택권 확대로 이어져</h2>
+                <p class="news-summary">2025년을 맞아 전기차 기술 혁신이 가속화되고 있습니다. 신규 진입업체와 확장된 제품 라인업으로 소비자들의 선택권이 그 어느 때보다 다양해졌으며, 이는 EV 모터 기술 발전의 새로운 동력이 되고 있습니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Green Mountain Energy</span>
+                    <span class="news-date">2025.02.07</span>
+                </div>
+            </div>
+
+            <!-- 더 많은 뉴스 아이템들... -->
+            <div class="news-item hidden extended" data-category="tech">
+                <span class="news-badge tech">
+                    <span class="impact-indicator medium-impact"></span>미래기술
+                </span>
+                <h2 class="news-title">고체 배터리와 차세대 모터 제어 시스템 연구 가속화</h2>
+                <p class="news-summary">고체 배터리 기술과 AI 기반 모터 제어 시스템의 통합 연구가 활발히 진행되고 있습니다. 이러한 기술 융합은 EV의 효율성과 안전성을 획기적으로 향상시킬 것으로 기대되며, 2026년부터 상용화가 시작될 전망입니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Tech Innovation Reports</span>
+                    <span class="news-date">2025.03.10</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="korea">
+                <span class="news-badge korea">
+                    <span class="impact-indicator high-impact"></span>국내
+                </span>
+                <h2 class="news-title">LG이노텍, 차세대 EV 모터 핵심부품 대량생산 체제 구축</h2>
+                <p class="news-summary">LG이노텍이 전기차 모터의 핵심 부품인 스테이터와 로터 생산 능력을 대폭 확대한다고 발표했습니다. 2025년 하반기부터 월 10만 세트 생산이 가능해져 글로벌 EV 모터 공급망에서 중요한 역할을 담당할 예정입니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Korean Tech News</span>
+                    <span class="news-date">2025.04.15</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="market">
+                <span class="news-badge market">
+                    <span class="impact-indicator medium-impact"></span>경쟁분석
+                </span>
+                <h2 class="news-title">테슬라 미국 EV 시장 점유율 44% 유지하며 여전히 압도적 1위</h2>
+                <p class="news-summary">2024년 말 기준 테슬라는 여전히 미국 EV 시장에서 44%의 강력한 점유율을 보이고 있습니다. 경쟁사들의 도전이 거세지고 있지만, 테슬라의 통합 기술력과 슈퍼차저 네트워크 등이 경쟁 우위를 지속시키고 있습니다.</p>
+                <div class="news-meta">
+                    <span class="news-source">Green Mountain Energy</span>
+                    <span class="news-date">2025.01.30</span>
+                </div>
+            </div>
+
+            <div class="news-item hidden extended" data-category="tech">
+                <span class="news-badge tech">
+                    <span class="impact-indicator high-impact"></span>자율주행
+                </span>
+                <h2 class="news-title">자율주행과 EV 모터 제어의 완전 통합 시스템 개발 중</h2

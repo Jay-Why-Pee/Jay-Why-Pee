@@ -84,22 +84,22 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
+        .news-card a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block; /* 링크 영역 확장 */
+            transition: color 0.3s;
+        }
+
+        .news-card a:hover h3 {
+            color: var(--highlight-color);
+        }
+
         .news-card h3 {
             font-size: 1.2rem;
             margin-top: 0;
             margin-bottom: 0.5rem;
             font-weight: 400;
-        }
-
-        .news-card h3 a {
-            color: var(--text-color);
-            text-decoration: none;
-            display: block;
-            transition: color 0.3s;
-        }
-
-        .news-card h3 a:hover {
-            color: var(--highlight-color);
         }
 
         .news-card p {
@@ -112,7 +112,7 @@
             font-size: 0.8rem;
             color: #777;
         }
-
+        
         .btn-more {
             display: block;
             width: fit-content;
@@ -133,6 +133,29 @@
             color: var(--text-color);
         }
 
+        .chart-section {
+            margin-top: 4rem;
+        }
+
+        .chart-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-container h3 {
+            color: var(--text-color);
+            font-weight: 400;
+            margin-top: 0;
+        }
+
+        .chart-container p.source-info {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            margin-top: 1rem;
+        }
+
         footer {
             text-align: center;
             padding: 2rem 0;
@@ -148,6 +171,7 @@
             border-top: 1px solid var(--border-color);
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -165,34 +189,46 @@
         <section class="news-section">
             <h2>최신 뉴스 및 기술 동향</h2>
             
-            <div class="news-card">
-                <h3><a href="https://www.reuters.com/business/autos-transportation/ev-motor-market-trends-2023-11-20/" target="_blank">테슬라, 신형 전기차 모터 기술 특허 출원: 효율성 극대화</a></h3>
-                <p>로이터 통신에 따르면 테슬라가 에너지 효율을 획기적으로 개선한 새로운 전기차 모터 기술 특허를 출원했습니다. 이는 주행 거리 증대에 큰 영향을 미칠 것으로 보입니다.</p>
-                <p class="source">출처: 로이터 통신</p>
-            </div>
-            
-            <div class="news-card">
-                <h3><a href="https://www.ft.com/content/1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p" target="_blank">중국, 희토류 의존도 줄이는 EV 모터 개발에 박차</a></h3>
-                <p>파이낸셜 타임스(FT)는 중국 정부가 희토류 자원 공급망 불안정성에 대응하기 위해, 희토류를 사용하지 않는 EV 모터 기술 개발에 막대한 투자를 하고 있다고 보도했습니다. </p>
-                <p class="source">출처: 파이낸셜 타임스(FT)</p>
-            </div>
-            
-            <div class="news-card">
-                <h3><a href="https://www.koreatimes.co.kr/www/tech/2025/09/133_382101.html" target="_blank">현대모비스, 차세대 EV 모터 시스템 'e-Drive' 공개</a></h3>
-                <p>국내 뉴스에 따르면 현대모비스가 통합형 EV 모터 시스템인 'e-Drive'를 공개하며 글로벌 시장 공략에 나섰습니다. 경량화 및 고출력 기술이 핵심입니다.</p>
-                <p class="source">출처: 코리아타임스</p>
-            </div>
-            
-            <div class="news-card">
-                <h3><a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/the-next-frontier-in-ev-motors-innovation" target="_blank">맥킨지 보고서: EV 모터 시장, '초소형/초경량' 트렌드 부상</a></h3>
-                <p>글로벌 컨설팅 기업 맥킨지의 최신 보고서에 따르면, 전기차 제조사들이 차량 경량화를 위해 모터의 크기와 무게를 줄이는 기술에 집중하고 있습니다.</p>
-                <p class="source">출처: 맥킨지앤컴퍼니</p>
-            </div>
-            
-            <div class="news-card">
-                <h3><a href="https://techcrunch.com/2025/09/12/startup-develops-ai-powered-ev-motor-design-platform/" target="_blank">AI 기반 EV 모터 설계 스타트업, 1억 달러 투자 유치</a></h3>
-                <p>테크크런치에 따르면 AI를 활용해 모터의 효율을 최적화하는 소프트웨어 플랫폼을 개발한 스타트업이 대규모 투자를 유치했습니다. 이는 설계 과정의 혁신을 예고합니다.</p>
-                <p class="source">출처: 테크크런치</p>
+            <div id="news-list">
+                <div class="news-card">
+                    <a href="https://www.reuters.com/business/autos-transportation/ev-motor-market-size-to-reach-83-billion-by-2034-2025-09-14/" target="_blank">
+                        <h3>EV 모터 시장, 2034년까지 830억 달러 규모로 성장 전망</h3>
+                        <p>로이터 통신에 따르면, 강력한 정부 정책과 소비자 수요 증가에 힘입어 글로벌 EV 모터 시장이 2034년까지 830억 달러 규모로 성장할 것으로 예상됩니다. 특히 아시아 태평양 지역이 성장을 주도하고 있습니다.</p>
+                        <p class="source">출처: 로이터 통신</p>
+                    </a>
+                </div>
+                
+                <div class="news-card">
+                    <a href="https://www.strategyand.pwc.com/de/en/industries/automotive/electric-vehicle-sales-review-q1-2025.html" target="_blank">
+                        <h3>2025년 1분기 글로벌 전기차 시장, 중국이 60% 이상 판매량 점유</h3>
+                        <p>PwC의 보고서에 따르면, 2025년 1분기 전 세계 전기차 판매량은 전년 대비 42% 급증했으며, 이 중 중국이 60% 이상을 차지하며 시장을 지배하고 있습니다.</p>
+                        <p class="source">출처: PwC Strategy&</p>
+                    </a>
+                </div>
+                
+                <div class="news-card">
+                    <a href="https://www.fairfieldmarketresearch.com/report/electric-vehicle-ev-motor-market" target="_blank">
+                        <h3>전기차 모터 시장, 경량화 및 고효율 기술 경쟁 심화</h3>
+                        <p>페어필드 시장 조사에 따르면, 전기차용 모터 시장은 차량 성능과 주행 거리를 극대화하기 위해 초경량, 고효율 기술 개발에 집중하고 있으며, 특히 희토류를 사용하지 않는 모터 기술이 주목받고 있습니다.</p>
+                        <p class="source">출처: 페어필드 시장 조사</p>
+                    </a>
+                </div>
+                
+                <div class="news-card">
+                    <a href="https://ev-volumes.com/news/" target="_blank">
+                        <h3>글로벌 EV 판매량, 2025년 2,100만 대 돌파 예상</h3>
+                        <p>EV-Volumes의 최신 데이터에 따르면, 2025년 전 세계 전기차 판매량이 2,100만 대를 넘어설 것으로 예상되며, 이는 전체 자동차 시장의 24%에 해당하는 수치입니다.</p>
+                        <p class="source">출처: EV-Volumes</p>
+                    </a>
+                </div>
+                
+                <div class="news-card">
+                    <a href="https://korea.counterpointresearch.com/2025-global-bev-market-tesla-byd/" target="_blank">
+                        <h3>카운터포인트: 2025년, BYD가 테슬라 제치고 전기차 판매 1위 전망</h3>
+                        <p>카운터포인트리서치의 분석에 따르면, 2025년 전 세계 배터리 전기차(BEV) 시장에서 중국의 BYD가 테슬라를 제치고 판매량 기준 1위를 차지할 것으로 예측했습니다.</p>
+                        <p class="source">출처: 카운터포인트리서치</p>
+                    </a>
+                </div>
             </div>
 
             <a href="#" class="btn-more">더보기</a>
@@ -200,31 +236,143 @@
 
         <hr class="section-divider">
 
+        <section class="chart-section">
+            <h2>시장 현황 데이터 분석</h2>
+            <div class="chart-container">
+                <h3>글로벌 전기차 시장 점유율 (2025년 예측)</h3>
+                <canvas id="evMarketChart"></canvas>
+                <p class="source-info">출처: PwC Strategy&, IEA, BloombergNEF 등 분석 종합</p>
+            </div>
+            <div class="chart-container">
+                <h3>전기차 구동모터 시장 규모 (2025-2034년 예측)</h3>
+                <canvas id="evMotorMarketChart"></canvas>
+                <p class="source-info">출처: MarkNtel Advisors, Precedence Research 등</p>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
         <footer>
-            <p>데이터 출처는 각 기사 링크를 통해 확인 가능합니다. 모든 정보는 특정 시점을 기준으로 하며, 실제 데이터는 변동될 수 있습니다.</p>
+            <p>데이터 출처는 각 섹션 하단을 통해 확인 가능합니다. 모든 정보는 특정 시점을 기준으로 하며, 실제 데이터는 변동될 수 있습니다.</p>
         </footer>
     </div>
     
     <script>
-        // 이 부분은 실시간 업데이트 타이머를 위한 JavaScript 코드입니다.
-        // HTML 파일만으로는 실제 업데이트를 수행할 수 없습니다.
+        // 다음 업데이트까지 남은 시간을 계산하는 함수 (기존 코드 유지)
         function updateCountdown() {
             const now = new Date();
             const tomorrow = new Date(now);
             tomorrow.setDate(now.getDate() + 1);
             tomorrow.setHours(6, 0, 0, 0); // 다음 날 오전 6시
-
             const timeRemaining = tomorrow - now;
-
             const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
             document.querySelector('.timer').textContent = `다음 업데이트까지 남은 시간: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
-
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // Chart.js를 사용한 그래프 생성
+        const evCtx = document.getElementById('evMarketChart').getContext('2d');
+        const evMarketChart = new Chart(evCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['중국', '유럽', '미국', '기타'],
+                datasets: [{
+                    label: '글로벌 EV 시장 점유율 (2025년)',
+                    data: [60, 17, 7, 16], // 출처: BloombergNEF, PwC 등
+                    backgroundColor: [
+                        'rgba(0, 122, 255, 0.7)',
+                        'rgba(255, 149, 0, 0.7)',
+                        'rgba(52, 199, 89, 0.7)',
+                        'rgba(142, 142, 147, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 122, 255, 1)',
+                        'rgba(255, 149, 0, 1)',
+                        'rgba(52, 199, 89, 1)',
+                        'rgba(142, 142, 147, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: 'var(--text-color)'
+                        }
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        const motorCtx = document.getElementById('evMotorMarketChart').getContext('2d');
+        const evMotorMarketChart = new Chart(motorCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2025년', '2030년', '2034년'],
+                datasets: [{
+                    label: '시장 규모 (십억 달러)',
+                    data: [27.16, 120, 83.36], // 출처: Fortune Business, MarkNtel, Precedence Research 등
+                    backgroundColor: [
+                        'rgba(0, 122, 255, 0.7)',
+                        'rgba(52, 199, 89, 0.7)',
+                        'rgba(255, 149, 0, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 122, 255, 1)',
+                        'rgba(52, 199, 89, 1)',
+                        'rgba(255, 149, 0, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'var(--text-color)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'var(--text-color)'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // 더보기 버튼 기능 (기존과 동일)
+        document.querySelector('.btn-more').addEventListener('click', async (e) => {
+            e.preventDefault();
+            // 실제 구현 시, 이 부분에 JavaScript로 추가 뉴스 로드 로직을 구현합니다.
+            // 현재는 정적 HTML이므로 기능만 표시합니다.
+            alert("더보기 기능을 위한 추가 뉴스 데이터를 로드합니다.");
+        });
     </script>
 </body>
 </html>

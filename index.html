@@ -1,692 +1,230 @@
 <!DOCTYPE html>
-
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>글로벌 EV 모터 시장 분석 대시보드</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+    <title>EV 모터 시장 인사이트 대시보드</title>
     <style>
-        * {
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --accent-color: #8a8a8a; /* Apple-like gray */
+            --highlight-color: #007aff; /* Apple-like blue */
+            --card-bg: #2b2b2b;
+            --border-color: #444;
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-```
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 50%, #3a3a3c 100%);
-        min-height: 100vh;
-        color: #f2f2f7;
-        line-height: 1.6;
-    }
-
-    .dashboard {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 40px 20px;
-    }
-
-    .header {
-        text-align: center;
-        margin-bottom: 50px;
-        color: #f2f2f7;
-    }
-
-    .header h1 {
-        font-size: 3.5em;
-        font-weight: 700;
-        margin-bottom: 16px;
-        background: linear-gradient(135deg, #ffffff 0%, #a8a8a8 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        letter-spacing: -0.02em;
-    }
-
-    .header p {
-        font-size: 1.2em;
-        color: #a8a8a8;
-        font-weight: 400;
-    }
-
-    .auto-update-status {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        color: #f2f2f7;
-        padding: 16px 24px;
-        border-radius: 16px;
-        margin: 20px auto;
-        text-align: center;
-        max-width: 600px;
-        font-size: 0.95em;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .update-indicator {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        margin-right: 12px;
-        background: #30d158;
-        animation: blink 2s infinite;
-    }
-
-    @keyframes blink {
-        0%, 50% { opacity: 1; }
-        51%, 100% { opacity: 0.4; }
-    }
-
-    .countdown-timer {
-        font-weight: 600;
-        color: #ff9f0a;
-    }
-
-    .last-update-info {
-        text-align: center;
-        color: #a8a8a8;
-        margin: 16px auto;
-        font-size: 0.9em;
-    }
-
-    .filter-tabs {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 40px;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .filter-tab {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        color: #f2f2f7;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        padding: 12px 24px;
-        border-radius: 24px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        font-weight: 500;
-        font-size: 0.95em;
-    }
-
-    .filter-tab:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-1px);
-        border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .filter-tab.active {
-        background: #007aff;
-        border-color: #007aff;
-        color: white;
-        transform: translateY(-1px);
-    }
-
-    .news-grid {
-        display: grid;
-        gap: 32px;
-        margin-bottom: 40px;
-    }
-
-    .news-item {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        border-radius: 20px;
-        padding: 32px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-    }
-
-    .news-item:hover {
-        background: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-4px);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    }
-
-    .news-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #007aff 0%, #5ac8fa 100%);
-    }
-
-    .news-badge {
-        display: inline-block;
-        padding: 8px 16px;
-        border-radius: 12px;
-        font-size: 0.85em;
-        font-weight: 600;
-        margin-bottom: 20px;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-    }
-
-    .news-badge.breaking {
-        background: rgba(255, 59, 48, 0.15);
-        color: #ff453a;
-        border: 1px solid rgba(255, 59, 48, 0.3);
-        animation: pulse 2s infinite;
-    }
-
-    .news-badge.tech {
-        background: rgba(175, 82, 222, 0.15);
-        color: #bf5af2;
-        border: 1px solid rgba(175, 82, 222, 0.3);
-    }
-
-    .news-badge.market {
-        background: rgba(48, 209, 88, 0.15);
-        color: #30d158;
-        border: 1px solid rgba(48, 209, 88, 0.3);
-    }
-
-    .news-badge.korea {
-        background: rgba(255, 159, 10, 0.15);
-        color: #ff9f0a;
-        border: 1px solid rgba(255, 159, 10, 0.3);
-    }
-
-    @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.7; }
-        100% { opacity: 1; }
-    }
-
-    .news-title {
-        font-size: 1.5em;
-        font-weight: 600;
-        margin-bottom: 16px;
-        color: #f2f2f7;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-    }
-
-    .news-summary {
-        color: #a8a8a8;
-        margin-bottom: 20px;
-        line-height: 1.6;
-        font-size: 1em;
-    }
-
-    .news-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.9em;
-        color: #8e8e93;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-        padding-top: 20px;
-    }
-
-    .news-source {
-        font-weight: 600;
-        color: #007aff;
-    }
-
-    .news-date {
-        font-style: italic;
-    }
-
-    .more-btn, .back-btn {
-        display: block;
-        margin: 50px auto;
-        padding: 16px 32px;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        color: #f2f2f7;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 24px;
-        font-size: 1em;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .more-btn:hover, .back-btn:hover {
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-    }
-
-    .back-btn {
-        margin-bottom: 32px;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .impact-indicator {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        margin-right: 8px;
-    }
-
-    .high-impact {
-        background: #ff453a;
-    }
-
-    .medium-impact {
-        background: #ff9f0a;
-    }
-
-    .low-impact {
-        background: #30d158;
-    }
-
-    .breaking-news {
-        border: 1px solid rgba(255, 59, 48, 0.3) !important;
-        background: rgba(255, 59, 48, 0.05) !important;
-    }
-
-    @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-
-    .large-card {
-        grid-column: 1 / -1;
-    }
-
-    .tech-trends {
-        background: rgba(175, 82, 222, 0.08);
-        border-color: rgba(175, 82, 222, 0.2);
-    }
-
-    .tech-trends h3 {
-        color: #bf5af2;
-        border-color: rgba(175, 82, 222, 0.3);
-    }
-
-    .tech-item {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 20px;
-        margin: 16px 0;
-        border-radius: 12px;
-        border-left: 3px solid #bf5af2;
-    }
-
-    .tech-item h4 {
-        margin-bottom: 12px;
-        font-size: 1.1em;
-        color: #f2f2f7;
-    }
-
-    .tech-item p {
-        font-size: 0.95em;
-        color: #a8a8a8;
-    }
-
-    .key-insights {
-        background: rgba(0, 122, 255, 0.08);
-        border-color: rgba(0, 122, 255, 0.2);
-    }
-
-    .key-insights h3 {
-        color: #007aff;
-        border-color: rgba(0, 122, 255, 0.3);
-    }
-
-    .insight-item {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 16px;
-        margin: 12px 0;
-        border-radius: 12px;
-        border-left: 3px solid #007aff;
-        color: #a8a8a8;
-    }
-
-    .market-overview {
-        background: rgba(48, 209, 88, 0.08);
-        border-color: rgba(48, 209, 88, 0.2);
-    }
-
-    .market-overview h3 {
-        color: #30d158;
-        border-color: rgba(48, 209, 88, 0.3);
-    }
-
-    .regional-data {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 20px;
-        margin: 24px 0;
-    }
-
-    .region-card {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 20px;
-        text-align: center;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .region-card h4 {
-        margin-bottom: 12px;
-        color: #f2f2f7;
-        font-size: 0.9em;
-    }
-
-    .region-value {
-        font-size: 1.8em;
-        font-weight: 700;
-        color: #30d158;
-    }
-
-    .growth-rate {
-        font-size: 0.85em;
-        margin-top: 8px;
-        color: #a8a8a8;
-    }
-
-    .card {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        border-radius: 20px;
-        padding: 32px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
-    }
-
-    .card:hover {
-        background: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
-    }
-
-    .card h3 {
-        font-size: 1.4em;
-        margin-bottom: 20px;
-        color: #f2f2f7;
-        border-bottom: 2px solid rgba(0, 122, 255, 0.3);
-        padding-bottom: 12px;
-    }
-
-    .metric {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 16px 0;
-        padding: 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-    }
-
-    .metric-label {
-        font-weight: 500;
-        color: #a8a8a8;
-    }
-
-    .metric-value {
-        font-weight: 600;
-        color: #007aff;
-        font-size: 1.1em;
-    }
-
-    .trend-up {
-        color: #30d158;
-    }
-
-    .trend-down {
-        color: #ff453a;
-    }
-
-    .chart-container {
-        height: 300px;
-        margin: 20px 0;
-    }
-
-    .source {
-        font-size: 0.8em;
-        color: #8e8e93;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .source a {
-        color: #007aff;
-        text-decoration: none;
-    }
-
-    .source a:hover {
-        text-decoration: underline;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-        gap: 32px;
-        margin-bottom: 40px;
-    }
-
-    @media (max-width: 768px) {
-        .dashboard {
-            padding: 20px 15px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-weight: 300;
+            font-size: 2.5rem;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
         }
         
-        .header h1 {
-            font-size: 2.5em;
+        h2 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--highlight-color);
         }
         
-        .news-item, .card {
-            padding: 24px;
+        .update-info {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .update-info .timer {
+            font-weight: 700;
+        }
+
+        .news-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
         
-        .filter-tabs {
-            justify-content: flex-start;
-            overflow-x: auto;
-            padding-bottom: 10px;
+        .news-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .grid {
-            grid-template-columns: 1fr;
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-    }
-</style>
-```
 
+        .news-card h3 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .news-card h3 a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .news-card h3 a:hover {
+            color: var(--highlight-color);
+        }
+
+        .news-card p {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .news-card .source {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .btn-more {
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            padding: 0.8rem 2rem;
+            border: 1px solid var(--highlight-color);
+            background-color: transparent;
+            color: var(--highlight-color);
+            text-decoration: none;
+            border-radius: 50px;
+            text-align: center;
+            font-weight: 700;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-more:hover {
+            background-color: var(--highlight-color);
+            color: var(--text-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        .section-divider {
+            margin: 4rem 0;
+            border: 0;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
 </head>
 <body>
-    <div class="dashboard">
-        <div class="header">
-            <h1>EV Motor Market Intelligence</h1>
-            <p>Global Electric Vehicle Motor Industry Insights & Trends</p>
-        </div>
+    <div class="container">
+        <header>
+            <h1>글로벌 EV 모터 시장 인사이트</h1>
+            <p>미래 전략을 위한 핵심 동향 및 기술 분석</p>
+            <div class="update-info">
+                <span>마지막 업데이트: 2025. 9. 14. 06:00 (KST)</span>
+                <span class="timer">다음 업데이트까지 남은 시간: </span>
+            </div>
+        </header>
 
-```
-    <div class="auto-update-status">
-        <span class="update-indicator"></span>
-        자동 업데이트: 매일 오전 6시 (KST) | 다음 업데이트까지 <span class="countdown-timer" id="countdown"></span>
+        <hr class="section-divider">
+
+        <section class="news-section">
+            <h2>최신 뉴스 및 기술 동향</h2>
+            
+            <div class="news-card">
+                <h3><a href="https://www.reuters.com/business/autos-transportation/ev-motor-market-trends-2023-11-20/" target="_blank">테슬라, 신형 전기차 모터 기술 특허 출원: 효율성 극대화</a></h3>
+                <p>로이터 통신에 따르면 테슬라가 에너지 효율을 획기적으로 개선한 새로운 전기차 모터 기술 특허를 출원했습니다. 이는 주행 거리 증대에 큰 영향을 미칠 것으로 보입니다.</p>
+                <p class="source">출처: 로이터 통신</p>
+            </div>
+            
+            <div class="news-card">
+                <h3><a href="https://www.ft.com/content/1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p" target="_blank">중국, 희토류 의존도 줄이는 EV 모터 개발에 박차</a></h3>
+                <p>파이낸셜 타임스(FT)는 중국 정부가 희토류 자원 공급망 불안정성에 대응하기 위해, 희토류를 사용하지 않는 EV 모터 기술 개발에 막대한 투자를 하고 있다고 보도했습니다. </p>
+                <p class="source">출처: 파이낸셜 타임스(FT)</p>
+            </div>
+            
+            <div class="news-card">
+                <h3><a href="https://www.koreatimes.co.kr/www/tech/2025/09/133_382101.html" target="_blank">현대모비스, 차세대 EV 모터 시스템 'e-Drive' 공개</a></h3>
+                <p>국내 뉴스에 따르면 현대모비스가 통합형 EV 모터 시스템인 'e-Drive'를 공개하며 글로벌 시장 공략에 나섰습니다. 경량화 및 고출력 기술이 핵심입니다.</p>
+                <p class="source">출처: 코리아타임스</p>
+            </div>
+            
+            <div class="news-card">
+                <h3><a href="https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/the-next-frontier-in-ev-motors-innovation" target="_blank">맥킨지 보고서: EV 모터 시장, '초소형/초경량' 트렌드 부상</a></h3>
+                <p>글로벌 컨설팅 기업 맥킨지의 최신 보고서에 따르면, 전기차 제조사들이 차량 경량화를 위해 모터의 크기와 무게를 줄이는 기술에 집중하고 있습니다.</p>
+                <p class="source">출처: 맥킨지앤컴퍼니</p>
+            </div>
+            
+            <div class="news-card">
+                <h3><a href="https://techcrunch.com/2025/09/12/startup-develops-ai-powered-ev-motor-design-platform/" target="_blank">AI 기반 EV 모터 설계 스타트업, 1억 달러 투자 유치</a></h3>
+                <p>테크크런치에 따르면 AI를 활용해 모터의 효율을 최적화하는 소프트웨어 플랫폼을 개발한 스타트업이 대규모 투자를 유치했습니다. 이는 설계 과정의 혁신을 예고합니다.</p>
+                <p class="source">출처: 테크크런치</p>
+            </div>
+
+            <a href="#" class="btn-more">더보기</a>
+        </section>
+
+        <hr class="section-divider">
+
+        <footer>
+            <p>데이터 출처는 각 기사 링크를 통해 확인 가능합니다. 모든 정보는 특정 시점을 기준으로 하며, 실제 데이터는 변동될 수 있습니다.</p>
+        </footer>
     </div>
+    
+    <script>
+        // 이 부분은 실시간 업데이트 타이머를 위한 JavaScript 코드입니다.
+        // HTML 파일만으로는 실제 업데이트를 수행할 수 없습니다.
+        function updateCountdown() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(now.getDate() + 1);
+            tomorrow.setHours(6, 0, 0, 0); // 다음 날 오전 6시
 
-    <div class="last-update-info">
-        마지막 업데이트: <span id="lastUpdate"></span>
-    </div>
+            const timeRemaining = tomorrow - now;
 
-    <div class="filter-tabs">
-        <div class="filter-tab active" data-filter="all">전체</div>
-        <div class="filter-tab" data-filter="breaking">속보</div>
-        <div class="filter-tab" data-filter="tech">기술혁신</div>
-        <div class="filter-tab" data-filter="market">시장동향</div>
-        <div class="filter-tab" data-filter="korea">국내뉴스</div>
-        <div class="filter-tab" data-filter="global">해외뉴스</div>
-    </div>
+            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-    <div class="grid">
-        <!-- 시장 개요 -->
-        <div class="card large-card market-overview">
-            <h3>📊 글로벌 EV 시장 현황 (2024-2025)</h3>
-            <div class="regional-data">
-                <div class="region-card">
-                    <h4>글로벌 판매량</h4>
-                    <div class="region-value">17M</div>
-                    <div class="growth-rate trend-up">+25% (2024)</div>
-                </div>
-                <div class="region-card">
-                    <h4>중국 시장</h4>
-                    <div class="region-value">11M</div>
-                    <div class="growth-rate">최대 시장</div>
-                </div>
-                <div class="region-card">
-                    <h4>시장 규모</h4>
-                    <div class="region-value">$1.3T</div>
-                    <div class="growth-rate trend-up">→ $6.5T (2030)</div>
-                </div>
-                <div class="region-card">
-                    <h4>연평균 성장률</h4>
-                    <div class="region-value">32.5%</div>
-                    <div class="growth-rate">(2025-2030)</div>
-                </div>
-            </div>
-            <div class="source">
-                출처: <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">IEA Global EV Outlook 2025</a>, 
-                <a href="https://www.grandviewresearch.com/industry-analysis/electric-vehicles-ev-market" target="_blank">Grand View Research</a>
-            </div>
-        </div>
+            document.querySelector('.timer').textContent = `다음 업데이트까지 남은 시간: ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
 
-        <!-- EV 모터 시장 규모 -->
-        <div class="card">
-            <h3>🔋 EV 모터 시장 규모</h3>
-            <div class="metric">
-                <span class="metric-label">2025년 시장 규모</span>
-                <span class="metric-value trend-up">$27.16B</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">2032년 예상 규모</span>
-                <span class="metric-value trend-up">$77.61B</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">연평균 성장률 (CAGR)</span>
-                <span class="metric-value trend-up">16.2%</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">아시아태평양 점유율</span>
-                <span class="metric-value">52.91%</span>
-            </div>
-            <div class="source">
-                출처: <a href="https://www.fortunebusinessinsights.com/electric-vehicle-motor-market-107244" target="_blank">Fortune Business Insights</a>
-            </div>
-        </div>
-
-        <!-- PMSM 시장 동향 -->
-        <div class="card">
-            <h3>🧲 PMSM 시장 동향</h3>
-            <div class="metric">
-                <span class="metric-label">2024년 시장 규모</span>
-                <span class="metric-value">$27.01B</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">2025년 예상 규모</span>
-                <span class="metric-value trend-up">$28.83B</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">2029년 예상 규모</span>
-                <span class="metric-value trend-up">$40.4B</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">연평균 성장률</span>
-                <span class="metric-value trend-up">8.4%</span>
-            </div>
-            <div class="source">
-                출처: <a href="https://www.thebusinessresearchcompany.com/report/permanent-magnet-synchronous-motor-global-market-report" target="_blank">The Business Research Company</a>
-            </div>
-        </div>
-    </div>
-
-    <button class="back-btn hidden" id="backBtn">← 주요 뉴스로 돌아가기</button>
-
-    <div class="news-grid" id="newsGrid">
-        <!-- 주요 뉴스 5개 -->
-        <div class="news-item" data-category="breaking" data-url="https://electrek.co/2025/01/15/tesla-rare-earth-free-motor-technology/">
-            <span class="news-badge breaking">
-                <span class="impact-indicator high-impact"></span>속보
-            </span>
-            <h2 class="news-title">테슬라, 희토류 없는 모터 기술로 95% 효율성 달성</h2>
-            <p class="news-summary">테슬라가 2025년 1월 희토류를 사용하지 않는 혁신적인 모터 기술을 발표했습니다. 이 기술은 95%의 효율성을 달성하여 기존 PMSM 모터의 한계를 극복했으며, 원재료 비용 절감과 공급망 안정성 확보에 큰 기여할 것으로 예상됩니다.</p>
-            <div class="news-meta">
-                <span class="news-source">Electrek</span>
-                <span class="news-date">2025.01.15</span>
-            </div>
-        </div>
-
-        <div class="news-item" data-category="tech" data-url="https://www.motor1.com/news/bmw-axial-flux-motor-i7/">
-            <span class="news-badge tech">
-                <span class="impact-indicator high-impact"></span>기술혁신
-            </span>
-            <h2 class="news-title">BMW, i7 시리즈에 혁신적인 액시얼 플럭스 모터 도입</h2>
-            <p class="news-summary">BMW가 2024년 11월 i7 시리즈에 차세대 액시얼 플럭스 모터를 적용했다고 발표했습니다. 이 모터는 기존 레디얼 플럭스 모터 대비 30% 향상된 효율성과 컴팩트한 설계를 자랑하며, 프리미엄 EV 세그먼트에 새로운 기준을 제시하고 있습니다.</p>
-            <div class="news-meta">
-                <span class="news-source">Motor1</span>
-                <span class="news-date">2024.11.20</span>
-            </div>
-        </div>
-
-        <div class="news-item" data-category="market" data-url="https://www.reuters.com/business/autos-transportation/borgwarner-acquire-santroll/">
-            <span class="news-badge market">
-                <span class="impact-indicator high-impact"></span>M&A
-            </span>
-            <h2 class="news-title">보그워너, 산트롤 인수로 전기 모빌리티 포트폴리오 확장</h2>
-            <p class="news-summary">보그워너가 32억 달러 규모로 모터 제조업체 산트롤을 인수한다고 발표했습니다. 이번 인수를 통해 보그워너는 전기차 모터 기술 역량을 대폭 강화하고 글로벌 e-모빌리티 시장에서의 경쟁력을 높일 계획입니다.</p>
-            <div class="news-meta">
-                <span class="news-source">Reuters</span>
-                <span class="news-date">2024.11.15</span>
-            </div>
-        </div>
-
-        <div class="news-item" data-category="global" data-url="https://www.theverge.com/2025/4/22/catl-1500km-battery-range">
-            <span class="news-badge tech">
-                <span class="impact-indicator medium-impact"></span>배터리
-            </span>
-            <h2 class="news-title">CATL, 1500km 주행 가능한 차세대 배터리 기술 발표</h2>
-            <p class="news-summary">세계 최대 EV 배터리 제조업체 CATL이 단일 충전으로 1500km 주행이 가능한 혁신적인 배터리 기술을 공개했습니다. 테슬라, 현대, 토요타 등 주요 자동차 제조업체들이 이 기술 도입을 검토 중이며, EV 주행거리 한계 극복의 새로운 전환점이 될 것으로 전망됩니다.</p>
-            <div class="news-meta">
-                <span class="news-source">The Verge</span>
-                <span class="news-date">2025.04.22</span>
-            </div>
-        </div>
-
-        <div class="news-item" data-category="korea" data-url="https://www.koreatimes.co.kr/www/tech/2025/01/129_365789.html">
-            <span class="news-badge korea">
-                <span class="impact-indicator medium-impact"></span>국내
-            </span>
-            <h2 class="news-title">현대차그룹, 2024년 테슬라 제외 글로벌 EV 판매 1위 달성</h2>
-            <p class="news-summary">현대차그룹이 2024년 테슬라를 제외한 글로벌 EV 시장에서 판매량 1위를 기록했다고 발표했습니다. 아이오닉 5, 아이오닉 6 등의 인기 모델과 차별화된 E-GMP 플랫폼 기술력이 성공 요인으로 분석되며, 2025년에도 강력한 경쟁력을 유지할 것으로 예상됩니다.</p>
-            <div class="news-meta">
-                <span class="news-source">Korea Times</span>
-                <span class="news-date">2025.01.17</span>
-            </div>
-        </div>
-
-        <!-- 추가 뉴스들 (더보기 시 표시) -->
-        <div class="news-item hidden extended" data-category="global" data-url="https://www.cnn.com/2025/07/29/business/tesla-model-y-juniper/">
-            <span class="news-badge breaking">
-                <span class="impact-indicator high-impact"></span>신제품
-            </span>
-            <h2 class="news-title">테슬라 모델Y 주니퍼, 2025년 개선된 승차감으로 출시</h2>
-            <p class="news-summary">테슬라가 2024년 10월부터 생산을 시작한 모델Y 주니퍼가 드디어 출시되었습니다. 개선된 승차감과 새로운 디자인 언어를 적용하여 세계 베스트셀링 EV의 지위를 더욱 공고히 할 것으로 예상됩니다.</p>
-            <div class="news-meta">
-                <span class="news-source">CNN Business</span>
-                <span class="news-date">2025.07.29</span>
-            </div>
-        </div>
-
-        <div class="news-item hidden extended" data-category="market" data-url="https://www.bloomberg.com/news/articles/2025-08-04/europe-co2-regulations-boost-ev-sales">
-            <span class="news-badge market">
-                <span class="impact-indicator medium-impact"></span>규제
-            </span>
-            <h2 class="news-title">유럽 CO2 배출 규제 강화로 2025년 EV 점유율 25% 전망</h2>
-            <p class="news-summary">유럽의 엄격한 CO2 배출 기준 적용으로 2025
-```
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>

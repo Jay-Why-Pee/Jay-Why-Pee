@@ -50,19 +50,22 @@ def crawl_news_data():
         return []
 
 def get_mock_graph_data():
-    """그래프 데이터는 변경 없이 모의 데이터를 계속 사용합니다."""
+    """그래프 데이터와 출처 정보를 반환합니다."""
     return {
         "yearly_market_size": {
             "labels": ["2022", "2023", "2024", "2025(예상)"],
-            "data": [1000, 1200, 1500, 1800]
+            "data": [1000, 1200, 1500, 1800],
+            "source": "출처: 글로벌 시장 보고서"
         },
         "country_market_share": {
             "labels": ["중국", "한국", "미국", "독일", "기타"],
-            "data": [45, 20, 15, 10, 10]
+            "data": [45, 20, 15, 10, 10],
+            "source": "출처: Statista"
         },
         "company_market_share": {
             "labels": ["LG전자", "보쉬", "덴소", "기타"],
-            "data": [30, 25, 20, 25]
+            "data": [30, 25, 20, 25],
+            "source": "출처: 각사 공시자료"
         }
     }
 
@@ -74,6 +77,7 @@ def main():
     news_data = crawl_news_data()
     
     data = {
+        "last_updated": datetime.now().isoformat(),
         "news": news_data,
         "graphs": get_mock_graph_data()
     }

@@ -1,39 +1,56 @@
 import json
 import time
-import random
+import requests
+from bs4 import BeautifulSoup
 from datetime import datetime
 
-#
-# 참고: 이 스크립트는 크롤링 로직을 시뮬레이션하기 위한 모의 데이터 생성 예제입니다.
-# 실제 웹사이트에서 데이터를 수집하려면 requests, beautifulsoup4 등의 라이브러리를 사용해
-# 크롤링 코드를 직접 작성해야 합니다.
-#
+def crawl_news_data():
+    """웹사이트에서 뉴스 데이터를 크롤링합니다."""
+    # 크롤링할 웹사이트 URL (예시: Google 뉴스)
+    url = "https://news.google.com/search?q=%EC%A0%84%EA%B8%B0%EC%B0%A8%20%EB%AA%A8%ED%84%B0%20%EA%B8%B0%EC%88%A0&hl=ko&gl=KR&ceid=KR%3Ako"
 
-def get_mock_news_data():
-    """모의 뉴스 데이터를 생성합니다."""
-    news_titles = [
-        "테슬라, 새로운 모터 기술 특허 출원",
-        "LG전자, 전기차 모터 시장 점유율 확대",
-        "2025년 글로벌 EV 모터 시장 규모 1.5배 성장 전망",
-        "중국 B사를 넘어선 한국의 A사, 전기차 모터 기술 혁신",
-        "글로벌 EV 모터 시장, 기술 경쟁 심화"
-    ]
-    news_sources = ["구글 뉴스", "네이버 뉴스", "특허청"]
-    
-    news_list = []
-    for i in range(10):
-        news = {
-            "title": random.choice(news_titles),
-            "summary": "전기차 모터 시장의 최신 동향에 대한 심층 분석 기사입니다. 주요 기업들의 기술 개발 현황과 시장 경쟁 구도를 다룹니다.",
-            "source": random.choice(news_sources),
-            "link": "https://www.example.com/news/" + str(int(time.time())) + str(i),
-            "timestamp": datetime.now().isoformat()
-        }
-        news_list.append(news)
-    return news_list
+    try:
+        response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+        response.raise_for_status()  # HTTP 오류 발생 시 예외를 발생시킵니다.
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        news_list = []
+        # Google 뉴스 페이지의 뉴스 카드 HTML 구조를 찾아 데이터를 추출합니다.
+        # 이 셀렉터는 웹사이트 업데이트에 따라 변경될 수 있습니다.
+        articles = soup.select('div.pT6mwb')
+        
+        for article in articles[:10]: # 최신 기사 10개만 가져오기
+            try:
+                title_elem = article.select_one('h3.ipQwMb > a')
+                link_elem = title_elem
+                summary_elem = article.select_one('span.xBbh9')
+                source_elem = article.select_one('div.sv9sFf > a')
+
+                title = title_elem.get_text(strip=True) if title_elem else "제목 없음"
+                link = 'https://news.google.com' + link_elem['href'].lstrip('.') if link_elem and 'href' in link_elem.attrs else "#"
+                summary = summary_elem.get_text(strip=True) if summary_elem else "요약 없음"
+                source = source_elem.get_text(strip=True) if source_elem else "출처 없음"
+
+                news_item = {
+                    "title": title,
+                    "summary": summary,
+                    "source": source,
+                    "link": link,
+                    "timestamp": datetime.now().isoformat()
+                }
+                news_list.append(news_item)
+            except Exception as e:
+                print(f"기사 처리 중 오류 발생: {e}")
+                continue
+
+        return news_list
+        
+    except requests.exceptions.RequestException as e:
+        print(f"웹사이트 접속 오류: {e}")
+        return []
 
 def get_mock_graph_data():
-    """모의 그래프 데이터를 생성합니다."""
+    """그래프 데이터는 변경 없이 모의 데이터를 계속 사용합니다."""
     return {
         "yearly_market_size": {
             "labels": ["2022", "2023", "2024", "2025(예상)"],
@@ -52,12 +69,15 @@ def get_mock_graph_data():
 def main():
     """뉴스 데이터와 그래프 데이터를 수집하여 JSON 파일로 저장합니다."""
     print("뉴스 및 그래프 데이터 수집을 시작합니다...")
+    
+    # 실제 크롤러 함수를 호출하여 뉴스 데이터를 가져옵니다.
+    news_data = crawl_news_data()
+    
     data = {
-        "news": get_mock_news_data(),
+        "news": news_data,
         "graphs": get_mock_graph_data()
     }
     
-    # news_data.json 파일에 데이터 저장
     with open("news_data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
     

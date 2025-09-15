@@ -1,0 +1,33 @@
+name: Update EV Motor News
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 매시 정각마다 실행
+  workflow_dispatch:     # 수동 실행도 가능
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 저장소 체크아웃
+      uses: actions/checkout@v3
+
+    - name: Python 설정
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: feedparser 설치
+      run: pip install feedparser
+
+    - name: 뉴스 수집 스크립트 실행
+      run: python ev_news_crawler.py
+
+    - name: 변경사항 커밋 및 푸시
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add ev_motor_news.json
+        git commit -m '자동 뉴스 업데이트'
+        git push

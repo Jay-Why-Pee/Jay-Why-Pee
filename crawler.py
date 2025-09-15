@@ -16,7 +16,7 @@ def crawl_news_data():
         news_list = []
         articles = soup.select('div.pT6mwb')
         
-        for article in articles[:10]:
+        for article in articles[:30]:  # <-- 이 부분이 10에서 30으로 변경되었습니다.
             try:
                 title_elem = article.select_one('h3.ipQwMb > a')
                 link_elem = title_elem

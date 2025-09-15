@@ -46,4 +46,3 @@ jobs:
       - name: 변경사항 없음 알림
         if: steps.git_status.outputs.has_changes == 'false'
         run: echo "변경사항이 없으므로 커밋 및 푸시를 건너뜁니다."
-```eof

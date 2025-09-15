@@ -15,7 +15,6 @@
         body { font-family: 'Noto Sans KR', sans-serif; }
         .chart-container { position: relative; width: 100%; max-width: 500px; margin: auto; height: 300px; max-height: 350px; }
         @media (min-width: 768px) { .chart-container { height: 350px; } }
-        .modal { display: none; }
     </style>
 </head>
 <body class="bg-neutral-900 text-neutral-200">
@@ -26,7 +25,7 @@
     </div>
 
     <!-- Summary Modal -->
-    <div id="summary-modal" class="modal fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center">
+    <div id="summary-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 justify-center items-center hidden">
         <div class="bg-neutral-800 rounded-lg p-8 m-4 max-w-xl w-full shadow-2xl relative">
             <h3 class="text-xl font-bold mb-4 text-neutral-50">✨ AI 뉴스 요약</h3>
             <div id="summary-content" class="text-neutral-300 overflow-y-auto max-h-[70vh]">
@@ -107,42 +106,42 @@
                         "title": "글로벌 EV 모터 시장, 기술 경쟁 심화",
                         "summary": "전기차 모터 시장의 최신 동향에 대한 심층 분석 기사입니다. 주요 기업들의 기술 개발 현황과 시장 경쟁 구도를 다룹니다.",
                         "source": "구글 뉴스",
-                        "link": "https://www.example.com/news/1",
+                        "link": "https://www.google.com/search?q=글로벌 EV 모터 기술 동향",
                         "timestamp": "2024-05-20T10:00:00Z"
                     },
                     {
                         "title": "테슬라, 새로운 모터 기술 특허 출원",
                         "summary": "고효율, 고출력 모터 기술에 대한 테슬라의 새로운 특허 출원 소식입니다. 업계에 미칠 영향이 주목됩니다.",
                         "source": "특허청",
-                        "link": "https://www.example.com/news/2",
+                        "link": "https://www.google.com/search?q=테슬라 모터 기술 특허",
                         "timestamp": "2024-05-20T09:30:00Z"
                     },
                     {
                         "title": "LG전자, 전기차 모터 시장 점유율 확대",
                         "summary": "LG전자가 주요 완성차 업체와의 협력을 통해 글로벌 EV 모터 시장에서 점유율을 확대하고 있다는 분석입니다.",
                         "source": "네이버 뉴스",
-                        "link": "https://www.example.com/news/3",
+                        "link": "https://www.google.com/search?q=LG전자 EV 모터 점유율",
                         "timestamp": "2024-05-20T09:00:00Z"
                     },
                     {
                         "title": "2025년 글로벌 EV 모터 시장 규모 1.5배 성장 전망",
                         "summary": "최신 시장 보고서에 따르면, 전기차 시장의 폭발적인 성장에 힘입어 EV 모터 시장이 큰 폭으로 성장할 것으로 예측됩니다.",
                         "source": "구글 검색",
-                        "link": "https://www.example.com/news/4",
+                        "link": "https://www.google.com/search?q=2025년 EV 모터 시장 규모",
                         "timestamp": "2024-05-20T08:00:00Z"
                     },
                     {
                         "title": "중국 B사를 넘어선 한국의 A사, 전기차 모터 기술 혁신",
                         "summary": "한국의 한 모터 제조사가 혁신적인 기술을 통해 경쟁사를 제치고 시장 선두로 부상했다는 소식입니다.",
                         "source": "네이버 뉴스",
-                        "link": "https://www.example.com/news/5",
+                        "link": "https://www.google.com/search?q=한국 전기차 모터 기술",
                         "timestamp": "2024-05-20T07:30:00Z"
                     },
                     {
                         "title": "글로벌 EV 모터 시장, 기술 경쟁 심화",
                         "summary": "전기차 모터 시장의 최신 동향에 대한 심층 분석 기사입니다. 주요 기업들의 기술 개발 현황과 시장 경쟁 구도를 다룹니다.",
                         "source": "구글 뉴스",
-                        "link": "https://www.example.com/news/6",
+                        "link": "https://www.google.com/search?q=글로벌 EV 모터 시장 동향",
                         "timestamp": "2024-05-20T07:00:00Z"
                     }
                 ],
@@ -200,7 +199,8 @@
             };
 
             const summarizeNews = async (title, summary) => {
-                summaryModal.style.display = 'flex';
+                summaryModal.classList.remove('hidden');
+                summaryModal.classList.add('flex');
                 summaryContent.innerHTML = `
                     <div class="text-center py-8">
                         <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500 mx-auto"></div>
@@ -213,7 +213,7 @@
                 // to securely handle the API key and make the call.
                 const mockApiResponse = `
                     <p class="mb-4">이 기사는 전기차(EV) 모터 시장의 주요 동향을 다루고 있습니다. <strong>핵심은 기술 경쟁 심화와 주요 기업들의 시장 점유율 변화</strong>입니다. 특히 LG전자와 테슬라 같은 기업들의 최신 기술 특허 출원과 시장 확장 노력이 강조됩니다.</p>
-                    <p>또한, 기사는 EV 시장의 폭발적인 성장세에 힘입어 모터 시장도 동반 성장할 것으로 예측하며, 한국 기업들이 기술 혁신을 통해 시장 선두로 부상하고 있음을 보여줍니다.</p>
+                    <p>또한, 기사는 EV 시장의 폭발적인 성장에 힘입어 모터 시장도 동반 성장할 것으로 예측하며, 한국 기업들이 기술 혁신을 통해 시장 선두로 부상하고 있음을 보여줍니다.</p>
                 `;
                 
                 setTimeout(() => {
@@ -223,7 +223,8 @@
             };
 
             closeModalBtn.addEventListener('click', () => {
-                summaryModal.style.display = 'none';
+                summaryModal.classList.remove('flex');
+                summaryModal.classList.add('hidden');
             });
 
             const renderCharts = (graphData) => {

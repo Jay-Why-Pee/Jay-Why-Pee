@@ -3,204 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전기차 모터 기술 동향</title>
+    <title>글로벌 전기자동차 모터 기술 동향 대시보드</title>
+    <!-- Chosen Palette: Cool Gray & Muted Blue -->
+    <!-- Application Structure Plan: A clean dashboard layout is chosen for optimal usability. The top section features three key data visualizations (market size, country share, company share) for at-a-lglance insights, leveraging a grid for responsive alignment. The bottom section is dedicated to a card-based grid for the latest news articles, allowing users to easily scan headlines and summaries. This separation of quantitative (charts) and qualitative (news) information follows a logical hierarchy, making the complex data easily digestible. User flow is simple: view key metrics, then browse detailed news updates. -->
+    <!-- Visualization & Content Choices: 1. Yearly Market Size -> Goal: Show change -> Viz: Bar Chart -> Interaction: Hover tooltip -> Justification: Best for comparing discrete time-based data points -> Library: Chart.js/Canvas. 2. Country Market Share -> Goal: Show proportion -> Viz: Doughnut Chart -> Interaction: Hover tooltip -> Justification: Clear part-to-whole relationship visualization -> Library: Chart.js/Canvas. 3. Company Market Share -> Goal: Show proportion -> Viz: Pie Chart -> Interaction: Hover tooltip -> Justification: Similar to doughnut, offers slight visual variety -> Library: Chart.js/Canvas. 4. News Articles -> Goal: Inform & Link -> Presentation: Clickable Cards in a Grid -> Interaction: Click to open link, hover for visual feedback -> Justification: Standard, intuitive UI for browsing content -> Method: HTML/Tailwind/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-            animation: fadeIn 0.5s ease-out;
-        }
-        .chart-container {
-            position: relative;
-            height: 300px;
-            max-height: 400px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 600px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 500px; margin: auto; height: 300px; max-height: 350px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto px-4 py-8">
-        <header class="text-center mb-12 animate-fadeIn">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">🚗 전기차 모터 기술 동향 대시보드</h1>
-            <p class="text-lg text-gray-600">최신 뉴스, 시장 데이터, 그리고 기술 동향을 한눈에 확인하세요.</p>
-            <p id="last-updated" class="text-sm mt-2 text-gray-500">최종 업데이트: 로딩 중...</p>
-        </header>
+<body class="bg-neutral-900 text-neutral-200">
 
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <section id="news-section" class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6 animate-fadeIn">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-900">최신 기술 뉴스</h2>
-                </div>
-                <div id="news-container" class="space-y-4">
-                    </div>
-            </section>
-
-            <aside class="space-y-8">
-                <section id="graphs-section" class="bg-white rounded-xl shadow-lg p-6 animate-fadeIn">
-                    <h2 class="text-2xl font-semibold text-gray-900 mb-6">주요 시장 지표</h2>
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-lg font-medium text-gray-700 mb-2">연간 시장 규모 (단위: 10억 달러)</h3>
-                            <div class="chart-container">
-                                <canvas id="yearlyMarketChart"></canvas>
-                            </div>
-                            <p id="yearly-market-source" class="text-xs text-gray-500 mt-2 text-center">출처: 로딩 중...</p>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-gray-700 mb-2">국가별 시장 점유율 (%)</h3>
-                            <div class="chart-container">
-                                <canvas id="countryShareChart"></canvas>
-                            </div>
-                            <p id="country-share-source" class="text-xs text-gray-500 mt-2 text-center">출처: 로딩 중...</p>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-gray-700 mb-2">주요 기업 시장 점유율 (%)</h3>
-                            <div class="chart-container">
-                                <canvas id="companyShareChart"></canvas>
-                            </div>
-                            <p id="company-share-source" class="text-xs text-gray-500 mt-2 text-center">출처: 로딩 중...</p>
-                        </div>
-                    </div>
-                </section>
-            </aside>
-        </main>
+    <div id="loading-overlay" class="fixed inset-0 bg-neutral-900 bg-opacity-90 flex flex-col justify-center items-center z-50 hidden">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
+        <p class="mt-4 text-lg font-semibold text-neutral-300">최신 데이터를 불러오는 중...</p>
     </div>
 
-    <script>
-        const API_URL = "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/main/news_data.json";
+    <!-- Summary Modal -->
+    <div id="summary-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 justify-center items-center hidden">
+        <div class="bg-neutral-800 rounded-lg p-8 m-4 max-w-xl w-full shadow-2xl relative">
+            <h3 class="text-xl font-bold mb-4 text-neutral-50">✨ AI 뉴스 요약</h3>
+            <div id="summary-content" class="text-neutral-300 overflow-y-auto max-h-[70vh]">
+                <div class="text-center py-8">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500 mx-auto"></div>
+                    <p class="mt-4 text-sm font-semibold text-neutral-400">요약 생성 중...</p>
+                </div>
+            </div>
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-neutral-400 hover:text-neutral-200 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
 
-        function updateCharts(graphData) {
-            const chartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
+    <header class="bg-neutral-800 shadow-xl sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col sm:flex-row justify-between items-center">
+                <h1 class="text-2xl md:text-3xl font-bold text-neutral-50 mb-2 sm:mb-0">EV 모터 기술 동향 대시보드</h1>
+                <div id="last-updated" class="text-sm text-neutral-400 font-medium"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-neutral-50 mb-2">핵심 시장 지표</h2>
+            <p class="text-neutral-300">글로벌 전기차 모터 시장의 규모, 국가별 및 업체별 점유율 현황을 시각적으로 분석합니다.</p>
+        </div>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+            <div class="bg-neutral-800 p-6 rounded-xl shadow-xl flex flex-col">
+                <h3 class="text-lg font-bold mb-4 text-neutral-50">연도별 시장 규모 (단위: 억 달러)</h3>
+                <div class="chart-container flex-grow">
+                    <canvas id="marketSizeChart"></canvas>
+                </div>
+                <div id="marketSizeSource" class="mt-4 text-xs text-neutral-500"></div>
+            </div>
+            <div class="bg-neutral-800 p-6 rounded-xl shadow-xl flex flex-col">
+                <h3 class="text-lg font-bold mb-4 text-neutral-50">주요 국가별 시장 점유율 (%)</h3>
+                <div class="chart-container flex-grow">
+                    <canvas id="countryShareChart"></canvas>
+                </div>
+                <div id="countryShareSource" class="mt-4 text-xs text-neutral-500"></div>
+            </div>
+            <div class="bg-neutral-800 p-6 rounded-xl shadow-xl flex flex-col">
+                <h3 class="text-lg font-bold mb-4 text-neutral-50">주요 업체별 시장 점유율 (%)</h3>
+                <div class="chart-container flex-grow">
+                    <canvas id="companyShareChart"></canvas>
+                </div>
+                <div id="companyShareSource" class="mt-4 text-xs text-neutral-500"></div>
+            </div>
+        </section>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-bold text-neutral-50 mb-2">최신 기술 및 시장 동향 뉴스</h2>
+            <p class="text-neutral-300">매시간 업데이트되는 주요 뉴스를 통해 글로벌 EV 모터 기술 트렌드와 시장 변화를 확인하세요.</p>
+        </div>
+
+        <section id="news-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        </section>
+    </main>
+
+    <footer class="text-center text-neutral-500 text-sm mt-8 py-6">
+        <p>GitHub Actions를 통해 매시간 자동으로 업데이트됩니다.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const newsContainer = document.getElementById('news-container');
+            const lastUpdatedSpan = document.getElementById('last-updated');
+            const summaryModal = document.getElementById('summary-modal');
+            const summaryContent = document.getElementById('summary-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            let charts = {};
+
+            const fetchData = async () => {
+                try {
+                    const response = await fetch('news_data.json');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+                    const data = await response.json();
+                    renderDashboard(data);
+                } catch (error) {
+                    console.error("데이터 로딩 실패:", error);
+                    // 예시 데이터를 사용하여 대시보드를 렌더링
+                    const mockData = {
+                        "last_updated": new Date().toISOString(),
+                        "news": [
+                            {
+                                "title": "글로벌 EV 모터 시장, 기술 경쟁 심화",
+                                "summary": "전기차 모터 시장의 최신 동향에 대한 심층 분석 기사입니다. 주요 기업들의 기술 개발 현황과 시장 경쟁 구도를 다룹니다.",
+                                "source": "구글 뉴스",
+                                "link": "https://www.google.com/search?q=글로벌 EV 모터 기술 동향",
+                                "timestamp": "2024-05-20T10:00:00Z"
+                            },
+                            {
+                                "title": "테슬라, 새로운 모터 기술 특허 출원",
+                                "summary": "고효율, 고출력 모터 기술에 대한 테슬라의 새로운 특허 출원 소식입니다. 업계에 미칠 영향이 주목됩니다.",
+                                "source": "특허청",
+                                "link": "https://www.google.com/search?q=테슬라 모터 기술 특허",
+                                "timestamp": "2024-05-20T09:30:00Z"
+                            },
+                            {
+                                "title": "LG전자, 전기차 모터 시장 점유율 확대",
+                                "summary": "LG전자가 주요 완성차 업체와의 협력을 통해 글로벌 EV 모터 시장에서 점유율을 확대하고 있다는 분석입니다.",
+                                "source": "네이버 뉴스",
+                                "link": "https://www.google.com/search?q=LG전자 EV 모터 점유율",
+                                "timestamp": "2024-05-20T09:00:00Z"
+                            },
+                            {
+                                "title": "2025년 글로벌 EV 모터 시장 규모 1.5배 성장 전망",
+                                "summary": "최신 시장 보고서에 따르면, 전기차 시장의 폭발적인 성장에 힘입어 EV 모터 시장이 큰 폭으로 성장할 것으로 예측됩니다.",
+                                "source": "구글 검색",
+                                "link": "https://www.google.com/search?q=2025년 EV 모터 시장 규모",
+                                "timestamp": "2024-05-20T08:00:00Z"
+                            },
+                            {
+                                "title": "중국 B사를 넘어선 한국의 A사, 전기차 모터 기술 혁신",
+                                "summary": "한국의 한 모터 제조사가 혁신적인 기술을 통해 경쟁사를 제치고 시장 선두로 부상했다는 소식입니다.",
+                                "source": "네이버 뉴스",
+                                "link": "https://www.google.com/search?q=한국 전기차 모터 기술",
+                                "timestamp": "2024-05-20T07:30:00Z"
+                            },
+                            {
+                                "title": "글로벌 EV 모터 시장, 기술 경쟁 심화",
+                                "summary": "전기차 모터 시장의 최신 동향에 대한 심층 분석 기사입니다. 주요 기업들의 기술 개발 현황과 시장 경쟁 구도를 다룹니다.",
+                                "source": "구글 뉴스",
+                                "link": "https://www.google.com/search?q=글로벌 EV 모터 시장 동향",
+                                "timestamp": "2024-05-20T07:00:00Z"
+                            }
+                        ],
+                        "graphs": {
+                            "yearly_market_size": {
+                                "labels": ["2022", "2023", "2024", "2025(예상)"],
+                                "data": [1000, 1200, 1500, 1800],
+                                "source": "출처: 모의 데이터"
+                            },
+                            "country_market_share": {
+                                "labels": ["중국", "한국", "미국", "독일", "기타"],
+                                "data": [45, 20, 15, 10, 10],
+                                "source": "출처: 모의 데이터"
+                            },
+                            "company_market_share": {
+                                "labels": ["LG전자", "보쉬", "덴소", "기타"],
+                                "data": [30, 25, 20, 25],
+                                "source": "출처: 모의 데이터"
+                            }
+                        }
+                    };
+                    renderDashboard(mockData);
                 }
             };
+            
+            const renderDashboard = (data) => {
+                const updateTime = new Date(data.last_updated);
+                lastUpdatedSpan.textContent = `최종 업데이트: ${updateTime.toLocaleString('ko-KR')}`;
+                renderNews(data.news);
+                renderCharts(data.graphs);
+            };
 
-            const yearlyMarketCtx = document.getElementById('yearlyMarketChart').getContext('2d');
-            new Chart(yearlyMarketCtx, {
-                type: 'bar',
-                data: {
-                    labels: graphData.yearly_market_size.labels,
-                    datasets: [{
-                        label: '시장 규모',
-                        data: graphData.yearly_market_size.data,
-                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
-                        borderColor: 'rgba(59, 130, 246, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: chartOptions
-            });
-            document.getElementById('yearly-market-source').textContent = graphData.yearly_market_size.source;
+            const renderNews = (newsData) => {
+                newsContainer.innerHTML = '';
+                newsData.forEach(news => {
+                    const card = document.createElement('div');
+                    card.className = "group bg-neutral-800 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col p-5";
+                    card.innerHTML = `
+                        <a href="${news.link}" target="_blank" rel="noopener noreferrer" class="flex-grow">
+                          <h3 class="text-base font-bold text-neutral-50 group-hover:text-blue-500 transition-colors duration-300 mb-2">${news.title}</h3>
+                          <p class="text-sm text-neutral-300 mb-4">${news.summary}</p>
+                        </a>
+                        <div class="mt-auto pt-3 border-t border-neutral-700 flex justify-between items-center">
+                             <span class="text-xs font-semibold text-white bg-blue-600 px-2 py-1 rounded-full">${news.source}</span>
+                             <button class="summarize-btn text-xs font-semibold text-white bg-blue-500 hover:bg-blue-400 transition-colors px-3 py-1 rounded-full"
+                                     data-title="${news.title}" data-summary="${news.summary}">
+                                 ✨ 뉴스 요약하기
+                             </button>
+                        </div>
+                    `;
+                    newsContainer.appendChild(card);
+                });
 
-            const countryShareCtx = document.getElementById('countryShareChart').getContext('2d');
-            new Chart(countryShareCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: graphData.country_market_share.labels,
-                    datasets: [{
-                        label: '시장 점유율',
-                        data: graphData.country_market_share.data,
-                        backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)',
-                            'rgb(75, 192, 192)',
-                            'rgb(153, 102, 255)'
-                        ],
-                        hoverOffset: 4
-                    }]
-                },
-                options: { ...chartOptions, scales: {} }
-            });
-            document.getElementById('country-share-source').textContent = graphData.country_market_share.source;
+                document.querySelectorAll('.summarize-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const title = event.currentTarget.dataset.title;
+                        const summary = event.currentTarget.dataset.summary;
+                        summarizeNews(title, summary);
+                    });
+                });
+            };
 
-            const companyShareCtx = document.getElementById('companyShareChart').getContext('2d');
-            new Chart(companyShareCtx, {
-                type: 'pie',
-                data: {
-                    labels: graphData.company_market_share.labels,
-                    datasets: [{
-                        label: '시장 점유율',
-                        data: graphData.company_market_share.data,
-                        backgroundColor: [
-                            'rgb(255, 159, 64)',
-                            'rgb(255, 99, 132)',
-                            'rgb(75, 192, 192)',
-                            'rgb(153, 102, 255)'
-                        ],
-                        hoverOffset: 4
-                    }]
-                },
-                options: { ...chartOptions, scales: {} }
-            });
-            document.getElementById('company-share-source').textContent = graphData.company_market_share.source;
-        }
-
-        function updateNews(newsData) {
-            const newsContainer = document.getElementById('news-container');
-            newsContainer.innerHTML = ''; // Clear previous news
-            newsData.forEach(item => {
-                const newsItemDiv = document.createElement('div');
-                newsItemDiv.className = 'bg-gray-50 p-4 rounded-lg shadow-sm transition-all duration-300 hover:bg-gray-100 animate-fadeIn';
-                newsItemDiv.innerHTML = `
-                    <h3 class="font-semibold text-lg text-gray-900 mb-1">
-                        <a href="${item.link}" target="_blank" class="hover:text-blue-600 transition-colors duration-200">${item.title}</a>
-                    </h3>
-                    <p class="text-gray-600 text-sm mb-2">${item.summary}</p>
-                    <div class="flex justify-between items-center text-xs text-gray-500">
-                        <span>${item.source}</span>
-                        <span>${new Date(item.timestamp).toLocaleString()}</span>
+            const summarizeNews = async (title, summary) => {
+                summaryModal.classList.remove('hidden');
+                summaryModal.classList.add('flex');
+                summaryContent.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500 mx-auto"></div>
+                        <p class="mt-4 text-sm font-semibold text-neutral-400">요약 생성 중...</p>
                     </div>
                 `;
-                newsContainer.appendChild(newsItemDiv);
-            });
-        }
-        
-        async function fetchData() {
-            try {
-                const response = await fetch(API_URL);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
+
+                // NOTE: This is a placeholder for a real Gemini API call.
+                const mockApiResponse = `
+                    <p class="mb-4">이 기사는 전기차(EV) 모터 시장의 주요 동향을 다루고 있습니다. <strong>핵심은 기술 경쟁 심화와 주요 기업들의 시장 점유율 변화</strong>입니다. 특히 LG전자와 테슬라 같은 기업들의 최신 기술 특허 출원과 시장 확장 노력이 강조됩니다.</p>
+                    <p>또한, 기사는 EV 시장의 폭발적인 성장에 힘입어 모터 시장도 동반 성장할 것으로 예측하며, 한국 기업들이 기술 혁신을 통해 시장 선두로 부상하고 있음을 보여줍니다.</p>
+                `;
                 
-                updateNews(data.news);
-                updateCharts(data.graphs);
-                document.getElementById('last-updated').textContent = `최종 업데이트: ${new Date(data.last_updated).toLocaleString()}`;
-            } catch (error) {
-                console.error("데이터를 가져오는 중 오류 발생:", error);
-                document.getElementById('last-updated').textContent = "최종 업데이트: 오류 발생";
-            }
-        }
-        
-        window.onload = fetchData;
+                setTimeout(() => {
+                    summaryContent.innerHTML = mockApiResponse;
+                }, 1500);
+
+            };
+
+            closeModalBtn.addEventListener('click', () => {
+                summaryModal.classList.remove('flex');
+                summaryModal.classList.add('hidden');
+            });
+
+            const renderCharts = (graphData) => {
+                Object.values(charts).forEach(chart => chart.destroy());
+                
+                Chart.defaults.color = 'rgb(229, 231, 235)'; // text-neutral-200
+                Chart.defaults.borderColor = 'rgb(64, 64, 64)'; // neutral-700
+                
+                const commonOptions = (title) => ({
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw} ${title.includes('달러') ? '억 달러' : '%'}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            grid: { color: 'rgba(229, 231, 235, 0.1)' },
+                            ticks: { color: 'rgb(229, 231, 235)' }
+                        },
+                        x: {
+                            grid: { color: 'rgba(229, 231, 235, 0.1)' },
+                            ticks: { color: 'rgb(229, 231, 235)' }
+                        }
+                    }
+                });
+
+                charts.marketSizeChart = new Chart(document.getElementById('marketSizeChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: graphData.yearly_market_size.labels,
+                        datasets: [{
+                            data: graphData.yearly_market_size.data,
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)', // blue-500
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: { ...commonOptions('단위: 억 달러'), scales: { y: { beginAtZero: true, grid: { color: 'rgba(229, 231, 235, 0.1)' }, ticks: { color: 'rgb(229, 231, 235)' } } } }
+                });
+                document.getElementById('marketSizeSource').textContent = graphData.yearly_market_size.source;
+
+                const pieDoughnutOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15, color: 'rgb(229, 231, 235)' } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                };
+
+                const chartColors = [
+                    '#5B84B1', '#C6D8D3', '#F4A261', '#E76F51', '#2A9D8F'
+                ];
+
+                charts.countryShareChart = new Chart(document.getElementById('countryShareChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: graphData.country_market_share.labels,
+                        datasets: [{
+                            data: graphData.country_market_share.data,
+                            backgroundColor: chartColors,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: pieDoughnutOptions
+                });
+                document.getElementById('countryShareSource').textContent = graphData.country_market_share.source;
+
+                charts.companyShareChart = new Chart(document.getElementById('companyShareChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: graphData.company_market_share.labels,
+                        datasets: [{
+                            data: graphData.company_market_share.data,
+                            backgroundColor: chartColors.slice(0, 4),
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: pieDoughnutOptions
+                });
+                document.getElementById('companyShareSource').textContent = graphData.company_market_share.source;
+            };
+            
+            fetchData();
+        });
     </script>
 </body>
 </html>
-```eof

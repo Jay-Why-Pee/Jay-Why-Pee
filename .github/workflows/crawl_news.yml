@@ -2,6 +2,7 @@ name: 뉴스 크롤링 워크플로우
 
 on:
   schedule:
+    # 매시간 0분에 실행
     - cron: '0 * * * *'
   workflow_dispatch:
 
@@ -9,39 +10,40 @@ jobs:
   crawl_and_commit:
     runs-on: ubuntu-latest
 
-steps:
-  - name: 저장소 체크아웃
-    uses: actions/checkout@v4
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
 
-  - name: Python 설정
-    uses: actions/setup-python@v4
-    with:
-      python-version: '3.x'
+      - name: Python 설정
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-  - name: 파이썬 의존성 설치
-    run: pip install -r requirements.txt
-  
-  - name: 크롤러 스크립트 실행
-    run: python crawler.py
+      - name: 파이썬 의존성 설치
+        run: pip install -r requirements.txt
+      
+      - name: 크롤러 스크립트 실행
+        run: python crawler.py
 
-  - name: 변경사항 확인
-    id: git_status
-    run: |
-      if [ -n "$(git status --porcelain)" ]; then
-        echo "has_changes=true" >> $GITHUB_OUTPUT
-      else
-        echo "has_changes=false" >> $GITHUB_OUTPUT
-      fi
+      - name: 변경사항 확인
+        id: git_status
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
 
-  - name: 변경사항 커밋 및 푸시
-    if: steps.git_status.outputs.has_changes == 'true'
-    run: |
-      git config --global user.name 'github-actions[bot]'
-      git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      git add news_data.json
-      git commit -m "데이터베이스 업데이트: 최신 뉴스 및 차트 데이터"
-      git push
-    
-  - name: 변경사항 없음 알림
-    if: steps.git_status.outputs.has_changes == 'false'
-    run: echo "변경사항이 없으므로 커밋 및 푸시를 건너뜁니다."
+      - name: 변경사항 커밋 및 푸시
+        if: steps.git_status.outputs.has_changes == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add news_data.json
+          git commit -m "데이터베이스 업데이트: 최신 뉴스 및 차트 데이터"
+          git push
+        
+      - name: 변경사항 없음 알림
+        if: steps.git_status.outputs.has_changes == 'false'
+        run: echo "변경사항이 없으므로 커밋 및 푸시를 건너뜁니다."
+```eof

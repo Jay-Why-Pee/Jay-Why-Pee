@@ -7,6 +7,9 @@ name: 뉴스 크롤링 워크플로우on:schedule:# 매시간 0분에 실행- cr
     with:
       python-version: '3.x'
 
+  - name: 파이썬 의존성 설치
+    run: pip install -r requirements.txt
+  
   - name: 크롤러 스크립트 실행
     run: python crawler.py
 

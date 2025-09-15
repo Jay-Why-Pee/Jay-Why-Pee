@@ -6,20 +6,17 @@ from datetime import datetime
 
 def crawl_news_data():
     """웹사이트에서 뉴스 데이터를 크롤링합니다."""
-    # 크롤링할 웹사이트 URL (예시: Google 뉴스)
     url = "https://news.google.com/search?q=%EC%A0%84%EA%B8%B0%EC%B0%A8%20%EB%AA%A8%ED%84%B0%20%EA%B8%B0%EC%88%A0&hl=ko&gl=KR&ceid=KR%3Ako"
 
     try:
         response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
-        response.raise_for_status()  # HTTP 오류 발생 시 예외를 발생시킵니다.
+        response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
         
         news_list = []
-        # Google 뉴스 페이지의 뉴스 카드 HTML 구조를 찾아 데이터를 추출합니다.
-        # 이 셀렉터는 웹사이트 업데이트에 따라 변경될 수 있습니다.
         articles = soup.select('div.pT6mwb')
         
-        for article in articles[:10]: # 최신 기사 10개만 가져오기
+        for article in articles[:10]:
             try:
                 title_elem = article.select_one('h3.ipQwMb > a')
                 link_elem = title_elem
@@ -42,12 +39,16 @@ def crawl_news_data():
             except Exception as e:
                 print(f"기사 처리 중 오류 발생: {e}")
                 continue
-
+        
+        if not news_list:
+            print("경고: 크롤링 결과, 기사를 하나도 찾지 못했습니다. 기존 파일을 유지합니다.")
+            return None
+            
         return news_list
         
     except requests.exceptions.RequestException as e:
         print(f"웹사이트 접속 오류: {e}")
-        return []
+        return None
 
 def get_mock_graph_data():
     """그래프 데이터와 출처 정보를 반환합니다."""
@@ -73,8 +74,12 @@ def main():
     """뉴스 데이터와 그래프 데이터를 수집하여 JSON 파일로 저장합니다."""
     print("뉴스 및 그래프 데이터 수집을 시작합니다...")
     
-    # 실제 크롤러 함수를 호출하여 뉴스 데이터를 가져옵니다.
     news_data = crawl_news_data()
+    
+    # 크롤링에 실패하여 None이 반환된 경우, JSON 파일을 덮어쓰지 않습니다.
+    if news_data is None:
+        print("크롤링 실패. 기존 news_data.json 파일을 유지합니다.")
+        return
     
     data = {
         "last_updated": datetime.now().isoformat(),

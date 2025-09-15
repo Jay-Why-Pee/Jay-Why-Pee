@@ -1032,5 +1032,37 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
+
+<section>
+  <h3>📰 EV 모터 기술 트렌드 실시간 뉴스</h3>
+  <div id="dynamic-news">뉴스를 불러오는 중입니다...</div>
+</section>
+
+<script>
+  async function loadNews() {
+    try {
+      const response = await fetch('ev_motor_news.json');
+      const data = await response.json();
+      const container = document.getElementById('dynamic-news');
+      container.innerHTML = `<p><strong>마지막 업데이트:</strong> ${data.last_updated}</p>`;
+      data.news.forEach(item => {
+        const newsItem = document.createElement('div');
+        newsItem.innerHTML = `
+          <h4>${item.title}</h4>
+          <p><em>${item.source} | ${item.published}</em></p>
+          <p>${item.summary}</p>
+          ${item.link}기사 보기</a>
+          <hr>
+        `;
+        container.appendChild(newsItem);
+      });
+    } catch (error) {
+      console.error('뉴스 로딩 실패:', error);
+    }
+  }
+  window.onload = loadNews;
+</script>
+
+
 </body>
 </html>

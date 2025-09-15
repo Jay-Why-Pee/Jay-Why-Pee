@@ -1,4 +1,15 @@
-name: 뉴스 크롤링 워크플로우on:schedule:# 매시간 0분에 실행- cron: '0 * * * *'workflow_dispatch:jobs:crawl_and_commit:runs-on: ubuntu-lateststeps:
+name: 뉴스 크롤링 워크플로우
+
+on:
+schedule:
+# 매시간 0분에 실행
+- cron: '0 * * * *'
+workflow_dispatch:
+jobs:
+crawl_and_commit:
+runs-on: ubuntu-latest
+
+steps:
   - name: 저장소 체크아웃
     uses: actions/checkout@v4
 

@@ -1,0 +1,19 @@
+name: 뉴스 크롤링 워크플로우on:schedule:# 매시간 0분에 실행- cron: '0 * * * *'workflow_dispatch:jobs:crawl_and_commit:runs-on: ubuntu-lateststeps:
+  - name: 저장소 체크아웃
+    uses: actions/checkout@v4
+
+  - name: Python 설정
+    uses: actions/setup-python@v4
+    with:
+      python-version: '3.x'
+
+  - name: 크롤러 스크립트 실행
+    run: python crawler.py
+
+  - name: 변경사항 커밋 및 푸시
+    run: |
+      git config --global user.name 'github-actions[bot]'
+      git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      git add news_data.json
+      git commit -m "데이터베이스 업데이트: 최신 뉴스 및 차트 데이터"
+      git push

@@ -435,7 +435,7 @@
         
         <div class="auto-update-status">
             <span class="update-indicator"></span>
-            자동 업데이트: 매일 오전 6시 (KST) | 다음 업데이트까지 <span class="countdown-timer" id="countdown"></span>
+            자동 업데이트: 매시간 (06:00-23:00 KST) | 다음 업데이트까지 <span class="countdown-timer" id="countdown"></span>
         </div>
 
         <div class="last-update-info">
@@ -709,17 +709,36 @@
         // Countdown timer
         function updateCountdown() {
             const now = new Date();
-            let tomorrow = new Date(now);
-            tomorrow.setDate(now.getDate() + 1);
-            tomorrow.setHours(6, 0, 0, 0);
-            const timeRemaining = tomorrow - now;
+            const currentHour = now.getHours();
             
-            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+            // If outside 06:00-23:00, show time until 06:00
+            if (currentHour < 6) {
+                let target = new Date(now);
+                target.setHours(6, 0, 0, 0);
+                const timeRemaining = target - now;
+                showCountdown(timeRemaining);
+            } else if (currentHour >= 23) {
+                let tomorrow = new Date(now);
+                tomorrow.setDate(now.getDate() + 1);
+                tomorrow.setHours(6, 0, 0, 0);
+                const timeRemaining = tomorrow - now;
+                showCountdown(timeRemaining);
+            } else {
+                // During 06:00-23:00, show time until next hour
+                let nextHour = new Date(now);
+                nextHour.setHours(nextHour.getHours() + 1);
+                nextHour.setMinutes(0, 0, 0);
+                const timeRemaining = nextHour - now;
+                showCountdown(timeRemaining);
+            }
+        }
+
+        function showCountdown(timeRemaining) {
             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
+            
             document.getElementById('countdown').textContent = 
-                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();

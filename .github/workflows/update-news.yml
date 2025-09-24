@@ -25,6 +25,20 @@ jobs:
       - name: Install dependencies
         run: npm install
         
+      - name: Diagnostic - runner info
+        run: |
+          echo "--- DIAGNOSTIC: workflow start ---"
+          echo "GITHUB_RUN_ID=$GITHUB_RUN_ID"
+          echo "GITHUB_WORKFLOW=$GITHUB_WORKFLOW"
+          echo "GITHUB_EVENT_NAME=$GITHUB_EVENT_NAME"
+          date -u
+          uname -a
+          echo "Node:" $(node -v 2>/dev/null || echo "(node not installed)")
+          echo "NPM:" $(npm -v 2>/dev/null || echo "(npm not installed)")
+          echo "Workspace files:"
+          ls -la
+          echo "--- DIAGNOSTIC END ---"
+        
       - name: Collect News
         env:
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}

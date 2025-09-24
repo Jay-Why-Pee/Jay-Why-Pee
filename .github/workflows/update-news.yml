@@ -2,12 +2,14 @@ name: Update News Data
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Run every 6 hours
+    - cron: '0 21 * * *'  # Runs at 21:00 UTC (06:00 KST) daily
   workflow_dispatch:  # Allow manual triggers
 
 jobs:
   update-news:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - uses: actions/checkout@v3
@@ -15,7 +17,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
+          cache: 'npm'
           
       - name: Install dependencies
         run: npm install
@@ -23,13 +26,11 @@ jobs:
       - name: Collect News
         env:
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
-        run: |
-          node scripts/collect-news.js
+        run: node scripts/collect-news.js
           
       - name: Commit and Push
         run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
+          git config --local user.name 'github-actions[bot]'
+          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
           git add data/news.json
-          git commit -m "auto: Update news data" || echo "No changes to commit"
-          git push
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: Update news data [skip ci]" && git push)

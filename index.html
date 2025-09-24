@@ -1,78 +1,793 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EV Motor Technology News</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <title>글로벌 EV 모터 시장 분석 대시보드</title>
+    <link rel="stylesheet" href="/src/frontend/css/styles.css">
+    <script src="/node_modules/chart.js/dist/chart.umd.js"></script>
+    <script src="/node_modules/moment/moment.min.js"></script>
+    <script src="/src/frontend/js/chartEvents.js"></script>
+    <script src="/src/frontend/js/chartManager.js"></script>
+    <script src="/src/frontend/js/visualizations.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #a8a8a8;
+            font-weight: 400;
+        }
+
+        .auto-update-status {
+            background-color: #2b2b2b;
+            color: #f0f0f0;
+            padding: 16px 24px;
+            border-radius: 16px;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 600px;
+            font-size: 0.95em;
+            border: 1px solid #444;
+        }
+
+        .update-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 12px;
+            background: #30d158;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.4; }
+        }
+
+        .countdown-timer {
+            font-weight: 600;
+            color: #ff9f0a;
+        }
+
+        .last-update-info {
+            text-align: center;
+            color: #a8a8a8;
+            margin: 16px auto;
+            font-size: 0.9em;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .filter-tab {
+            background-color: #2b2b2b;
+            color: #f0f0f0;
+            border: 1px solid #444;
+            padding: 12px 24px;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .filter-tab:hover {
+            background-color: #3d3d3d;
+            transform: translateY(-1px);
+        }
+
+        .filter-tab.active {
+            background-color: #007aff;
+            border-color: #007aff;
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .news-item {
+            background-color: #2b2b2b;
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid #444;
+            transition: all 0.4s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .news-item:hover {
+            background-color: #3d3d3d;
+            border-color: #666;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .news-item a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .news-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .news-badge.breaking {
+            background-color: rgba(255, 59, 48, 0.15);
+            color: #ff453a;
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .news-badge.tech {
+            background-color: rgba(175, 82, 222, 0.15);
+            color: #bf5af2;
+            border: 1px solid rgba(175, 82, 222, 0.3);
+        }
+
+        .news-badge.market {
+            background-color: rgba(48, 209, 88, 0.15);
+            color: #30d158;
+            border: 1px solid rgba(48, 209, 88, 0.3);
+        }
+
+        .news-badge.korea {
+            background-color: rgba(255, 159, 10, 0.15);
+            color: #ff9f0a;
+            border: 1px solid rgba(255, 159, 10, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .news-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #f2f2f7;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        .news-summary {
+            color: #a8a8a8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            color: #8e8e93;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
+
+        .news-source {
+            font-weight: 600;
+            color: #007aff;
+        }
+
+        .news-date {
+            font-style: italic;
+        }
+
+        .more-btn, .back-btn {
+            display: block;
+            margin: 50px auto;
+            padding: 16px 32px;
+            background-color: #2b2b2b;
+            color: #f2f2f7;
+            border: 1px solid #444;
+            border-radius: 24px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .more-btn:hover, .back-btn:hover {
+            background-color: #3d3d3d;
+            border-color: #666;
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            margin-bottom: 32px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background-color: #2b2b2b;
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid #444;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background-color: #3d3d3d;
+            border-color: #666;
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #f2f2f7;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 0;
+            padding: 16px;
+            background-color: #3d3d3d;
+            border-radius: 12px;
+        }
+
+        .metric-label {
+            font-weight: 500;
+            color: #a8a8a8;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #007aff;
+            font-size: 1.1em;
+        }
+
+        .trend-up {
+            color: #30d158;
+        }
+
+        .trend-down {
+            color: #ff453a;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .source {
+            font-size: 0.8em;
+            color: #8e8e93;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        .source a {
+            color: #007aff;
+            text-decoration: none;
+        }
+
+        .source a:hover {
+            text-decoration: underline;
+        }
+
+        .large-card {
+            grid-column: 1 / -1;
+        }
+
+        .tech-item {
+            background-color: #3d3d3d;
+            padding: 20px;
+            margin: 16px 0;
+            border-radius: 12px;
+            border-left: 3px solid #bf5af2;
+        }
+
+        .tech-item h4 {
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            color: #f2f2f7;
+        }
+
+        .tech-item p {
+            font-size: 0.95em;
+            color: #a8a8a8;
+        }
+
+        .insight-item {
+            background-color: #3d3d3d;
+            padding: 16px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border-left: 3px solid #007aff;
+            color: #a8a8a8;
+        }
+
+        .regional-data {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .region-card {
+            background-color: #3d3d3d;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            border: 1px solid #555;
+        }
+
+        .region-card h4 {
+            margin-bottom: 12px;
+            color: #f2f2f7;
+            font-size: 0.9em;
+        }
+
+        .region-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #30d158;
+        }
+
+        .growth-rate {
+            font-size: 0.85em;
+            margin-top: 8px;
+            color: #a8a8a8;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .news-item, .card {
+                padding: 24px;
+            }
+            
+            .filter-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">EV Motor Technology News</h1>
-        <div class="last-updated mb-3 text-muted">
-            Last updated: <span id="lastUpdated">Loading...</span>
+    <div class="dashboard">
+        <div class="header">
+            <h1>EV Motor Market Intelligence</h1>
+            <p>글로벌 전기차 모터 산업 핵심 인사이트 & 동향</p>
         </div>
-        <div id="newsContainer" class="row">
-            <div class="col-12">
-                <div class="text-center my-5">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
+        
+        <div class="auto-update-status">
+            <span class="update-indicator"></span>
+            자동 업데이트: 매일 오전 6시 (KST) | 다음 업데이트까지 <span class="countdown-timer" id="countdown"></span>
+        </div>
+
+        <div class="last-update-info">
+            마지막 업데이트: <span id="lastUpdate">2025. 09. 14. 06:00 (KST)</span>
+        </div>
+
+        <div class="grid">
+            <div class="card large-card">
+                <h3>📊 글로벌 EV 시장 현황 (2024-2025)</h3>
+                <div class="regional-data">
+                    <div class="region-card">
+                        <h4>글로벌 판매량</h4>
+                        <div class="region-value">17M</div>
+                        <div class="growth-rate trend-up">+25% (2024)</div>
                     </div>
+                    <div class="region-card">
+                        <h4>중국 시장</h4>
+                        <div class="region-value">11M</div>
+                        <div class="growth-rate">최대 시장</div>
+                    </div>
+                    <div class="region-card">
+                        <h4>시장 규모</h4>
+                        <div class="region-value">$1.3T</div>
+                        <div class="growth-rate trend-up">→ $6.5T (2030)</div>
+                    </div>
+                    <div class="region-card">
+                        <h4>연평균 성장률</h4>
+                        <div class="region-value">32.5%</div>
+                        <div class="growth-rate">(2025-2030)</div>
+                    </div>
+                </div>
+                <div class="source">
+                    출처: <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">IEA Global EV Outlook 2025</a>,
+                    <a href="https://www.grandviewresearch.com/industry-analysis/electric-vehicles-ev-market" target="_blank">Grand View Research</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔋 EV 모터 시장 규모</h3>
+                <div class="metric">
+                    <span class="metric-label">2025년 시장 규모</span>
+                    <span class="metric-value trend-up">$27.16B</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">2032년 예상 규모</span>
+                    <span class="metric-value trend-up">$77.61B</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">연평균 성장률 (CAGR)</span>
+                    <span class="metric-value trend-up">16.2%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">아시아태평양 점유율</span>
+                    <span class="metric-value">52.91%</span>
+                </div>
+                <div class="source">
+                    출처: <a href="https://www.fortunebusinessinsights.com/electric-vehicle-motor-market-107244" target="_blank">Fortune Business Insights</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🧲 PMSM 시장 동향</h3>
+                <div class="metric">
+                    <span class="metric-label">2024년 시장 규모</span>
+                    <span class="metric-value">$27.01B</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">2025년 예상 규모</span>
+                    <span class="metric-value trend-up">$28.83B</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">2029년 예상 규모</span>
+                    <span class="metric-value trend-up">$40.4B</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">연평균 성장률</span>
+                    <span class="metric-value trend-up">8.4%</span>
+                </div>
+                <div class="source">
+                    출처: <a href="https://www.thebusinessresearchcompany.com/report/permanent-magnet-synchronous-motor-global-market-report" target="_blank">The Business Research Company</a>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="filter-tabs">
+            <div class="filter-tab active" data-filter="all">전체</div>
+            <div class="filter-tab" data-filter="breaking">속보</div>
+            <div class="filter-tab" data-filter="tech">기술혁신</div>
+            <div class="filter-tab" data-filter="market">시장동향</div>
+            <div class="filter-tab" data-filter="korea">국내뉴스</div>
+        </div>
+
+        <div class="news-grid" id="newsGrid">
+            <!-- News items will be dynamically populated here -->
+        </div>
+        
+        <button class="more-btn" id="moreBtn">더 많은 뉴스 보기</button>
+
+        <div class="card large-card">
+            <h3>🚀 핵심 기술 트렌드</h3>
+            <div class="tech-item">
+                <h4>실리콘 카바이드(SiC) 인버터</h4>
+                <p>효율성 향상 및 손실 감소로 차세대 EV 견인 인버터의 핵심 기술로 부상. STMicroelectronics 등 주요 반도체 기업들이 시장을 주도하고 있습니다.</p>
+            </div>
+            <div class="tech-item">
+                <h4>메가와트 충전 시스템</h4>
+                <p>대형 상용차 및 미래 승용차를 위한 메가와트급 충전 스테이션이 2024년부터 전 세계적으로 설치 시작. 이는 고성능 EV 모터와 파워트레인 개발을 촉진하고 있습니다.</p>
+            </div>
+            <div class="tech-item">
+                <h4>AI 기반 모터 제어</h4>
+                <p>인공지능 알고리즘을 활용한 모터 제어 시스템으로 에너지 효율성과 차량 성능을 실시간으로 최적화합니다.</p>
+            </div>
+            <div class="source">
+                출처: <a href="https://virta.global/resources/blog/global-electric-vehicle-market" target="_blank">Virta Global</a>,
+                <a href="https://www.yolegroup.com/category/power-electronics/" target="_blank">Yole Group</a>
+            </div>
+        </div>
+
+        <div class="card large-card">
+            <h3>💡 전략적 인사이트</h3>
+            <div class="insight-item">
+                <strong>시장 집중도:</strong> 중국이 전체 EV 시장의 약 65%를 차지하며 압도적 우위를 유지하고 있습니다.
+            </div>
+            <div class="insight-item">
+                <strong>가격 경쟁력:</strong> 2024년 신규 전기차 모델 중 75%가 $50,000 이상으로, 대중화를 위해 가격 경쟁력 개선이 중요합니다.
+            </div>
+            <div class="insight-item">
+                <strong>기술 혁신:</strong> PMSM과 SiC 기술의 결합으로 모터 효율성 및 전력 밀도가 대폭 향상되고 있습니다.
+            </div>
+            <div class="insight-item">
+                <strong>공급망 다변화:</strong> EU의 전기차 수출이 증가하며 중국 의존도를 완화하려는 노력이 지속되고 있습니다.
+            </div>
+            <div class="insight-item">
+                <strong>미래 성장 동력:</strong> 상용차 전동화와 메가와트 충전 인프라가 새로운 성장 엔진으로 부상하고 있습니다.
+            </div>
+        </div>
+
+        <div class="card large-card">
+            <h3>📈 EV 모터 시장 성장 예측</h3>
+            <div class="chart-container">
+                <canvas id="marketChart"></canvas>
+            </div>
+            <div class="source">
+                출처: Fortune Business Insights, The Business Research Company 데이터 기반
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🌏 지역별 시장 현황</h3>
+            <div class="metric">
+                <span class="metric-label">중국 EV 판매량</span>
+                <span class="metric-value trend-up">11M+ (2024)</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">유럽 EV 수출량</span>
+                <span class="metric-value trend-up">830K (+9%)</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">한국 시장 성장률</span>
+                <span class="metric-value trend-up">11.7% (2024)</span>
+            </div>
+            <div class="source">
+                출처: <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">IEA Global EV Outlook 2025</a>
+            </div>
+        </div>
+        
+    </div>
+    
     <script>
+        // Load news data from JSON file
         async function loadNews() {
             try {
                 const response = await fetch('data/news.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load news data');
+                }
                 const data = await response.json();
                 
-                // Update last updated time
-                const lastUpdated = new Date(data.lastUpdated);
-                document.getElementById('lastUpdated').textContent = lastUpdated.toLocaleString();
+                document.getElementById('lastUpdate').textContent = 
+                    new Date(data.lastUpdated).toLocaleString('ko-KR', { 
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    }) + ' (KST)';
                 
-                // Clear loading spinner
-                document.getElementById('newsContainer').innerHTML = '';
-                
-                // Add articles
-                data.articles.forEach(article => {
-                    const articleElement = document.createElement('div');
-                    articleElement.className = 'col-md-6 col-lg-4 mb-4';
-                    articleElement.innerHTML = `
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">${article.title}</h5>
-                                <p class="card-text">${article.summary || 'No summary available.'}</p>
-                                <div class="mt-3">
-                                    <span class="badge bg-primary">${article.category}</span>
-                                    <span class="badge bg-secondary">${article.source}</span>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">Published: ${article.date}</small>
-                                <a href="${article.url}" class="btn btn-sm btn-outline-primary float-end" target="_blank">Read More</a>
-                            </div>
-                        </div>
-                    `;
-                    document.getElementById('newsContainer').appendChild(articleElement);
-                });
+                renderNews('all', data.articles);
             } catch (error) {
                 console.error('Error loading news:', error);
-                document.getElementById('newsContainer').innerHTML = `
-                    <div class="col-12">
-                        <div class="alert alert-danger">
-                            Error loading news. Please try again later.
-                        </div>
+                document.getElementById('newsGrid').innerHTML = `
+                    <div class="card">
+                        <h3>뉴스를 불러오는데 실패했습니다</h3>
+                        <p>잠시 후 다시 시도해주세요.</p>
                     </div>
                 `;
             }
         }
 
-        // Load news when page loads
+        let visibleCount = 6;
+        let currentFilter = 'all';
+        let currentArticles = [];
+
+        const newsGrid = document.getElementById('newsGrid');
+        const moreBtn = document.getElementById('moreBtn');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+
+        // News card creation function
+        const createNewsCard = (item) => {
+            const newsItem = document.createElement('div');
+            newsItem.className = 'news-item';
+            newsItem.dataset.category = item.category;
+            
+            const categoryText = {
+                'breaking': '속보',
+                'tech': '기술혁신',
+                'market': '시장동향',
+                'korea': '국내뉴스'
+            }[item.category];
+            
+            newsItem.innerHTML = `
+                <a href="${item.url}" target="_blank">
+                    <span class="news-badge ${item.category}">${categoryText}</span>
+                    <h2 class="news-title">${item.title}</h2>
+                    <p class="news-summary">${item.summary}</p>
+                    <div class="news-meta">
+                        <span class="news-source">${item.source}</span>
+                        <span class="news-date">${item.date}</span>
+                    </div>
+                </a>
+            `;
+            return newsItem;
+        };
+
+        // News rendering function
+        const renderNews = (filter, articles) => {
+            currentArticles = articles;
+            newsGrid.innerHTML = '';
+            const filteredNews = articles.filter(item => filter === 'all' || item.category === filter);
+            
+            const newsToShow = filteredNews.slice(0, visibleCount);
+            newsToShow.forEach(item => {
+                const card = createNewsCard(item);
+                newsGrid.appendChild(card);
+            });
+            
+            moreBtn.style.display = visibleCount >= filteredNews.length ? 'none' : 'block';
+        };
+
+        // Filter tab click events
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.filter;
+                visibleCount = 6;
+                renderNews(currentFilter, currentArticles);
+            });
+        });
+
+        // More button click event
+        moreBtn.addEventListener('click', () => {
+            visibleCount += 6;
+            renderNews(currentFilter, currentArticles);
+        });
+
+        // Initialize news loading
         loadNews();
+
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date();
+            let tomorrow = new Date(now);
+            tomorrow.setDate(now.getDate() + 1);
+            tomorrow.setHours(6, 0, 0, 0);
+            const timeRemaining = tomorrow - now;
+            
+            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent = 
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Market Chart
+        const ctx = document.getElementById('marketChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032'],
+                datasets: [{
+                    label: 'EV 모터 시장 규모 (십억 달러)',
+                    data: [19.2, 22.5, 27.0, 27.16, 31.0, 36.5, 43.1, 50.8, 60.1, 68.0, 77.61],
+                    backgroundColor: 'rgba(0, 122, 255, 0.4)',
+                    borderColor: 'rgba(0, 122, 255, 1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#f0f0f0'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += '$' + context.parsed.y.toLocaleString() + 'B';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#a8a8a8'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#a8a8a8',
+                            callback: function(value) {
+                                return '$' + value + 'B';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>

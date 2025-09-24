@@ -1,260 +1,180 @@
 const fetch = require('node-fetch');
 const Parser = require('rss-parser');
+const fs = require('fs').promises;
+const path = require('path');
 
 class NewsCollector {
     constructor(db, options = {}) {
         this.db = db;
         this.newsApiKey = options.newsApiKey || process.env.NEWSAPI_KEY;
         this.parser = new Parser();
-        this.queries = [
-            'electric vehicle motor technology',
-            'ev motor manufacturing innovation',
-            'tesla rare earth motor',
-            'ev motor market trends',
-            'electric vehicle drivetrain advances'
-        ];
+        this.categories = {
+            breaking: ['tesla motors', 'electric vehicle manufacturing'],
+            tech: ['ev motor technology', 'electric powertrain'],
+            market: ['ev market', 'electric vehicle market', 'ev motor market'],
+            korea: ['현대자동차 전기차', '한국 전기차', 'korean ev market']
+        };
     }
 
     async validateUrl(url) {
         try {
-            console.log(`Validating URL: ${url}`);
-            // Try HEAD first
-            const head = await fetch(url, { 
-                method: 'HEAD', 
-                redirect: 'follow',
-                timeout: 5000,
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (compatible; NewsCollector/1.0)'
-                }
-            });
-            if (head.ok) {
-                console.log(`URL validated via HEAD: ${url}`);
-                return true;
-            }
+            // Quick HEAD check
+            const head = await fetch(url, { method: 'HEAD', redirect: 'follow' });
+            if (head && head.ok) return true;
 
-            // Fallback to GET if HEAD fails
-            console.log(`HEAD failed, trying GET: ${url}`);
-            const get = await fetch(url, { 
-                method: 'GET', 
-                redirect: 'follow',
-                timeout: 5000,
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (compatible; NewsCollector/1.0)'
-                }
-            });
-            const isValid = get.ok;
-            console.log(`URL ${isValid ? 'validated' : 'invalid'} via GET: ${url}`);
-            return isValid;
+            // Fallback to GET if HEAD not supported
+            const get = await fetch(url, { method: 'GET', redirect: 'follow' });
+            return get && get.ok;
         } catch (err) {
-            console.error(`URL validation failed for ${url}:`, err.message);
             return false;
         }
     }
 
-    async fetchFromNewsApi(query) {
+    async fetchFromNewsApi(category) {
         if (!this.newsApiKey) {
-            console.log('No NewsAPI key provided, skipping NewsAPI source');
+            console.log('NewsAPI key not provided, skipping NewsAPI fetch');
             return [];
         }
 
-        console.log(`Fetching from NewsAPI with query: ${query}`);
-        const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&pageSize=10&sortBy=relevancy&apiKey=${this.newsApiKey}`;
-        
-        try {
-            const res = await fetch(url, {
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (compatible; NewsCollector/1.0)'
-                }
-            });
-            
-            if (!res.ok) {
-                console.error(`NewsAPI request failed: ${res.status} ${res.statusText}`);
-                return [];
-            }
+        const queries = this.categories[category];
+        let articles = [];
 
-            const data = await res.json();
-            console.log(`Retrieved ${data.articles?.length || 0} articles from NewsAPI`);
-            
-            return (data.articles || []).map(a => ({
-                title: a.title,
-                summary: a.description || a.content || '',
-                source: (a.source && a.source.name) || '',
-                date: a.publishedAt ? a.publishedAt.split('T')[0] : '',
-                url: a.url,
-                category: this.categorizeArticle(a.title + ' ' + (a.description || ''))
-            }));
-        } catch (err) {
-            console.error('Error fetching from NewsAPI:', err.message);
-            return [];
-        }
-    }
-
-    async fetchFromGoogleRss(query) {
-        console.log(`Fetching from Google News RSS with query: ${query}`);
-        const feedUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
-        
-        try {
-            const feed = await this.parser.parseURL(feedUrl);
-            console.log(`Retrieved ${feed.items?.length || 0} items from RSS feed`);
-            
-            return (feed.items || []).map(item => ({
-                title: item.title,
-                summary: item.contentSnippet || '',
-                source: item.source || new URL(item.link).hostname,
-                date: item.isoDate ? item.isoDate.split('T')[0] : '',
-                url: item.link,
-                category: this.categorizeArticle(item.title + ' ' + (item.contentSnippet || ''))
-            }));
-        } catch (err) {
-            console.error('Error fetching from Google News RSS:', err.message);
-            return [];
-        }
-    }
-
-    categorizeArticle(content) {
-        content = content.toLowerCase();
-        
-        if (content.includes('breaking') || 
-            content.includes('announces') || 
-            content.includes('announces') || 
-            content.includes('just in')) {
-            return 'breaking';
-        }
-        
-        if (content.includes('korea') || 
-            content.includes('hyundai') || 
-            content.includes('samsung') || 
-            content.includes('lg')) {
-            return 'korea';
-        }
-        
-        if (content.includes('technology') || 
-            content.includes('innovation') || 
-            content.includes('development')) {
-            return 'tech';
-        }
-        
-        if (content.includes('market') || 
-            content.includes('industry') || 
-            content.includes('growth')) {
-            return 'market';
-        }
-        
-        return 'tech';  // default category
-    }
-
-    async saveArticle(article) {
-        return new Promise((resolve, reject) => {
-            const query = `
-                INSERT INTO news (
-                    title, summary, source, url, category, published_date
-                ) VALUES (?, ?, ?, ?, ?, ?)
-                ON CONFLICT(url) DO UPDATE SET
-                    title = ?,
-                    summary = ?,
-                    source = ?,
-                    category = ?,
-                    published_date = ?,
-                    updated_at = CURRENT_TIMESTAMP
-            `;
-            
-            this.db.run(
-                query,
-                [
-                    article.title,
-                    article.summary,
-                    article.source,
-                    article.url,
-                    article.category,
-                    article.date,
-                    // Values for UPDATE clause
-                    article.title,
-                    article.summary,
-                    article.source,
-                    article.category,
-                    article.date
-                ],
-                function(err) {
-                    if (err) {
-                        console.error('Error saving article:', err.message);
-                        reject(err);
-                    } else {
-                        console.log(`Article saved/updated: ${article.title}`);
-                        resolve(this.lastID);
+        for (const query of queries) {
+            try {
+                const response = await fetch(
+                    `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&sortBy=publishedAt&language=en&pageSize=10`,
+                    {
+                        headers: { 'X-Api-Key': this.newsApiKey }
                     }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`NewsAPI error: ${response.statusText}`);
                 }
-            );
-        });
+
+                const data = await response.json();
+                articles = [...articles, ...data.articles];
+            } catch (error) {
+                console.error(`NewsAPI fetch failed for query "${query}":`, error.message);
+            }
+        }
+
+        return articles;
+    }
+
+    async fetchFromGoogleRss(category) {
+        const rssFeeds = {
+            breaking: [
+                'https://news.google.com/rss/search?q=tesla+motors+OR+electric+vehicle+manufacturing&hl=en-US&gl=US&ceid=US:en',
+            ],
+            tech: [
+                'https://news.google.com/rss/search?q=ev+motor+technology+OR+electric+powertrain&hl=en-US&gl=US&ceid=US:en',
+            ],
+            market: [
+                'https://news.google.com/rss/search?q=ev+market+OR+electric+vehicle+market&hl=en-US&gl=US&ceid=US:en',
+            ],
+            korea: [
+                'https://news.google.com/rss/search?q=현대자동차+전기차+OR+한국+전기차&hl=ko&gl=KR&ceid=KR:ko',
+            ]
+        };
+
+        let articles = [];
+
+        for (const feedUrl of rssFeeds[category]) {
+            try {
+                const feed = await this.parser.parseURL(feedUrl);
+                articles = [...articles, ...feed.items.map(item => ({
+                    title: item.title,
+                    summary: item.contentSnippet || item.content || '',
+                    url: item.link,
+                    publishedAt: item.pubDate,
+                    source: {
+                        name: item.creator || 'Google News'
+                    }
+                }))];
+            } catch (error) {
+                console.error(`RSS feed fetch failed for ${feedUrl}:`, error.message);
+            }
+        }
+
+        return articles;
     }
 
     async collectAndStore() {
-        console.log('Starting news collection...');
-        const results = new Set();
-        
-        // Collect from all queries
-        for (const query of this.queries) {
-            // Try NewsAPI
-            try {
-                const fromNewsApi = await this.fetchFromNewsApi(query);
-                fromNewsApi.forEach(article => results.add(JSON.stringify(article)));
-            } catch (e) {
-                console.error('Error collecting from NewsAPI:', e.message);
+        const newsData = {
+            articles: [],
+            lastUpdated: new Date().toISOString()
+        };
+
+        for (const category of Object.keys(this.categories)) {
+            let articles = [];
+            
+            // Try NewsAPI first if key is available
+            if (this.newsApiKey) {
+                articles = await this.fetchFromNewsApi(category);
+            }
+            
+            // Fallback to RSS if no articles from NewsAPI
+            if (articles.length === 0) {
+                articles = await this.fetchFromGoogleRss(category);
             }
 
-            // Try RSS
-            try {
-                const fromRss = await this.fetchFromGoogleRss(query);
-                fromRss.forEach(article => results.add(JSON.stringify(article)));
-            } catch (e) {
-                console.error('Error collecting from RSS:', e.message);
+            // Validate and store articles
+            for (const article of articles) {
+                if (!article.url || !await this.validateUrl(article.url)) continue;
+
+                const newsItem = {
+                    title: article.title,
+                    summary: article.description?.slice(0, 200) + '...',
+                    url: article.url,
+                    source: article.source.name,
+                    category,
+                    published_date: new Date(article.publishedAt).toISOString()
+                };
+
+                // Store in database
+                await new Promise((resolve, reject) => {
+                    this.db.run(
+                        `INSERT INTO news (title, summary, source, url, category, published_date) 
+                         SELECT ?,?,?,?,?,? 
+                         WHERE NOT EXISTS (SELECT 1 FROM news WHERE url = ?);`,
+                        [newsItem.title, newsItem.summary, newsItem.source, newsItem.url, 
+                         newsItem.category, newsItem.published_date, newsItem.url],
+                        function (err) {
+                            if (err) return reject(err);
+                            resolve();
+                        }
+                    );
+                }).catch(console.error);
+
+                // Add to news data for JSON
+                newsData.articles.push({
+                    ...newsItem,
+                    date: new Date(newsItem.published_date).toLocaleDateString('ko-KR')
+                });
             }
         }
 
-        console.log(`Collected ${results.size} unique articles, validating URLs...`);
-        
-        // Process and store valid articles
-        const articles = Array.from(results).map(str => JSON.parse(str));
-        let savedCount = 0;
-        
-        for (const article of articles) {
-            if (!article.url) {
-                console.log('Skipping article without URL');
-                continue;
-            }
+        // Remove duplicates and sort
+        newsData.articles = Array.from(
+            new Map(newsData.articles.map(item => [item.url, item])).values()
+        ).sort((a, b) => new Date(b.published_date) - new Date(a.published_date))
+        .slice(0, 30);
 
-            const isValid = await this.validateUrl(article.url);
-            if (!isValid) {
-                console.log(`Skipping article with invalid URL: ${article.url}`);
-                continue;
-            }
-
-            try {
-                await this.saveArticle(article);
-                savedCount++;
-            } catch (err) {
-                console.error(`Failed to save article: ${article.title}`, err.message);
-            }
-        }
-
-        console.log(`News collection completed. Saved ${savedCount} articles.`);
-        return savedCount;
-    }
-
-    async getVerifiedNews() {
-        return new Promise((resolve, reject) => {
-            this.db.all(
-                `SELECT * FROM news ORDER BY published_date DESC LIMIT 50`,
-                [],
-                (err, rows) => {
-                    if (err) {
-                        console.error('Error fetching verified news:', err.message);
-                        reject(err);
-                    } else {
-                        resolve(rows);
-                    }
-                }
+        // Save to JSON file
+        const dataDir = path.join(process.cwd(), 'data');
+        try {
+            await fs.writeFile(
+                path.join(dataDir, 'news.json'),
+                JSON.stringify(newsData, null, 2),
+                'utf8'
             );
-        });
+            console.log('News data successfully written to news.json');
+        } catch (error) {
+            console.error('Error writing news.json:', error);
+        }
+
+        return true;
     }
 }
 

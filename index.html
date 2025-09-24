@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Motor Technology News</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">EV Motor Technology News</h1>
+        <div class="last-updated mb-3 text-muted">
+            Last updated: <span id="lastUpdated">Loading...</span>
+        </div>
+        <div id="newsContainer" class="row">
+            <div class="col-12">
+                <div class="text-center my-5">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadNews() {
+            try {
+                const response = await fetch('data/news.json');
+                const data = await response.json();
+                
+                // Update last updated time
+                const lastUpdated = new Date(data.lastUpdated);
+                document.getElementById('lastUpdated').textContent = lastUpdated.toLocaleString();
+                
+                // Clear loading spinner
+                document.getElementById('newsContainer').innerHTML = '';
+                
+                // Add articles
+                data.articles.forEach(article => {
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'col-md-6 col-lg-4 mb-4';
+                    articleElement.innerHTML = `
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">${article.title}</h5>
+                                <p class="card-text">${article.summary || 'No summary available.'}</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-primary">${article.category}</span>
+                                    <span class="badge bg-secondary">${article.source}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Published: ${article.date}</small>
+                                <a href="${article.url}" class="btn btn-sm btn-outline-primary float-end" target="_blank">Read More</a>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('newsContainer').appendChild(articleElement);
+                });
+            } catch (error) {
+                console.error('Error loading news:', error);
+                document.getElementById('newsContainer').innerHTML = `
+                    <div class="col-12">
+                        <div class="alert alert-danger">
+                            Error loading news. Please try again later.
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Load news when page loads
+        loadNews();
+    </script>
+</body>
+</html>

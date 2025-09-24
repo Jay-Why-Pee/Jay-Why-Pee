@@ -536,40 +536,15 @@
 
         <div class="card large-card">
             <h3>🚀 핵심 기술 트렌드</h3>
-            <div class="tech-item">
-                <h4>실리콘 카바이드(SiC) 인버터</h4>
-                <p>효율성 향상 및 손실 감소로 차세대 EV 견인 인버터의 핵심 기술로 부상. STMicroelectronics 등 주요 반도체 기업들이 시장을 주도하고 있습니다.</p>
-            </div>
-            <div class="tech-item">
-                <h4>메가와트 충전 시스템</h4>
-                <p>대형 상용차 및 미래 승용차를 위한 메가와트급 충전 스테이션이 2024년부터 전 세계적으로 설치 시작. 이는 고성능 EV 모터와 파워트레인 개발을 촉진하고 있습니다.</p>
-            </div>
-            <div class="tech-item">
-                <h4>AI 기반 모터 제어</h4>
-                <p>인공지능 알고리즘을 활용한 모터 제어 시스템으로 에너지 효율성과 차량 성능을 실시간으로 최적화합니다.</p>
-            </div>
-            <div class="source">
-                출처: <a href="https://virta.global/resources/blog/global-electric-vehicle-market" target="_blank">Virta Global</a>,
-                <a href="https://www.yolegroup.com/category/power-electronics/" target="_blank">Yole Group</a>
+            <div id="techTrendsContainer">
+                <!-- Tech trends will be dynamically populated here -->
             </div>
         </div>
 
         <div class="card large-card">
             <h3>💡 전략적 인사이트</h3>
-            <div class="insight-item">
-                <strong>시장 집중도:</strong> 중국이 전체 EV 시장의 약 65%를 차지하며 압도적 우위를 유지하고 있습니다.
-            </div>
-            <div class="insight-item">
-                <strong>가격 경쟁력:</strong> 2024년 신규 전기차 모델 중 75%가 $50,000 이상으로, 대중화를 위해 가격 경쟁력 개선이 중요합니다.
-            </div>
-            <div class="insight-item">
-                <strong>기술 혁신:</strong> PMSM과 SiC 기술의 결합으로 모터 효율성 및 전력 밀도가 대폭 향상되고 있습니다.
-            </div>
-            <div class="insight-item">
-                <strong>공급망 다변화:</strong> EU의 전기차 수출이 증가하며 중국 의존도를 완화하려는 노력이 지속되고 있습니다.
-            </div>
-            <div class="insight-item">
-                <strong>미래 성장 동력:</strong> 상용차 전동화와 메가와트 충전 인프라가 새로운 성장 엔진으로 부상하고 있습니다.
+            <div id="marketInsightsContainer">
+                <!-- Market insights will be dynamically populated here -->
             </div>
         </div>
 
@@ -578,8 +553,8 @@
             <div class="chart-container">
                 <canvas id="marketChart"></canvas>
             </div>
-            <div class="source">
-                출처: Fortune Business Insights, The Business Research Company 데이터 기반
+            <div id="marketForecastContainer">
+                <!-- Market forecast info will be dynamically populated here -->
             </div>
         </div>
 
@@ -660,8 +635,8 @@
             newsItem.innerHTML = `
                 <a href="${item.url}" target="_blank">
                     <span class="news-badge ${item.category}">${categoryText}</span>
-                    <h2 class="news-title">${item.title}</h2>
-                    <p class="news-summary">${item.summary}</p>
+                    <h2 class="news-title">${item.title_kr || item.title}</h2>
+                    <p class="news-summary">${item.summary_kr || item.summary}</p>
                     <div class="news-meta">
                         <span class="news-source">${item.source}</span>
                         <span class="news-date">${item.date}</span>
@@ -702,6 +677,112 @@
             visibleCount += 6;
             renderNews(currentFilter, currentArticles);
         });
+
+        // Update tech trends
+        function updateTechTrends(trends) {
+            const container = document.getElementById('techTrendsContainer');
+            container.innerHTML = trends.map(trend => `
+                <div class="tech-item">
+                    <h4>${trend.keyword}</h4>
+                    <p>${trend.summary}</p>
+                </div>
+            `).join('');
+        }
+
+        // Update market insights
+        function updateMarketInsights(insights) {
+            const container = document.getElementById('marketInsightsContainer');
+            container.innerHTML = insights.map(insight => `
+                <div class="insight-item">
+                    <strong>${insight.title}:</strong> ${insight.content}
+                </div>
+            `).join('');
+        }
+
+        // Update market forecast
+        function updateMarketForecast(forecast) {
+            const container = document.getElementById('marketForecastContainer');
+            
+            // Update chart data if forecast data is available
+            if (forecast.current.size && forecast.future.size) {
+                const chart = Chart.getChart("marketChart");
+                const years = [];
+                const data = [];
+                
+                // Generate yearly data points
+                const startYear = new Date().getFullYear();
+                const endYear = forecast.future.year;
+                const yearDiff = endYear - startYear;
+                
+                for (let i = 0; i <= yearDiff; i++) {
+                    const year = startYear + i;
+                    years.push(year.toString());
+                    
+                    // Calculate projected value using CAGR
+                    if (forecast.cagr) {
+                        const value = forecast.current.size * Math.pow(1 + forecast.cagr/100, i);
+                        data.push(parseFloat(value.toFixed(2)));
+                    }
+                }
+                
+                chart.data.labels = years;
+                chart.data.datasets[0].data = data;
+                chart.update();
+            }
+
+            // Update source info
+            container.innerHTML = `
+                <div class="source">
+                    현재 시장 규모: ${forecast.current.size || 'N/A'}<br>
+                    ${forecast.future.year}년 예상 규모: ${forecast.future.size || 'N/A'}<br>
+                    연평균 성장률 (CAGR): ${forecast.cagr ? forecast.cagr + '%' : 'N/A'}
+                </div>
+            `;
+        }
+
+        // Enhanced news loading with insights
+        async function loadNews() {
+            try {
+                const response = await fetch('data/news.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load news data');
+                }
+                const data = await response.json();
+                
+                document.getElementById('lastUpdate').textContent = 
+                    new Date(data.lastUpdated).toLocaleString('ko-KR', { 
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    }) + ' (KST)';
+                
+                renderNews('all', data.articles);
+
+                // Update insights sections if available
+                if (data.insights) {
+                    if (data.insights.techTrends) {
+                        updateTechTrends(data.insights.techTrends);
+                    }
+                    if (data.insights.marketInsights) {
+                        updateMarketInsights(data.insights.marketInsights);
+                    }
+                    if (data.insights.marketForecast) {
+                        updateMarketForecast(data.insights.marketForecast);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading news:', error);
+                document.getElementById('newsGrid').innerHTML = `
+                    <div class="card">
+                        <h3>뉴스를 불러오는데 실패했습니다</h3>
+                        <p>잠시 후 다시 시도해주세요.</p>
+                    </div>
+                `;
+            }
+        }
 
         // Initialize news loading
         loadNews();

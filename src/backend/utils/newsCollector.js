@@ -2,6 +2,8 @@ const fetch = require('node-fetch');
 const Parser = require('rss-parser');
 const fs = require('fs').promises;
 const path = require('path');
+const translationService = require('./translationService');
+const NewsAnalyzer = require('./newsAnalyzer');
 
 class NewsCollector {
     constructor(db, options = {}) {
@@ -147,6 +149,15 @@ class NewsCollector {
                     );
                 }).catch(console.error);
 
+                    // Translate title and summary if not in Korean
+                if (category !== 'korea') {
+                    newsItem.title_kr = await translationService.translate(newsItem.title);
+                    newsItem.summary_kr = await translationService.translate(newsItem.summary);
+                } else {
+                    newsItem.title_kr = newsItem.title;
+                    newsItem.summary_kr = newsItem.summary;
+                }
+
                 // Add to news data for JSON
                 newsData.articles.push({
                     ...newsItem,
@@ -160,6 +171,14 @@ class NewsCollector {
             new Map(newsData.articles.map(item => [item.url, item])).values()
         ).sort((a, b) => new Date(b.published_date) - new Date(a.published_date))
         .slice(0, 30);
+
+        // Analyze news and generate insights
+        const analyzer = new NewsAnalyzer(newsData.articles);
+        newsData.insights = {
+            techTrends: analyzer.analyzeTechTrends(),
+            marketInsights: analyzer.analyzeMarketInsights(),
+            marketForecast: analyzer.analyzeMarketForecast()
+        };
 
         // Save to JSON file
         const dataDir = path.join(process.cwd(), 'data');

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글로벌 EV 모터 시장 분석 대시보드</title>
     <link rel="stylesheet" href="/src/frontend/css/styles.css">
-    <script src="/node_modules/chart.js/dist/chart.umd.js"></script>
-    <script src="/node_modules/moment/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="/src/frontend/js/chartEvents.js"></script>
     <script src="/src/frontend/js/chartManager.js"></script>
     <script src="/src/frontend/js/visualizations.js"></script>
@@ -401,6 +401,126 @@
             color: #a8a8a8;
         }
 
+        .market-growth-visualization {
+            padding: 20px 0;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .chart-title {
+            font-size: 1.1em;
+            color: #f2f2f7;
+            font-weight: 600;
+        }
+
+        .chart-period {
+            font-size: 0.9em;
+            color: #8e8e93;
+        }
+
+        .growth-bars {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .year-bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 80px;
+            position: relative;
+        }
+
+        .year-bar .bar {
+            width: 100%;
+            max-width: 40px;
+            background: linear-gradient(180deg, #007aff 0%, #0056d3 100%);
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            min-height: 10px;
+        }
+
+        .year-bar.current-year .bar {
+            background: linear-gradient(180deg, #30d158 0%, #248a3d 100%);
+            box-shadow: 0 0 15px rgba(48, 209, 88, 0.4);
+        }
+
+        .year-bar.target-year .bar {
+            background: linear-gradient(180deg, #ff9f0a 0%, #d48806 100%);
+            box-shadow: 0 0 15px rgba(255, 159, 10, 0.4);
+        }
+
+        .year-bar:hover .bar {
+            transform: scaleY(1.05);
+            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
+        }
+
+        .year-bar .year {
+            font-size: 0.8em;
+            color: #8e8e93;
+            margin-bottom: 4px;
+        }
+
+        .year-bar .value {
+            font-size: 0.75em;
+            color: #a8a8a8;
+            font-weight: 500;
+        }
+
+        .year-bar.current-year .year,
+        .year-bar.current-year .value {
+            color: #30d158;
+            font-weight: 600;
+        }
+
+        .year-bar.target-year .year,
+        .year-bar.target-year .value {
+            color: #ff9f0a;
+            font-weight: 600;
+        }
+
+        .growth-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        .growth-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3d3d3d;
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .growth-metric .label {
+            font-size: 0.95em;
+            color: #a8a8a8;
+            font-weight: 500;
+        }
+
+        .growth-metric .value {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
         @media (max-width: 768px) {
             .dashboard {
                 padding: 20px 15px;
@@ -422,6 +542,29 @@
 
             .grid {
                 grid-template-columns: 1fr;
+            }
+
+            .growth-bars {
+                height: 150px;
+                padding: 0 5px;
+            }
+
+            .year-bar {
+                max-width: 60px;
+            }
+
+            .year-bar .bar {
+                max-width: 30px;
+            }
+
+            .year-bar .year,
+            .year-bar .value {
+                font-size: 0.7em;
+            }
+
+            .growth-info {
+                grid-template-columns: 1fr;
+                gap: 12px;
             }
         }
     </style>
@@ -551,10 +694,71 @@
         <div class="card large-card">
             <h3>📈 EV 모터 시장 성장 예측</h3>
             <div class="chart-container">
-                <canvas id="marketChart"></canvas>
+                <canvas id="marketChart" style="display: none;"></canvas>
+                <div id="marketGrowthChart" class="market-growth-visualization">
+                    <div class="chart-header">
+                        <span class="chart-title">시장 규모 (억 달러)</span>
+                        <span class="chart-period">2022-2032</span>
+                    </div>
+                    <div class="growth-bars">
+                        <div class="year-bar" data-year="2022" data-value="192">
+                            <div class="bar" style="height: 25%;"></div>
+                            <span class="year">2022</span>
+                            <span class="value">$19.2B</span>
+                        </div>
+                        <div class="year-bar" data-year="2023" data-value="225">
+                            <div class="bar" style="height: 29%;"></div>
+                            <span class="year">2023</span>
+                            <span class="value">$22.5B</span>
+                        </div>
+                        <div class="year-bar" data-year="2024" data-value="270">
+                            <div class="bar" style="height: 35%;"></div>
+                            <span class="year">2024</span>
+                            <span class="value">$27.0B</span>
+                        </div>
+                        <div class="year-bar current-year" data-year="2025" data-value="272">
+                            <div class="bar" style="height: 35%;"></div>
+                            <span class="year">2025</span>
+                            <span class="value">$27.16B</span>
+                        </div>
+                        <div class="year-bar" data-year="2026" data-value="310">
+                            <div class="bar" style="height: 40%;"></div>
+                            <span class="year">2026</span>
+                            <span class="value">$31.0B</span>
+                        </div>
+                        <div class="year-bar" data-year="2028" data-value="431">
+                            <div class="bar" style="height: 56%;"></div>
+                            <span class="year">2028</span>
+                            <span class="value">$43.1B</span>
+                        </div>
+                        <div class="year-bar" data-year="2030" data-value="601">
+                            <div class="bar" style="height: 78%;"></div>
+                            <span class="year">2030</span>
+                            <span class="value">$60.1B</span>
+                        </div>
+                        <div class="year-bar target-year" data-year="2032" data-value="776">
+                            <div class="bar" style="height: 100%;"></div>
+                            <span class="year">2032</span>
+                            <span class="value">$77.61B</span>
+                        </div>
+                    </div>
+                    <div class="growth-info">
+                        <div class="growth-metric">
+                            <span class="label">연평균 성장률 (CAGR)</span>
+                            <span class="value trend-up">16.2%</span>
+                        </div>
+                        <div class="growth-metric">
+                            <span class="label">2025-2032 예상 성장</span>
+                            <span class="value trend-up">+185%</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="marketForecastContainer">
-                <!-- Market forecast info will be dynamically populated here -->
+                <div class="source">
+                    출처: <a href="https://www.fortunebusinessinsights.com/electric-vehicle-motor-market-107244" target="_blank">Fortune Business Insights</a>, 
+                    <a href="https://www.thebusinessresearchcompany.com/report/permanent-magnet-synchronous-motor-global-market-report" target="_blank">The Business Research Company</a>
+                </div>
             </div>
         </div>
 
@@ -824,70 +1028,177 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Market Chart
-        const ctx = document.getElementById('marketChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032'],
-                datasets: [{
-                    label: 'EV 모터 시장 규모 (십억 달러)',
-                    data: [19.2, 22.5, 27.0, 27.16, 31.0, 36.5, 43.1, 50.8, 60.1, 68.0, 77.61],
-                    backgroundColor: 'rgba(0, 122, 255, 0.4)',
-                    borderColor: 'rgba(0, 122, 255, 1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#f0f0f0'
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed.y !== null) {
-                                    label += '$' + context.parsed.y.toLocaleString() + 'B';
-                                }
-                                return label;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: '#a8a8a8'
-                        },
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: '#a8a8a8',
-                            callback: function(value) {
-                                return '$' + value + 'B';
-                            }
-                        },
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        }
-                    }
+        // Market Chart - Initialize after DOM is ready
+        function initializeChart() {
+            const fallback = document.getElementById('chartFallback');
+            const canvas = document.getElementById('marketChart');
+            
+            try {
+                if (!canvas) {
+                    console.error('Chart canvas not found');
+                    showChartFallback();
+                    return;
                 }
+
+                const ctx = canvas.getContext('2d');
+                if (!ctx) {
+                    console.error('Canvas context not available');
+                    showChartFallback();
+                    return;
+                }
+
+                // Check if Chart.js is loaded
+                if (typeof Chart === 'undefined') {
+                    console.error('Chart.js library not loaded');
+                    showChartFallback();
+                    setTimeout(initializeChart, 2000); // Retry after 2 seconds
+                    return;
+                }
+
+                // Hide fallback and show canvas
+                if (fallback) fallback.style.display = 'none';
+                canvas.style.display = 'block';
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032'],
+                        datasets: [{
+                            label: 'EV 모터 시장 규모 (십억 달러)',
+                            data: [19.2, 22.5, 27.0, 27.16, 31.0, 36.5, 43.1, 50.8, 60.1, 68.0, 77.61],
+                            backgroundColor: 'rgba(0, 122, 255, 0.4)',
+                            borderColor: 'rgba(0, 122, 255, 1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#f0f0f0'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += '$' + context.parsed.y.toLocaleString() + 'B';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: '#a8a8a8'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#a8a8a8',
+                                    callback: function(value) {
+                                        return '$' + value + 'B';
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                console.log('Chart initialized successfully');
+            } catch (error) {
+                console.error('Error initializing chart:', error);
+                showChartFallback();
             }
-        });
+        }
+
+        function showChartFallback() {
+            const fallback = document.getElementById('chartFallback');
+            const canvas = document.getElementById('marketChart');
+            
+            if (fallback) {
+                fallback.style.display = 'block';
+                fallback.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px;">
+                        <h4 style="color: #f2f2f7; margin-bottom: 20px;">📊 EV 모터 시장 성장 데이터</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin: 20px 0;">
+                            <div style="background: #3d3d3d; padding: 15px; border-radius: 8px;">
+                                <div style="font-size: 1.2em; color: #007aff; font-weight: bold;">2025년</div>
+                                <div style="color: #a8a8a8;">$27.16B</div>
+                            </div>
+                            <div style="background: #3d3d3d; padding: 15px; border-radius: 8px;">
+                                <div style="font-size: 1.2em; color: #007aff; font-weight: bold;">2032년</div>
+                                <div style="color: #a8a8a8;">$77.61B</div>
+                            </div>
+                            <div style="background: #3d3d3d; padding: 15px; border-radius: 8px;">
+                                <div style="font-size: 1.2em; color: #30d158; font-weight: bold;">CAGR</div>
+                                <div style="color: #a8a8a8;">16.2%</div>
+                            </div>
+                        </div>
+                        <p style="color: #8e8e93; font-size: 0.9em;">상세 차트는 잠시 후 표시됩니다</p>
+                    </div>
+                `;
+            }
+            
+            if (canvas) {
+                canvas.style.display = 'none';
+            }
+        }
+
+        // Animate growth bars
+        function animateGrowthBars() {
+            const bars = document.querySelectorAll('.year-bar .bar');
+            bars.forEach((bar, index) => {
+                bar.style.height = '0';
+                bar.style.opacity = '0';
+                
+                setTimeout(() => {
+                    bar.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    bar.style.opacity = '1';
+                    
+                    // Get the target height from the original style
+                    const targetHeight = bar.getAttribute('style').match(/height:\s*(\d+%)/);
+                    if (targetHeight) {
+                        bar.style.height = targetHeight[1];
+                    }
+                }, index * 100);
+            });
+        }
+
+        // Initialize visualizations
+        function initializeVisualizations() {
+            // Try to initialize Chart.js chart first
+            initializeChart();
+            
+            // Always animate the CSS bars
+            setTimeout(animateGrowthBars, 300);
+        }
+
+        // Initialize when everything is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initializeVisualizations, 500);
+            });
+        } else {
+            setTimeout(initializeVisualizations, 500);
+        }
     </script>
 </body>
 </html>

@@ -433,10 +433,10 @@
             justify-content: space-between;
             align-items: end;
             height: 200px;
-            margin-bottom: 200px;
-            padding: 0 10px 150px 10px;
+            margin-bottom: 50px;
+            padding: 0 10px 20px 10px;
             position: relative;
-            min-height: 400px;
+            min-height: 220px;
         }
 
         .year-bar {
@@ -474,6 +474,36 @@
             box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
         }
 
+        .year-bar {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .year-bar::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-bottom: 5px;
+            border: 1px solid #444;
+        }
+
+        .year-bar:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .year-bar .year {
             font-size: 0.8em;
             color: #8e8e93;
@@ -481,14 +511,7 @@
         }
 
         .year-bar .value {
-            font-size: 0.75em;
-            color: #a8a8a8;
-            font-weight: 500;
-            position: absolute;
-            bottom: -80px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
+            display: none;
         }
 
         .year-bar.current-year .year,
@@ -507,8 +530,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            margin-top: 60px;
-            padding-top: 30px;
+            margin-top: 30px;
+            padding-top: 20px;
             border-top: 1px solid #444;
         }
 
@@ -557,9 +580,9 @@
 
             .growth-bars {
                 height: 150px;
-                padding: 0 5px 120px 5px;
-                margin-bottom: 120px;
-                min-height: 300px;
+                padding: 0 5px 20px 5px;
+                margin-bottom: 40px;
+                min-height: 170px;
             }
 
             .year-bar {
@@ -576,13 +599,13 @@
             }
 
             .year-bar .value {
-                bottom: -70px;
+                display: none;
             }
 
             .growth-info {
                 grid-template-columns: 1fr;
                 gap: 12px;
-                margin-top: 40px;
+                margin-top: 20px;
             }
         }
     </style>
@@ -719,42 +742,42 @@
                         <span class="chart-period">2022-2032</span>
                     </div>
                     <div class="growth-bars">
-                        <div class="year-bar" data-year="2022" data-value="192">
+                        <div class="year-bar" data-year="2022" data-value="192" data-tooltip="$19.2B">
                             <div class="bar" style="height: 25%;"></div>
                             <span class="year">2022</span>
                             <span class="value">$19.2B</span>
                         </div>
-                        <div class="year-bar" data-year="2023" data-value="225">
+                        <div class="year-bar" data-year="2023" data-value="225" data-tooltip="$22.5B">
                             <div class="bar" style="height: 29%;"></div>
                             <span class="year">2023</span>
                             <span class="value">$22.5B</span>
                         </div>
-                        <div class="year-bar" data-year="2024" data-value="270">
+                        <div class="year-bar" data-year="2024" data-value="270" data-tooltip="$27.0B">
                             <div class="bar" style="height: 35%;"></div>
                             <span class="year">2024</span>
                             <span class="value">$27.0B</span>
                         </div>
-                        <div class="year-bar current-year" data-year="2025" data-value="272">
+                        <div class="year-bar current-year" data-year="2025" data-value="272" data-tooltip="$27.16B (현재)">
                             <div class="bar" style="height: 35%;"></div>
                             <span class="year">2025</span>
                             <span class="value">$27.16B</span>
                         </div>
-                        <div class="year-bar" data-year="2026" data-value="310">
+                        <div class="year-bar" data-year="2026" data-value="310" data-tooltip="$31.0B">
                             <div class="bar" style="height: 40%;"></div>
                             <span class="year">2026</span>
                             <span class="value">$31.0B</span>
                         </div>
-                        <div class="year-bar" data-year="2028" data-value="431">
+                        <div class="year-bar" data-year="2028" data-value="431" data-tooltip="$43.1B">
                             <div class="bar" style="height: 56%;"></div>
                             <span class="year">2028</span>
                             <span class="value">$43.1B</span>
                         </div>
-                        <div class="year-bar" data-year="2030" data-value="601">
+                        <div class="year-bar" data-year="2030" data-value="601" data-tooltip="$60.1B">
                             <div class="bar" style="height: 78%;"></div>
                             <span class="year">2030</span>
                             <span class="value">$60.1B</span>
                         </div>
-                        <div class="year-bar target-year" data-year="2032" data-value="776">
+                        <div class="year-bar target-year" data-year="2032" data-value="776" data-tooltip="$77.61B (목표)">
                             <div class="bar" style="height: 100%;"></div>
                             <span class="year">2032</span>
                             <span class="value">$77.61B</span>

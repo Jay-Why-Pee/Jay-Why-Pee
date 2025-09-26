@@ -42,14 +42,19 @@ npm install
 
 1. 뉴스 수집 실행:
 ```bash
-node scripts/collect-news.js
+npm run collect-news
 ```
 
 2. 웹서버 실행:
 ```bash
-# src/backend 디렉토리에서
-node server.js
+npm start
+# 또는 개발 모드
+npm run dev
 ```
+
+3. 브라우저에서 확인:
+- 대시보드: http://localhost:3000
+- API 상태 확인: http://localhost:3000/api/health
 
 ## 주의사항
 

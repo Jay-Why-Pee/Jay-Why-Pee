@@ -317,6 +317,7 @@
         .chart-container {
             height: 300px;
             margin: 20px 0;
+            padding-bottom: 20px;
         }
 
         .source {
@@ -402,7 +403,8 @@
         }
 
         .market-growth-visualization {
-            padding: 20px 0;
+            padding: 20px 0 40px 0;
+            margin-bottom: 20px;
         }
 
         .chart-header {
@@ -430,8 +432,9 @@
             justify-content: space-between;
             align-items: end;
             height: 200px;
-            margin-bottom: 20px;
-            padding: 0 10px;
+            margin-bottom: 40px;
+            padding: 0 10px 30px 10px;
+            position: relative;
         }
 
         .year-bar {
@@ -441,6 +444,7 @@
             width: 100%;
             max-width: 80px;
             position: relative;
+            margin-bottom: 10px;
         }
 
         .year-bar .bar {
@@ -478,6 +482,11 @@
             font-size: 0.75em;
             color: #a8a8a8;
             font-weight: 500;
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
         }
 
         .year-bar.current-year .year,
@@ -546,7 +555,8 @@
 
             .growth-bars {
                 height: 150px;
-                padding: 0 5px;
+                padding: 0 5px 40px 5px;
+                margin-bottom: 50px;
             }
 
             .year-bar {
@@ -560,6 +570,10 @@
             .year-bar .year,
             .year-bar .value {
                 font-size: 0.7em;
+            }
+
+            .year-bar .value {
+                bottom: -30px;
             }
 
             .growth-info {

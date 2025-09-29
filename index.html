@@ -433,8 +433,9 @@
             justify-content: space-between;
             align-items: end;
             height: 200px;
-            margin-bottom: 50px;
-            padding: 0 10px 20px 10px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            padding: 0 10px 10px 10px;
             position: relative;
             min-height: 220px;
         }
@@ -505,9 +506,8 @@
         }
 
         .year-bar .year {
-            font-size: 0.8em;
-            color: #8e8e93;
-            margin-bottom: 4px;
+            /* Hidden to prevent overlap with the next section. We'll show years on the line chart dots instead. */
+            display: none;
         }
 
         .year-bar .value {
@@ -580,9 +580,9 @@
 
             .growth-bars {
                 height: 150px;
-                padding: 0 5px 20px 5px;
-                margin-bottom: 40px;
-                min-height: 170px;
+                padding: 0 5px 10px 5px;
+                margin-bottom: 20px;
+                min-height: 160px;
             }
 
             .year-bar {
@@ -594,10 +594,6 @@
             }
 
             .year-bar .year,
-            .year-bar .value {
-                font-size: 0.7em;
-            }
-
             .year-bar .value {
                 display: none;
             }
@@ -1100,29 +1096,88 @@
                 if (fallback) fallback.style.display = 'none';
                 canvas.style.display = 'block';
 
+                // Custom plugin to draw year badges above points
+                const yearBadgePlugin = {
+                    id: 'yearBadgePlugin',
+                    afterDatasetsDraw(chart, args, pluginOptions) {
+                        const { ctx } = chart;
+                        const meta = chart.getDatasetMeta(0);
+                        const labels = chart.data.labels || [];
+                        const data = chart.data.datasets[0].data || [];
+                        ctx.save();
+                        ctx.font = '12px Roboto, \"Noto Sans KR\", sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        labels.forEach((label, i) => {
+                            const pt = meta.data[i];
+                            if (!pt || !pt.x || !pt.y) return;
+                            // Colors: default blue, green for 2025, orange for 2032
+                            const year = String(label);
+                            let bg = '#0a59d1'; // blue
+                            if (year === '2025') bg = '#248a3d';
+                            if (year === '2032') bg = '#d48806';
+                            const text = year;
+                            const paddingX = 6;
+                            const paddingY = 3;
+                            const radius = 6;
+                            const yOffset = 14; // distance above point
+                            const textWidth = ctx.measureText(text).width;
+                            const boxW = textWidth + paddingX * 2;
+                            const boxH = 20;
+                            const x = pt.x - boxW / 2;
+                            const y = pt.y - yOffset - boxH;
+                            // rounded rect
+                            ctx.fillStyle = bg;
+                            ctx.beginPath();
+                            ctx.moveTo(x + radius, y);
+                            ctx.arcTo(x + boxW, y, x + boxW, y + boxH, radius);
+                            ctx.arcTo(x + boxW, y + boxH, x, y + boxH, radius);
+                            ctx.arcTo(x, y + boxH, x, y, radius);
+                            ctx.arcTo(x, y, x + boxW, y, radius);
+                            ctx.closePath();
+                            ctx.fill();
+                            // text
+                            ctx.fillStyle = '#ffffff';
+                            ctx.fillText(text, pt.x, y + boxH - paddingY);
+                        });
+                        ctx.restore();
+                    }
+                };
+
+                // Precompute dot colors per year (blue default, green 2025, orange 2032)
+                const labels = ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032'];
+                const pointColors = labels.map(y => y === '2025' ? '#30d158' : (y === '2032' ? '#ff9f0a' : '#007aff'));
+
                 new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: ['2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032'],
+                        labels,
                         datasets: [{
                             label: 'EV 모터 시장 규모 (십억 달러)',
                             data: [19.2, 22.5, 27.0, 27.16, 31.0, 36.5, 43.1, 50.8, 60.1, 68.0, 77.61],
                             backgroundColor: 'rgba(0, 122, 255, 0.4)',
                             borderColor: 'rgba(0, 122, 255, 1)',
-                            borderWidth: 2,
+                            borderWidth: 2.5,
                             fill: true,
-                            tension: 0.4
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointHoverRadius: 5,
+                            pointBackgroundColor: pointColors,
+                            pointBorderColor: pointColors
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        layout: { padding: { top: 40 } },
                         plugins: {
                             legend: {
                                 labels: {
                                     color: '#f0f0f0'
                                 }
                             },
+                            // register plugin through options for this instance
+                            yearBadgePlugin: true,
                             tooltip: {
                                 callbacks: {
                                     label: function(context) {
@@ -1160,7 +1215,8 @@
                                 }
                             }
                         }
-                    }
+                    },
+                    plugins: [yearBadgePlugin]
                 });
 
                 console.log('Chart initialized successfully');

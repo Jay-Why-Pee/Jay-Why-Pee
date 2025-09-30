@@ -1067,7 +1067,8 @@
 
         // Market Chart - Initialize after DOM is ready
         function initializeChart() {
-            const fallback = document.getElementById('chartFallback');
+            // Use the existing CSS growth bars as a fallback container
+            const growthFallback = document.getElementById('marketGrowthChart');
             const canvas = document.getElementById('marketChart');
             
             try {
@@ -1092,53 +1093,31 @@
                     return;
                 }
 
-                // Hide fallback and show canvas
-                if (fallback) fallback.style.display = 'none';
+                // Hide CSS fallback (growth bars) and show canvas chart
+                if (growthFallback) growthFallback.style.display = 'none';
                 canvas.style.display = 'block';
 
-                // Custom plugin to draw year badges above points
+                // Custom plugin to draw year labels above points (no squares)
                 const yearBadgePlugin = {
                     id: 'yearBadgePlugin',
-                    afterDatasetsDraw(chart, args, pluginOptions) {
+                    afterDatasetsDraw(chart) {
                         const { ctx } = chart;
                         const meta = chart.getDatasetMeta(0);
                         const labels = chart.data.labels || [];
-                        const data = chart.data.datasets[0].data || [];
                         ctx.save();
                         ctx.font = '12px Roboto, \"Noto Sans KR\", sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
                         labels.forEach((label, i) => {
                             const pt = meta.data[i];
-                            if (!pt || !pt.x || !pt.y) return;
-                            // Colors: default blue, green for 2025, orange for 2032
+                            if (!pt || pt.x == null || pt.y == null) return;
                             const year = String(label);
-                            let bg = '#0a59d1'; // blue
-                            if (year === '2025') bg = '#248a3d';
-                            if (year === '2032') bg = '#d48806';
-                            const text = year;
-                            const paddingX = 6;
-                            const paddingY = 3;
-                            const radius = 6;
                             const yOffset = 14; // distance above point
-                            const textWidth = ctx.measureText(text).width;
-                            const boxW = textWidth + paddingX * 2;
-                            const boxH = 20;
-                            const x = pt.x - boxW / 2;
-                            const y = pt.y - yOffset - boxH;
-                            // rounded rect
-                            ctx.fillStyle = bg;
-                            ctx.beginPath();
-                            ctx.moveTo(x + radius, y);
-                            ctx.arcTo(x + boxW, y, x + boxW, y + boxH, radius);
-                            ctx.arcTo(x + boxW, y + boxH, x, y + boxH, radius);
-                            ctx.arcTo(x, y + boxH, x, y, radius);
-                            ctx.arcTo(x, y, x + boxW, y, radius);
-                            ctx.closePath();
-                            ctx.fill();
-                            // text
+                            // subtle shadow for readability
                             ctx.fillStyle = '#ffffff';
-                            ctx.fillText(text, pt.x, y + boxH - paddingY);
+                            ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
+                            ctx.shadowBlur = 3;
+                            ctx.fillText(year, pt.x, pt.y - yOffset);
                         });
                         ctx.restore();
                     }
@@ -1169,7 +1148,8 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        layout: { padding: { top: 40 } },
+                        // Extra top padding to avoid clipping the labels drawn above points
+                        layout: { padding: { top: 52 } },
                         plugins: {
                             legend: {
                                 labels: {

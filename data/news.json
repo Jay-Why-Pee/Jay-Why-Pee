@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-10-02T23:25:46.593Z",
+  "lastUpdated": "2025-10-03T03:05:24.903Z",
   "articles": [
     {
       "title": "CVE and Ford improve production of electric motor stators - Automotive Powertrain Technology International",
@@ -8,6 +8,14 @@
       "date": "2025-10-02",
       "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQREdSbk1OYkJKcEl5Ukp5bkloOG1lN1ZGMzJEWWxTNElzQjFtSUEzVEJkZzVXQ1EwQmVmN0tqOGZiSWVlckZwRERiajZrbmVEV255bnZOT2tYVmZsYXBael8zVlNobEJ3VHNOQl9ERzdyM0pVQ3FBYmFnSnBKQ0t6M3VkQXVtSC1JamNRSkw3NDEteS1YM0wwVVVoeWNkSGZpSjJ2NWw1X2NXaERFNGh6TUtBWnZlX05NT1VEb3N5QnZhX0xvLURwSFBEU0c4NlpMQk1FeThEdkl6aXc?oc=5",
       "category": "tech"
+    },
+    {
+      "title": "Electric Classic Car Market Worth USD 669.11 Bn by 2034 | Towards Automotive - GlobeNewswire",
+      "summary": "Electric Classic Car Market Worth USD 669.11 Bn by 2034 | Towards Automotive  GlobeNewswire",
+      "source": "news.google.com",
+      "date": "2025-10-02",
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPblJ0NFY3cUpJd1J4WThpeFgwTkNseDhsRlV3dmR0dWxDMDlkWXYzeEVOWnJEX1lPd21kTFhDRWN4dGtFdndINkltWmZObEpONTJfTGw0XzF2TzV4bWo0MGluMG1UOVYzODE3c2dqckpYa2VEcVNwanZSOEhTUWZ1NE9QU2FVMUk0Y2diQVNBTHY2MkhpUTdYUmtkVGo3VnBZekRtaWt6OTlyeWtUamdXTDZoci1pWXBFbHUyejRyejYxdWxHYXFwQ2pGS00xYjFKQlFmdzhwRHdBdEVPNFYw?oc=5",
+      "category": "market"
     },
     {
       "title": "Touring BYD’s HQ and Realizing the Technology Arsenal It Has (Part 2) - CleanTechnica",
@@ -42,14 +50,6 @@
       "category": "tech"
     },
     {
-      "title": "Electric Vehicle Motor Communication Controller Market Worth USD 3540.67 Mn by 2034 - GlobeNewswire",
-      "summary": "Electric Vehicle Motor Communication Controller Market Worth USD 3540.67 Mn by 2034  GlobeNewswire",
-      "source": "news.google.com",
-      "date": "2025-09-22",
-      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZmgyZVJpaFVKYnRtZWl4Y09JMzlId2tBZ3oxeldZRWhPTkpHSkE1djVTYnhvenFzVHRBSlBURHJJcldEOVpMQTc3MW9uYzg5dkdOWWpUdmNVNF9xZFBSRDVDb3MyTnExYUZGLUFrQmhKRnFSZGdQeWhWU1RmSDZGRGQxVVBQN3IxVTJlckJpR0Y3dWFEcWFJOUVyVUwweHpTSkE1QVV2RTZnUVNTNHhpVjZWU0NDQ3R2QVJWZS10QklmQXMzeTNqbGFmd1ljVzcyQW5nWFdtRi1CaTRWMWp6VmRraUl2S2pDSGIw?oc=5",
-      "category": "market"
-    },
-    {
       "title": "Automotive High-Performance Electric Vehicles Market Size, Growth & Forecast 2025-2034 - Precedence Research",
       "summary": "Automotive High-Performance Electric Vehicles Market Size, Growth & Forecast 2025-2034  Precedence Research",
       "source": "news.google.com",
@@ -64,14 +64,6 @@
       "date": "2025-02-17",
       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBHTHF5RGFpZUZCSG8wUjZxbHNRMWQxRG1CNnkwbFVaeW44Q2lTM2lmeU55WTlDanlSZUFmbHZocExlMWZHdlBCelpFeElLX0k1S0pPQk94aUg2WWQ2UjV6bUhib1Q3Y1VtVEtvUXJ6VVhhdw?oc=5",
       "category": "market"
-    },
-    {
-      "title": "The Electric Car’s History Goes Back Further Than You Think - Car and Driver",
-      "summary": "The Electric Car’s History Goes Back Further Than You Think  Car and Driver",
-      "source": "news.google.com",
-      "date": "2025-06-14",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBLeGtfQnRqcVYtOGpMQjl2aEEzVTFzLU90ZHhVZnYyaHJpdXlZZExBWFJ1bVAxS1dWdkZaT20yYVYxZEtQZjdvRHdfOFZmbkxtUm1CdmZnQjdJazYwaDVTVlphOHZuOXVfRi1TWWFRamFPNWljQkpBNUZ0RFU3UQ?oc=5",
-      "category": "tech"
     },
     {
       "title": "Protean Electric’s In-Wheel Motor Milestone - The EV Report",
@@ -114,12 +106,20 @@
       "category": "tech"
     },
     {
-      "title": "These powerful in-wheel motors could spawn the next generation of affordable high-performance EVs - TechRadar",
-      "summary": "These powerful in-wheel motors could spawn the next generation of affordable high-performance EVs  TechRadar",
+      "title": "Mercedes-AMG unveils concept EV with revolutionary axial flux motor technology - Electric & Hybrid Vehicle Technology International",
+      "summary": "Mercedes-AMG unveils concept EV with revolutionary axial flux motor technology  Electric & Hybrid Vehicle Technology International",
       "source": "news.google.com",
-      "date": "2025-01-18",
-      "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxNdXJuRWR2VXFnQllQaXpuTUpNRmJ0cGNVX19jWDhJWW9uaFBxUnItXzA3LUZwY3RFWi1JSFhDYkxuMWlrMWRhZ0dIdzhmY0ljeUpObEgyMFpLbGFVSTNvMVdzanlfYzlfSUdHVEZXazVmbDlleHJ5SmkwdDY4WXNKRkUxQWRPY2FNMFUzSm1FX2xwZXRDcmJIdEZDU1Bzak5iOWc3R0ZkTy1iRzdZdzZwaGhMamROYmFBZFFjWjBWLTE2WlhtVk5mQU1ZY2g0aVE0Sk5QRllzZWY4T19jeHR1NWhfejBobUtKM1BybHdlRmx2YXc?oc=5",
+      "date": "2025-06-26",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNYTdGYzN1Tk1HVGViZ0FyWDZydldlaHhvb1Y2N3g0aHA2dE5LQ3l3Q08zVy1QMjh0dk5MMWV5UDlQY0tWV1NYU0liUTR1SjNqOWhWc3FUS3ZVNXhzUVJwLVNlZWlsVEpIWE1BWThlYjJRWHRxdVhSc0V5MWx3V0xoTGotaUtpOEtaQmt4Q2E5dWtxNVMtYm9GQzFRalBrNW13dWxfd2VpRjg2UEFUUGxYN1RFOG9OaW41VjNnVmRJSTZzVnMwTHd4WWF2eEkwelVrNFE?oc=5",
       "category": "tech"
+    },
+    {
+      "title": "Electric Vehicle Motor Communication Controller Market Worth USD 3540.67 Mn by 2034 - GlobeNewswire",
+      "summary": "Electric Vehicle Motor Communication Controller Market Worth USD 3540.67 Mn by 2034  GlobeNewswire",
+      "source": "news.google.com",
+      "date": "2025-09-22",
+      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZmgyZVJpaFVKYnRtZWl4Y09JMzlId2tBZ3oxeldZRWhPTkpHSkE1djVTYnhvenFzVHRBSlBURHJJcldEOVpMQTc3MW9uYzg5dkdOWWpUdmNVNF9xZFBSRDVDb3MyTnExYUZGLUFrQmhKRnFSZGdQeWhWU1RmSDZGRGQxVVBQN3IxVTJlckJpR0Y3dWFEcWFJOUVyVUwweHpTSkE1QVV2RTZnUVNTNHhpVjZWU0NDQ3R2QVJWZS10QklmQXMzeTNqbGFmd1ljVzcyQW5nWFdtRi1CaTRWMWp6VmRraUl2S2pDSGIw?oc=5",
+      "category": "market"
     },
     {
       "title": "Electric Motors for Electric Vehicles 2024-2034 - IDTechEx",
@@ -128,14 +128,6 @@
       "date": "2025-02-18",
       "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE4tYk1hVm9UaUR6b0UwYU1DUGVwdElRN1BEUDN6U3FldXR4Z0o0ZW5kbjR3SHZpSmJ2Vm0ybkhmZjJVUm5rRUtvQ29yaWpwSzNDUXRQMU9vaDk5Q3FqdnJlRW4xWU40WjRxSDhrTVZxWWFpU3RJekFUTGY5QQ?oc=5",
       "category": "tech"
-    },
-    {
-      "title": "Electric Vehicle Motor Market Size to Uplift USD 71.92 Bn by 2034 - GlobeNewswire",
-      "summary": "Electric Vehicle Motor Market Size to Uplift USD 71.92 Bn by 2034  GlobeNewswire",
-      "source": "news.google.com",
-      "date": "2025-04-14",
-      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQa1dPbWVLRl9VYlRYQ3VFLUFGVEJaQkEwSEFoQ25OZ3Q3cDBRM3lOazkxbjJZR1hzbXZLenM1b1o2WTUtbjVTLVVzTExnNkNMbm9xNDNUcEoxSU5GakVFX0YxRlVoVi1FZUZjcVNZME9FYXd6dVJzdHg5cVdqYnBUSm1MWFNaY0FwemFKSENLUF9MSjdTbERQZnFiYnY2bm9tZXJWbVF6LXRsUGpZdGdVdVY4dUctSWJaZGdnSkV4WkhRa3g1X1B3NE9OVmY2ZWVUZHpn?oc=5",
-      "category": "market"
     },
     {
       "title": "This Mercedes-Benz Division You've Never Heard of Just Pulled 737 HP Out of a 29-LB EV Motor - Road & Track",
@@ -154,12 +146,12 @@
       "category": "tech"
     },
     {
-      "title": "Mercedes-AMG unveils concept EV with revolutionary axial flux motor technology - Electric & Hybrid Vehicle Technology International",
-      "summary": "Mercedes-AMG unveils concept EV with revolutionary axial flux motor technology  Electric & Hybrid Vehicle Technology International",
+      "title": "Electric Vehicle Motor Market Size to Uplift USD 71.92 Bn by 2034 - GlobeNewswire",
+      "summary": "Electric Vehicle Motor Market Size to Uplift USD 71.92 Bn by 2034  GlobeNewswire",
       "source": "news.google.com",
-      "date": "2025-06-26",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNYTdGYzN1Tk1HVGViZ0FyWDZydldlaHhvb1Y2N3g0aHA2dE5LQ3l3Q08zVy1QMjh0dk5MMWV5UDlQY0tWV1NYU0liUTR1SjNqOWhWc3FUS3ZVNXhzUVJwLVNlZWlsVEpIWE1BWThlYjJRWHRxdVhSc0V5MWx3V0xoTGotaUtpOEtaQmt4Q2E5dWtxNVMtYm9GQzFRalBrNW13dWxfd2VpRjg2UEFUUGxYN1RFOG9OaW41VjNnVmRJSTZzVnMwTHd4WWF2eEkwelVrNFE?oc=5",
-      "category": "tech"
+      "date": "2025-04-14",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQa1dPbWVLRl9VYlRYQ3VFLUFGVEJaQkEwSEFoQ25OZ3Q3cDBRM3lOazkxbjJZR1hzbXZLenM1b1o2WTUtbjVTLVVzTExnNkNMbm9xNDNUcEoxSU5GakVFX0YxRlVoVi1FZUZjcVNZME9FYXd6dVJzdHg5cVdqYnBUSm1MWFNaY0FwemFKSENLUF9MSjdTbERQZnFiYnY2bm9tZXJWbVF6LXRsUGpZdGdVdVY4dUctSWJaZGdnSkV4WkhRa3g1X1B3NE9OVmY2ZWVUZHpn?oc=5",
+      "category": "market"
     },
     {
       "title": "The Latest E-Motor Trends for Current and Future Electric Vehicles - Omdia",
@@ -167,6 +159,14 @@
       "source": "news.google.com",
       "date": "2025-02-10",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPTmhZc2oxZ29nVm5fdzJNS2N3N3F2V1lqVlJOM29IV2dHYnFRM0xkM1lHWGtvS29TNTZVRG90aFlYVjVrS1lWZTh4d2tvX1U5RmEtRVZVcUo0MnFlTmZ6bzdvWGFZc2VNQ2tvRFdpcFM4SlZjai1HZlNhS0FzRXA1all4eHhzY3NKb1lMVV8xUjBwNzBrOEhiLVhJWUpMTGFwUFhMWXgwQ1RzQQ?oc=5",
+      "category": "tech"
+    },
+    {
+      "title": "These powerful in-wheel motors could spawn the next generation of affordable high-performance EVs - TechRadar",
+      "summary": "These powerful in-wheel motors could spawn the next generation of affordable high-performance EVs  TechRadar",
+      "source": "news.google.com",
+      "date": "2025-01-18",
+      "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxNdXJuRWR2VXFnQllQaXpuTUpNRmJ0cGNVX19jWDhJWW9uaFBxUnItXzA3LUZwY3RFWi1JSFhDYkxuMWlrMWRhZ0dIdzhmY0ljeUpObEgyMFpLbGFVSTNvMVdzanlfYzlfSUdHVEZXazVmbDlleHJ5SmkwdDY4WXNKRkUxQWRPY2FNMFUzSm1FX2xwZXRDcmJIdEZDU1Bzak5iOWc3R0ZkTy1iRzdZdzZwaGhMamROYmFBZFFjWjBWLTE2WlhtVk5mQU1ZY2g0aVE0Sk5QRllzZWY4T19jeHR1NWhfejBobUtKM1BybHdlRmx2YXc?oc=5",
       "category": "tech"
     },
     {
@@ -242,6 +242,14 @@
       "category": "breaking"
     },
     {
+      "title": "Here's how in-wheel motors could cut EV cost, boost range 20% - Green Car Reports",
+      "summary": "Here's how in-wheel motors could cut EV cost, boost range 20%  Green Car Reports",
+      "source": "news.google.com",
+      "date": "2025-02-25",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOOS1qMjlNWTItbS1Sd2dENkROUm5hSGduZ2JqT2hhckJEeE1oM1V1dFZQanEzZkNRR1h5RFRYTWNVNHZIVFBCUE9pcEFCVjRkWjAxTmhzeHBhSkhlaGRPdTBRa0d2YklpSVA0UEI0Z2ZLUXg2UFVqWGFXN0cwam1hVV9GaTliWTQ?oc=5",
+      "category": "tech"
+    },
+    {
       "title": "BYD Unveils Record-Breaking Powerful EV Motor - Zecar",
       "summary": "BYD Unveils Record-Breaking Powerful EV Motor  Zecar",
       "source": "news.google.com",
@@ -271,6 +279,14 @@
       "source": "news.google.com",
       "date": "2025-01-20",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNMXRuRUhTbEdBTjRIVlR1NGoyaGZTdlhEbkVFMTB0cU84SVRYekhlU0FhNFp2T2xMemk2U1dFWkF0Uld4NU9pTHVJak9rQXBqS0s3SlNTamEzRHkxUXFtNnBNbkllbWhIeU5lY0NYTWhjNWpPWjFpbUFBcTdVRWYxYks1UGcxWl9adVlERVRudWlWM1E0SEMtY3Npb2ozb2NUUDRHbWl6clBVSGdXYmMzSlJKNkkyVno1LW9v?oc=5",
+      "category": "tech"
+    },
+    {
+      "title": "OEM-Ready Axial Flux Motor: Turntide’s Breakthrough AF430S Speeds Electric Integration - Yahoo Finance",
+      "summary": "OEM-Ready Axial Flux Motor: Turntide’s Breakthrough AF430S Speeds Electric Integration  Yahoo Finance",
+      "source": "news.google.com",
+      "date": "2025-04-15",
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9rX0FxQWhVQkd0Nlp0RGZDcE40SGhiS2xFX1pQNWt2TVYwMjJsdUZCX3ZmY0x3SVpiT0NHdW12T3pCS1RHd0VkZDE1ZDMxSUpEdXFWdGE2XzM0MzJmZVNXdFhGaEdtbE4tS0REc09KY3hXNDVQNlBUVkdfLTA?oc=5",
       "category": "tech"
     },
     {
@@ -311,14 +327,6 @@
       "source": "news.google.com",
       "date": "2025-03-19",
       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE0wWVBReGxtdE9KS190UUhkbENfaWNFMFBnZEJDWEc3SmE4VVZKSUhvQUxIblB6aTJTam5qSzMwbXhxbGVWaEEzdXpvb29CYjV0YThNbHAwYXNwVlJYOERfUm1PSkVfeDBXeVhRU2VRbEVRRjU4?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "This little electric car made history. 25 years ago, GM stopped making it - NPR",
-      "summary": "This little electric car made history. 25 years ago, GM stopped making it  NPR",
-      "source": "news.google.com",
-      "date": "2024-12-06",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPbHR3M3RHSml1N2VMMGxJc05SSDNtSlJrWGNXazRDUlRpbzlOLUt5SXZGRXh0d3BkdklvZzhzejlxblZhTzJTY3hHYUZHaFlnUXhRQmhsdkstaVRQR185SGwxaWN3ekNMUXVxMDlyUVhrd3otRDlTZjdVZFRqWk4wSHpzd2RQazA?oc=5",
       "category": "tech"
     },
     {
@@ -392,18 +400,15 @@
       "date": "2024-12-13",
       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQWHVKMmI5SDJBZnBEZWtDb3N3Wl9xVUxzZkpBNWg5d3RBbWp0TEhsNmdIY1ZNZnNfdnI5b3laNHZEeEZBQ2YyaFhLdG5VY0FXQ1h6MXZia3RlN0t1Q0w3SDFTMHFYbEVqcG1yQk1iUjdYaVRsdFFiT1E0QjNLclhfb2tETkFKMGRXQk9Eck9ka1BxVUFTZXNpaA?oc=5",
       "category": "tech"
-    },
-    {
-      "title": "Best electric cars to buy and avoid in 2025 - The Independent",
-      "summary": "Best electric cars to buy and avoid in 2025  The Independent",
-      "source": "news.google.com",
-      "date": "2025-07-29",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPbG9taFgzQndsUDdzUFZ5SEdjekNxUFJ0R0tOWG5tSldidm9LN0kzVElzVjFjOHNLbTlZS3pPS3FXNnlVYnUyeXlLMGI3TmZrSEZwRTdPUnZyXzFTMjdkZ25BOGI2WGx1YndCMG5pQlBFQzZqcWVqcmZXTWxyWkR5X0d1em56NGJJM3hNNTNPczRfWXFwN29r?oc=5",
-      "category": "tech"
     }
   ],
   "insights": {
     "techTrends": [
+      {
+        "keyword": "Silicon Carbide (SiC) 인버터 기술",
+        "summary": "최근 1건의 관련 뉴스가 보고됨",
+        "relevance": 1
+      },
       {
         "keyword": "희토류 없는 모터 기술",
         "summary": "최근 5건의 관련 뉴스가 보고됨",
@@ -411,13 +416,13 @@
       },
       {
         "keyword": "인휠 모터 기술",
-        "summary": "최근 6건의 관련 뉴스가 보고됨",
-        "relevance": 6
+        "summary": "최근 7건의 관련 뉴스가 보고됨",
+        "relevance": 7
       },
       {
         "keyword": "AI 기반 모터 제어 시스템",
-        "summary": "최근 14건의 관련 뉴스가 보고됨",
-        "relevance": 14
+        "summary": "최근 16건의 관련 뉴스가 보고됨",
+        "relevance": 16
       }
     ],
     "marketInsights": [

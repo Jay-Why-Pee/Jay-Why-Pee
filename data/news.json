@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-10-05T22:31:03.948Z",
+  "lastUpdated": "2025-10-05T23:23:43.692Z",
   "articles": [
     {
       "title": "Tesla, Inc. | History, Cars, Elon Musk, & Facts - Britannica",
@@ -167,14 +167,6 @@
       "source": "news.google.com",
       "date": "2025-07-09",
       "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE55U2lPcFBudmt2QkpDMHFlN2ZER01NSk5Nd3RPNFIzdWVCTkQwNElUVXNGOVFxN2o3YVFCVEU1M2oxSHB5Z2hiRXFBT0ozNjFYTjVXNy1ieW8xc3FIMjcwS3BYaGZqcEc1WWFEcVhJMW55WEIzTG5zWkFZbi0?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "Audi Boss Believes EV Are 'Simply the Better Technology' - Motor1.com",
-      "summary": "Audi Boss Believes EV Are 'Simply the Better Technology'  Motor1.com",
-      "source": "news.google.com",
-      "date": "2025-09-16",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9INmlkdmU3SXZSUllIUlRPeVlqV2hsTEtLWDBwWlBwWkdPRnFnVXZLZVpkWVJQNEwwT1VIclRuWUE1NXRQZDM5aVIyQnp0TlRlcDJMeE1Pd1U4Yzg4LTNaTWlURVRJVXByWDBZR2lTMmEwbHZkODFaclRTYWJ1dw?oc=5",
       "category": "tech"
     },
     {
@@ -400,6 +392,14 @@
       "date": "2025-08-11",
       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNX2t1SFl6ci04WlRfYklxQnl1N2NwM3JWMGx3Z0gzQ3p6dGQ5WU9MZmpuY3djNGFlR0FhZERCWnZCNUJ2SE1WM0VNMUhhbGVIR0Y0NHQzN2dsMVlfZi1RS25PcmJRaW05VW5teXhXaHJBLTV1Nm1oOFRUZE14MzVTb2Zreld5YkRpTnNDWS12LXdCeG8?oc=5",
       "category": "tech"
+    },
+    {
+      "title": "Magnet-free UK motor delivers high power densities and efficiencies - Drives&Controls",
+      "summary": "Magnet-free UK motor delivers high power densities and efficiencies  Drives&Controls",
+      "source": "news.google.com",
+      "date": "2025-03-06",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQOGFjSHFVcTBZUmpKbVdsMEx4eUdPQzd3ckp4cF9PelRoaWpnTmVVRVhxZWR1c3R1TWxxWUtvRERFNzAyY2Fab0FkeHZYQlpIUXJrdkR4TEwwSTgwMEl3TmZWWHBYZUtpR0RmbG9URklsZk1LSGJ0ZVRhSmJMelVfZzRsNFRsY2xQaXdfV0xnNjlqamZ1WFQ5eFRrRlM?oc=5",
+      "category": "tech"
     }
   ],
   "insights": {
@@ -421,8 +421,8 @@
       },
       {
         "keyword": "AI 기반 모터 제어 시스템",
-        "summary": "최근 16건의 관련 뉴스가 보고됨",
-        "relevance": 16
+        "summary": "최근 15건의 관련 뉴스가 보고됨",
+        "relevance": 15
       }
     ],
     "marketInsights": [

@@ -12,6 +12,104 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../..')));
 
+// 뉴스 API - 바로 정의
+app.get('/api/news', (req, res) => {
+    const { category, limit = 20, offset = 0 } = req.query;
+    
+    // news.json 파일에서 데이터 읽기
+    try {
+        const newsPath = path.join(__dirname, '../../data/news.json');
+        if (fs.existsSync(newsPath)) {
+            const newsData = JSON.parse(fs.readFileSync(newsPath, 'utf8'));
+            let articles = newsData.articles || [];
+            
+            // 카테고리 필터링
+            if (category && category !== 'all') {
+                articles = articles.filter(article => article.category === category);
+            }
+            
+            // 페이징
+            const start = parseInt(offset);
+            const end = start + parseInt(limit);
+            const paginatedArticles = articles.slice(start, end);
+            
+            res.json({
+                data: paginatedArticles,
+                total: articles.length,
+                lastUpdated: newsData.lastUpdated,
+                limit: parseInt(limit),
+                offset: start
+            });
+        } else {
+            res.json({ data: [], total: 0, message: 'No news data available' });
+        }
+    } catch (error) {
+        console.error('Error reading news data:', error);
+        res.status(500).json({ error: 'Failed to load news data' });
+    }
+});
+
+// URL 해소 및 검증 API
+app.get('/api/resolve-article', async (req, res) => {
+    const { url, title = '', title_kr = '', source = '', date = '' } = req.query;
+    if (!url) return res.status(400).json({ error: 'url query is required' });
+    try {
+        const fetch = require('node-fetch');
+        const cheerio = require('cheerio');
+        
+        const isGoogleDomain = (u) => {
+            try { const h = new URL(u).hostname; return h.endsWith('google.com') || h.endsWith('news.google.com'); } catch { return false; }
+        };
+
+        const headers = { 'User-Agent': 'Mozilla/5.0 (compatible; EV-Market-Dashboard/1.0)' };
+        let resp = await fetch(url, { redirect: 'follow', headers, timeout: 10000 });
+        if (!resp.ok) return res.status(502).json({ error: `fetch failed: ${resp.status}` });
+        let finalUrl = resp.url || url;
+        let html = await resp.text();
+        let $ = cheerio.load(html);
+
+        if (isGoogleDomain(finalUrl)) {
+            const refresh = $('meta[http-equiv="refresh"]').attr('content');
+            if (refresh && refresh.includes('url=')) {
+                const target = refresh.split('url=')[1].trim();
+                if (target && !isGoogleDomain(target)) finalUrl = target;
+            }
+            // Handle links containing a nested url= param
+            if (isGoogleDomain(finalUrl)) {
+                const links = $('a[href^="http"]').map((_, el) => $(el).attr('href')).get();
+                const candidates = [];
+                for (const href of links) {
+                    try {
+                        const u = new URL(href);
+                        const inner = u.searchParams.get('url');
+                        if (inner && !isGoogleDomain(inner)) candidates.push(inner);
+                        if (!isGoogleDomain(href)) candidates.push(href);
+                    } catch { /* ignore */ }
+                }
+                if (candidates.length > 0) finalUrl = candidates[0];
+            }
+            if (isGoogleDomain(finalUrl)) return res.status(422).json({ error: 'unable to resolve off google domain' });
+            resp = await fetch(finalUrl, { redirect: 'follow', headers, timeout: 10000 });
+            if (!resp.ok) return res.status(502).json({ error: `publisher fetch failed: ${resp.status}` });
+            finalUrl = resp.url || finalUrl;
+            html = await resp.text();
+            $ = cheerio.load(html);
+        }
+
+        const canonical = $('link[rel="canonical"]').attr('href') || $('meta[property="og:url"]').attr('content') || finalUrl;
+        const title = $('meta[property="og:title"]').attr('content') || $('title').text().trim();
+        const description = $('meta[name="description"]').attr('content') || $('meta[property="og:description"]').attr('content') || '';
+
+        return res.json({
+            url: canonical,
+            title,
+            description
+        });
+    } catch (e) {
+        return res.status(500).json({ error: 'resolution failed', detail: e.message });
+    }
+});
+
 // 라우트 설정 - 단순화
 function setupRoutes() {
     // 분석 라우트
@@ -22,42 +120,7 @@ function setupRoutes() {
     const marketRoutes = require('./routes/marketRoutes');
     app.use('/api/market', marketRoutes);
 
-    // 뉴스 API - 정적 데이터 사용
-    app.get('/api/news', (req, res) => {
-        const { category, limit = 20, offset = 0 } = req.query;
-        
-        // news.json 파일에서 데이터 읽기
-        try {
-            const newsPath = path.join(__dirname, '../../data/news.json');
-            if (fs.existsSync(newsPath)) {
-                const newsData = JSON.parse(fs.readFileSync(newsPath, 'utf8'));
-                let articles = newsData.articles || [];
-                
-                // 카테고리 필터링
-                if (category && category !== 'all') {
-                    articles = articles.filter(article => article.category === category);
-                }
-                
-                // 페이징
-                const start = parseInt(offset);
-                const end = start + parseInt(limit);
-                const paginatedArticles = articles.slice(start, end);
-                
-                res.json({
-                    data: paginatedArticles,
-                    total: articles.length,
-                    lastUpdated: newsData.lastUpdated,
-                    limit: parseInt(limit),
-                    offset: start
-                });
-            } else {
-                res.json({ data: [], total: 0, message: 'No news data available' });
-            }
-        } catch (error) {
-            console.error('Error reading news data:', error);
-            res.status(500).json({ error: 'Failed to load news data' });
-        }
-    });
+    
 
     // 특허 API - 더미 데이터
     app.get('/api/patents', (req, res) => {
@@ -122,7 +185,7 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Endpoint not found' });
 });
 
-// 라우트 설정
+// 라우트 설정을 먼저 호출
 setupRoutes();
 
 // 서버 시작

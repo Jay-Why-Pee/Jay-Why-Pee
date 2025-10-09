@@ -90,6 +90,48 @@
             font-size: 0.9em;
         }
 
+        .page-navigation {
+            display: flex;
+            justify-content: center;
+            margin: 30px auto 40px;
+            max-width: 400px;
+            background-color: #2b2b2b;
+            border-radius: 16px;
+            padding: 8px;
+            border: 1px solid #444;
+        }
+
+        .nav-tab {
+            flex: 1;
+            text-align: center;
+            padding: 16px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #a8a8a8;
+        }
+
+        .nav-tab:hover {
+            color: #f0f0f0;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-tab.active {
+            background-color: #007aff;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
         .filter-tabs {
             display: flex;
             justify-content: center;
@@ -439,338 +481,201 @@
         </div>
 
         <div class="last-update-info">
-            마지막 업데이트: <span id="lastUpdate">2025. 09. 14. 06:00 (KST)</span>
+            마지막 업데이트: <span id="lastUpdate">2025. 10. 09. 23:49 (KST)</span>
         </div>
 
-        <div class="grid">
+        <!-- 페이지 네비게이션 -->
+        <div class="page-navigation">
+            <div class="nav-tab active" data-page="news">뉴스</div>
+            <div class="nav-tab" data-page="market">시장 트렌드</div>
+        </div>
+
+        <!-- 뉴스 페이지 -->
+        <div id="newsPage" class="page-content active">
+            <div class="filter-tabs">
+                <div class="filter-tab active" data-filter="all">전체</div>
+                <div class="filter-tab" data-filter="breaking">속보</div>
+                <div class="filter-tab" data-filter="tech">기술혁신</div>
+                <div class="filter-tab" data-filter="market">시장동향</div>
+                <div class="filter-tab" data-filter="korea">국내뉴스</div>
+            </div>
+
+            <div class="news-grid" id="newsGrid">
+                <!-- 뉴스 아이템들이 여기에 동적으로 추가됨 -->
+            </div>
+            
+            <button class="more-btn" id="moreBtn">더 많은 뉴스 보기</button>
+
             <div class="card large-card">
-                <h3>📊 글로벌 EV 시장 현황 (2024-2025)</h3>
-                <div class="regional-data">
-                    <div class="region-card">
-                        <h4>글로벌 판매량</h4>
-                        <div class="region-value">17M</div>
-                        <div class="growth-rate trend-up">+25% (2024)</div>
-                    </div>
-                    <div class="region-card">
-                        <h4>중국 시장</h4>
-                        <div class="region-value">11M</div>
-                        <div class="growth-rate">최대 시장</div>
-                    </div>
-                    <div class="region-card">
-                        <h4>시장 규모</h4>
-                        <div class="region-value">$1.3T</div>
-                        <div class="growth-rate trend-up">→ $6.5T (2030)</div>
-                    </div>
-                    <div class="region-card">
-                        <h4>연평균 성장률</h4>
-                        <div class="region-value">32.5%</div>
-                        <div class="growth-rate">(2025-2030)</div>
-                    </div>
+                <h3>🚀 핵심 기술 트렌드</h3>
+                <div class="tech-item">
+                    <h4>실리콘 카바이드(SiC) 인버터</h4>
+                    <p>효율성 향상 및 손실 감소로 차세대 EV 견인 인버터의 핵심 기술로 부상. STMicroelectronics 등 주요 반도체 기업들이 시장을 주도하고 있습니다.</p>
+                </div>
+                <div class="tech-item">
+                    <h4>메가와트 충전 시스템</h4>
+                    <p>대형 상용차 및 미래 승용차를 위한 메가와트급 충전 스테이션이 2024년부터 전 세계적으로 설치 시작. 이는 고성능 EV 모터와 파워트레인 개발을 촉진하고 있습니다.</p>
+                </div>
+                <div class="tech-item">
+                    <h4>AI 기반 모터 제어</h4>
+                    <p>인공지능 알고리즘을 활용한 모터 제어 시스템으로 에너지 효율성과 차량 성능을 실시간으로 최적화합니다.</p>
                 </div>
                 <div class="source">
-                    출처: <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">IEA Global EV Outlook 2025</a>,
-                    <a href="https://www.grandviewresearch.com/industry-analysis/electric-vehicles-ev-market" target="_blank">Grand View Research</a>
+                    출처: <a href="https://virta.global/resources/blog/global-electric-vehicle-market" target="_blank">Virta Global</a>,
+                    <a href="https://www.yolegroup.com/category/power-electronics/" target="_blank">Yole Group</a>
                 </div>
             </div>
 
-            <div class="card">
-                <h3>🔋 EV 모터 시장 규모</h3>
-                <div class="metric">
-                    <span class="metric-label">2025년 시장 규모</span>
-                    <span class="metric-value trend-up">$27.16B</span>
+            <div class="card large-card">
+                <h3>💡 전략적 인사이트</h3>
+                <div class="insight-item">
+                    <strong>시장 집중도:</strong> 중국이 전체 EV 시장의 약 65%를 차지하며 압도적 우위를 유지하고 있습니다.
                 </div>
-                <div class="metric">
-                    <span class="metric-label">2032년 예상 규모</span>
-                    <span class="metric-value trend-up">$77.61B</span>
+                <div class="insight-item">
+                    <strong>가격 경쟁력:</strong> 2024년 신규 전기차 모델 중 75%가 $50,000 이상으로, 대중화를 위해 가격 경쟁력 개선이 중요합니다.
                 </div>
-                <div class="metric">
-                    <span class="metric-label">연평균 성장률 (CAGR)</span>
-                    <span class="metric-value trend-up">16.2%</span>
+                <div class="insight-item">
+                    <strong>기술 혁신:</strong> PMSM과 SiC 기술의 결합으로 모터 효율성 및 전력 밀도가 대폭 향상되고 있습니다.
                 </div>
-                <div class="metric">
-                    <span class="metric-label">아시아태평양 점유율</span>
-                    <span class="metric-value">52.91%</span>
+                <div class="insight-item">
+                    <strong>공급망 다변화:</strong> EU의 전기차 수출이 증가하며 중국 의존도를 완화하려는 노력이 지속되고 있습니다.
                 </div>
-                <div class="source">
-                    출처: <a href="https://www.fortunebusinessinsights.com/electric-vehicle-motor-market-107244" target="_blank">Fortune Business Insights</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>🧲 PMSM 시장 동향</h3>
-                <div class="metric">
-                    <span class="metric-label">2024년 시장 규모</span>
-                    <span class="metric-value">$27.01B</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">2025년 예상 규모</span>
-                    <span class="metric-value trend-up">$28.83B</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">2029년 예상 규모</span>
-                    <span class="metric-value trend-up">$40.4B</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">연평균 성장률</span>
-                    <span class="metric-value trend-up">8.4%</span>
-                </div>
-                <div class="source">
-                    출처: <a href="https://www.thebusinessresearchcompany.com/report/permanent-magnet-synchronous-motor-global-market-report" target="_blank">The Business Research Company</a>
+                <div class="insight-item">
+                    <strong>미래 성장 동력:</strong> 상용차 전동화와 메가와트 충전 인프라가 새로운 성장 엔진으로 부상하고 있습니다.
                 </div>
             </div>
         </div>
 
-        <div class="filter-tabs">
-            <div class="filter-tab active" data-filter="all">전체</div>
-            <div class="filter-tab" data-filter="breaking">속보</div>
-            <div class="filter-tab" data-filter="tech">기술혁신</div>
-            <div class="filter-tab" data-filter="market">시장동향</div>
-            <div class="filter-tab" data-filter="korea">국내뉴스</div>
-        </div>
+        <!-- 시장 트렌드 페이지 -->
+        <div id="marketPage" class="page-content">
+            <div class="grid">
+                <div class="card large-card">
+                    <h3>📊 글로벌 EV 시장 현황 (2024-2025)</h3>
+                    <div class="regional-data">
+                        <div class="region-card">
+                            <h4>글로벌 판매량</h4>
+                            <div class="region-value">17M</div>
+                            <div class="growth-rate trend-up">+25% (2024)</div>
+                        </div>
+                        <div class="region-card">
+                            <h4>중국 시장</h4>
+                            <div class="region-value">11M</div>
+                            <div class="growth-rate">최대 시장</div>
+                        </div>
+                        <div class="region-card">
+                            <h4>시장 규모</h4>
+                            <div class="region-value">$1.3T</div>
+                            <div class="growth-rate trend-up">→ $6.5T (2030)</div>
+                        </div>
+                        <div class="region-card">
+                            <h4>연평균 성장률</h4>
+                            <div class="region-value">32.5%</div>
+                            <div class="growth-rate">(2025-2030)</div>
+                        </div>
+                    </div>
+                    <div class="source">
+                        출처: <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">IEA Global EV Outlook 2025</a>,
+                        <a href="https://www.grandviewresearch.com/industry-analysis/electric-vehicles-ev-market" target="_blank">Grand View Research</a>
+                    </div>
+                </div>
 
-        <div class="news-grid" id="newsGrid">
-            <div class="news-item" data-category="breaking" data-url="https://virta.global/resources/blog/tesla-invests-in-rare-earth-free-motors">
-                <a href="https://virta.global/resources/blog/tesla-invests-in-rare-earth-free-motors" target="_blank">
-                    <span class="news-badge breaking">속보</span>
-                    <h2 class="news-title">테슬라, 희토류 없는 모터 기술로 원가 절감 및 공급망 안정성 확보</h2>
-                    <p class="news-summary">테슬라가 희토류를 사용하지 않는 혁신적인 모터 기술을 개발하며, 원재료 비용 절감과 함께 공급망 안정성을 크게 높일 것으로 예상됩니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">Virta Global</span>
-                        <span class="news-date">2025.08.04</span>
+                <div class="card">
+                    <h3>🔋 EV 모터 시장 규모</h3>
+                    <div class="metric">
+                        <span class="metric-label">2025년 시장 규모</span>
+                        <span class="metric-value trend-up">$27.16B</span>
                     </div>
-                </a>
-            </div>
+                    <div class="metric">
+                        <span class="metric-label">2032년 예상 규모</span>
+                        <span class="metric-value trend-up">$77.61B</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">연평균 성장률 (CAGR)</span>
+                        <span class="metric-value trend-up">16.2%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">아시아태평양 점유율</span>
+                        <span class="metric-value">52.91%</span>
+                    </div>
+                    <div class="source">
+                        출처: <a href="https://www.fortunebusinessinsights.com/electric-vehicle-motor-market-107244" target="_blank">Fortune Business Insights</a>
+                    </div>
+                </div>
 
-            <div class="news-item" data-category="tech" data-url="https://www.idtechex.com/en/report/axial-flux-and-in-wheel-motors-2024-2034-technology-trends-and-forecasts/977">
-                <a href="https://www.idtechex.com/en/report/axial-flux-and-in-wheel-motors-2024-2034-technology-trends-and-forecasts/977" target="_blank">
-                    <span class="news-badge tech">기술혁신</span>
-                    <h2 class="news-title">액시얼 플럭스 및 인휠 모터, EV 시장의 차세대 대안으로 부상</h2>
-                    <p class="news-summary">IDTechEx 보고서에 따르면 기존 온보드 모터의 대안으로 액시얼 플럭스 및 인휠 모터 기술이 큰 관심을 받으며, 시장 채택이 증가하고 있습니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">IDTechEx</span>
-                        <span class="news-date">2024.08.27</span>
+                <div class="card">
+                    <h3>🧲 PMSM 시장 동향</h3>
+                    <div class="metric">
+                        <span class="metric-label">2024년 시장 규모</span>
+                        <span class="metric-value">$27.01B</span>
                     </div>
-                </a>
-            </div>
+                    <div class="metric">
+                        <span class="metric-label">2025년 예상 규모</span>
+                        <span class="metric-value trend-up">$28.83B</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">2029년 예상 규모</span>
+                        <span class="metric-value trend-up">$40.4B</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">연평균 성장률</span>
+                        <span class="metric-value trend-up">8.4%</span>
+                    </div>
+                    <div class="source">
+                        출처: <a href="https://www.thebusinessresearchcompany.com/report/permanent-magnet-synchronous-motor-global-market-report" target="_blank">The Business Research Company</a>
+                    </div>
+                </div>
 
-            <div class="news-item" data-category="korea" data-url="https://www.motorgraph.com/news/articleView.html?idxno=32111">
-                <a href="https://www.motorgraph.com/news/articleView.html?idxno=32111" target="_blank">
-                    <span class="news-badge korea">국내뉴스</span>
-                    <h2 class="news-title">현대모비스, EV 구동계 핵심 부품 '수출 효자' 등극... 2024년 2조원 돌파</h2>
-                    <p class="news-summary">현대모비스가 전동화 핵심 부품인 구동모터, 배터리 시스템 등을 중심으로 수출을 확대하며 2024년 수출액 2조원을 돌파, 국내 EV 모터 산업을 견인하고 있습니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">모터그래프</span>
-                        <span class="news-date">2025.08.08</span>
+                <div class="card large-card">
+                    <h3>📈 EV 모터 시장 성장 예측</h3>
+                    <div class="chart-container">
+                        <canvas id="marketChart"></canvas>
                     </div>
-                </a>
-            </div>
+                    <div class="source">
+                        출처: Fortune Business Insights, The Business Research Company 데이터 기반
+                    </div>
+                </div>
 
-            <div class="news-item" data-category="market" data-url="https://www.iea.org/reports/global-ev-outlook-2025">
-                <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">
-                    <span class="news-badge market">시장동향</span>
-                    <h2 class="news-title">아시아 신흥국 EV 판매 40% 급증, 40만 대 돌파</h2>
-                    <p class="news-summary">중국을 제외한 아시아 신흥국의 전기차 판매가 2024년 40만 대에 달하며 전년 대비 40% 이상 급증했습니다. 이 지역의 EV 모터 수요도 크게 증가할 것으로 예상됩니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">IEA Global EV Outlook</span>
-                        <span class="news-date">2025.03.15</span>
+                <div class="card">
+                    <h3>🌏 지역별 시장 현황</h3>
+                    <div class="metric">
+                        <span class="metric-label">중국 EV 판매량</span>
+                        <span class="metric-value trend-up">11M+ (2024)</span>
                     </div>
-                </a>
-            </div>
-            
-            <div class="news-item" data-category="tech" data-url="https://www.st.com/en/applications/automotive/electric-vehicles-and-hybrid-electric-vehicles/ev-motor-drive-and-powertrain-control.html">
-                <a href="https://www.st.com/en/applications/automotive/electric-vehicles-and-hybrid-electric-vehicles/ev-motor-drive-and-powertrain-control.html" target="_blank">
-                    <span class="news-badge tech">기술혁신</span>
-                    <h2 class="news-title">ST마이크로일렉트로닉스, SiC 기반 파워트레인 솔루션 공개</h2>
-                    <p class="news-summary">ST마이크로일렉트로닉스가 EV의 모터 구동 및 파워트레인 제어를 위한 실리콘 카바이드(SiC) 솔루션을 공개하며, 효율성 향상과 소형화를 가능하게 했습니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">STMicroelectronics</span>
-                        <span class="news-date">2025.05.20</span>
+                    <div class="metric">
+                        <span class="metric-label">유럽 EV 수출량</span>
+                        <span class="metric-value trend-up">830K (+9%)</span>
                     </div>
-                </a>
-            </div>
-
-            <div class="news-item" data-category="market" data-url="https://www.virta.global/resources/blog/ev-market-uk">
-                <a href="https://www.virta.global/resources/blog/ev-market-uk" target="_blank">
-                    <span class="news-badge market">시장동향</span>
-                    <h2 class="news-title">영국 EV 점유율 30% 돌파, 유럽의 주요 성장 동력으로 부상</h2>
-                    <p class="news-summary">영국의 2024년 EV 판매 점유율이 30%에 근접하며 2023년 대비 크게 상승했습니다. 이는 EV 모터 제조업체들의 주요 타겟 시장으로 부상하고 있음을 의미합니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">Virta Global</span>
-                        <span class="news-date">2025.01.20</span>
+                    <div class="metric">
+                        <span class="metric-label">한국 시장 성장률</span>
+                        <span class="metric-value trend-up">11.7% (2024)</span>
                     </div>
-                </a>
-            </div>
-
-            <div class="news-item" data-category="breaking" data-url="https://www.bmwblog.com/2025/01/05/bmw-neue-klasse-x-concept-ix3/">
-                <a href="https://www.bmwblog.com/2025/01/05/bmw-neue-klasse-x-concept-ix3/" target="_blank">
-                    <span class="news-badge breaking">속보</span>
-                    <h2 class="news-title">BMW 비전 노이에 클라세 X, 2025년 말 iX3로 양산 예정</h2>
-                    <p class="news-summary">BMW의 혁신적인 비전 노이에 클라세 X 컨셉트카가 2025년 말 iX3 모델명으로 양산될 예정입니다. 차세대 전기 파워트레인 기술이 적용될 것으로 알려져 업계의 주목을 받고 있습니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">BMW Blog</span>
-                        <span class="news-date">2025.01.05</span>
+                    <div class="source">
+                        출처: <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">IEA Global EV Outlook 2025</a>
                     </div>
-                </a>
-            </div>
-
-            <div class="news-item" data-category="tech" data-url="https://www.usnews.com/news/automotive/articles/2024-ev-trailseeker-first-drive-review">
-                <a href="https://www.usnews.com/news/automotive/articles/2024-ev-trailseeker-first-drive-review" target="_blank">
-                    <span class="news-badge tech">기술혁신</span>
-                    <h2 class="news-title">차세대 EV 트레일시커, 듀얼 모터로 375마력 구현</h2>
-                    <p class="news-summary">새로 공개된 전기차 트레일시커가 듀얼 모터 시스템으로 375마력을 발휘하며 강력한 성능을 보여줍니다. 이는 고성능 EV 모터 기술 발전의 사례입니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">U.S. News</span>
-                        <span class="news-date">2024.12.21</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="news-item" data-category="market" data-url="https://greenmountainenergy.com/why-renewable-energy/evs/the-future-of-electric-vehicle-technology-innovations-in-2025/">
-                <a href="https://greenmountainenergy.com/why-renewable-energy/evs/the-future-of-electric-vehicle-technology-innovations-in-2025/" target="_blank">
-                    <span class="news-badge market">시장동향</span>
-                    <h2 class="news-title">2025년 EV 기술 혁신, 소비자 선택권 확대로 이어져</h2>
-                    <p class="news-summary">2025년을 맞아 전기차 기술 혁신이 가속화되고 있습니다. 신규 진입업체와 확장된 제품 라인업으로 소비자들의 선택권이 다양해졌으며, 이는 EV 모터 기술 발전의 새로운 동력이 되고 있습니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">Green Mountain Energy</span>
-                        <span class="news-date">2025.02.07</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="news-item" data-category="tech" data-url="https://www.semianalysis.com/p/google-quantum-computing-research">
-                <a href="https://www.semianalysis.com/p/google-quantum-computing-research" target="_blank">
-                    <span class="news-badge tech">기술혁신</span>
-                    <h2 class="news-title">고체 배터리와 AI 기반 모터 제어 시스템 연구 가속화</h2>
-                    <p class="news-summary">고체 배터리 기술과 AI 기반 모터 제어 시스템의 통합 연구가 활발히 진행되고 있습니다. 이러한 기술 융합은 EV의 효율성과 안전성을 획기적으로 향상시킬 것으로 기대됩니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">SemiAnalysis</span>
-                        <span class="news-date">2025.03.10</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="news-item" data-category="korea" data-url="https://www.lg.com/us/business/ev-components">
-                <a href="https://www.lg.com/us/business/ev-components" target="_blank">
-                    <span class="news-badge korea">국내뉴스</span>
-                    <h2 class="news-title">LG전자, LG마그나와 협력 강화로 글로벌 EV 부품 시장 선점</h2>
-                    <p class="news-summary">LG전자가 합작법인 LG마그나와의 협력을 통해 전기차 파워트레인 솔루션 공급을 확대하고 있습니다. 글로벌 완성차 업체들의 주문이 이어지며 국내 EV 부품 산업의 위상을 높이고 있습니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">LG Business</span>
-                        <span class="news-date">2025.04.15</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="news-item" data-category="market" data-url="https://greenmountainenergy.com/why-renewable-energy/evs/the-us-ev-market-continues-to-grow/">
-                <a href="https://greenmountainenergy.com/why-renewable-energy/evs/the-us-ev-market-continues-to-grow/" target="_blank">
-                    <span class="news-badge market">시장동향</span>
-                    <h2 class="news-title">테슬라 미국 EV 시장 점유율 44% 유지하며 여전히 압도적 1위</h2>
-                    <p class="news-summary">2024년 말 기준 테슬라는 여전히 미국 EV 시장에서 44%의 강력한 점유율을 보이고 있습니다. 경쟁사들의 도전이 거세지고 있지만, 테슬라의 기술력과 네트워크가 경쟁 우위를 지속시키고 있습니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">Green Mountain Energy</span>
-                        <span class="news-date">2025.01.30</span>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="news-item" data-category="tech" data-url="https://www.theverge.com/2025/5/18/250100/gm-cruise-ai-av-software">
-                <a href="https://www.theverge.com/2025/5/18/250100/gm-cruise-ai-av-software" target="_blank">
-                    <span class="news-badge tech">기술혁신</span>
-                    <h2 class="news-title">자율주행과 EV 모터 제어의 완전 통합 시스템 개발 중</h2>
-                    <p class="news-summary">자율주행 소프트웨어와 EV 모터 제어 시스템을 완전히 통합하는 차세대 기술이 개발되고 있습니다. 이 시스템은 주행 패턴을 분석하여 모터 효율성을 최적화할 것으로 기대됩니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">The Verge</span>
-                        <span class="news-date">2025.05.18</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="news-item" data-category="market" data-url="https://www.iea.org/reports/global-ev-outlook-2025">
-                <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">
-                    <span class="news-badge market">시장동향</span>
-                    <h2 class="news-title">글로벌 충전 인프라 투자, 2025년 500억 달러 돌파</h2>
-                    <p class="news-summary">전 세계 전기차 충전 인프라에 대한 투자가 2025년 500억 달러를 넘어설 것으로 전망됩니다. 메가와트급 초고속 충전 스테이션 구축이 가속화되며 EV 생태계 확장을 이끌고 있습니다.</p>
-                    <div class="news-meta">
-                        <span class="news-source">IEA Global EV Outlook</span>
-                        <span class="news-date">2025.06.12</span>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
-        
-        <button class="more-btn" id="moreBtn">더 많은 뉴스 보기</button>
-
-        <div class="card large-card">
-            <h3>🚀 핵심 기술 트렌드</h3>
-            <div class="tech-item">
-                <h4>실리콘 카바이드(SiC) 인버터</h4>
-                <p>효율성 향상 및 손실 감소로 차세대 EV 견인 인버터의 핵심 기술로 부상. STMicroelectronics 등 주요 반도체 기업들이 시장을 주도하고 있습니다.</p>
-            </div>
-            <div class="tech-item">
-                <h4>메가와트 충전 시스템</h4>
-                <p>대형 상용차 및 미래 승용차를 위한 메가와트급 충전 스테이션이 2024년부터 전 세계적으로 설치 시작. 이는 고성능 EV 모터와 파워트레인 개발을 촉진하고 있습니다.</p>
-            </div>
-            <div class="tech-item">
-                <h4>AI 기반 모터 제어</h4>
-                <p>인공지능 알고리즘을 활용한 모터 제어 시스템으로 에너지 효율성과 차량 성능을 실시간으로 최적화합니다.</p>
-            </div>
-            <div class="source">
-                출처: <a href="https://virta.global/resources/blog/global-electric-vehicle-market" target="_blank">Virta Global</a>,
-                <a href="https://www.yolegroup.com/category/power-electronics/" target="_blank">Yole Group</a>
-            </div>
-        </div>
-
-        <div class="card large-card">
-            <h3>💡 전략적 인사이트</h3>
-            <div class="insight-item">
-                <strong>시장 집중도:</strong> 중국이 전체 EV 시장의 약 65%를 차지하며 압도적 우위를 유지하고 있습니다.
-            </div>
-            <div class="insight-item">
-                <strong>가격 경쟁력:</strong> 2024년 신규 전기차 모델 중 75%가 $50,000 이상으로, 대중화를 위해 가격 경쟁력 개선이 중요합니다.
-            </div>
-            <div class="insight-item">
-                <strong>기술 혁신:</strong> PMSM과 SiC 기술의 결합으로 모터 효율성 및 전력 밀도가 대폭 향상되고 있습니다.
-            </div>
-            <div class="insight-item">
-                <strong>공급망 다변화:</strong> EU의 전기차 수출이 증가하며 중국 의존도를 완화하려는 노력이 지속되고 있습니다.
-            </div>
-            <div class="insight-item">
-                <strong>미래 성장 동력:</strong> 상용차 전동화와 메가와트 충전 인프라가 새로운 성장 엔진으로 부상하고 있습니다.
-            </div>
-        </div>
-
-        <div class="card large-card">
-            <h3>📈 EV 모터 시장 성장 예측</h3>
-            <div class="chart-container">
-                <canvas id="marketChart"></canvas>
-            </div>
-            <div class="source">
-                출처: Fortune Business Insights, The Business Research Company 데이터 기반
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>🌏 지역별 시장 현황</h3>
-            <div class="metric">
-                <span class="metric-label">중국 EV 판매량</span>
-                <span class="metric-value trend-up">11M+ (2024)</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">유럽 EV 수출량</span>
-                <span class="metric-value trend-up">830K (+9%)</span>
-            </div>
-            <div class="metric">
-                <span class="metric-label">한국 시장 성장률</span>
-                <span class="metric-value trend-up">11.7% (2024)</span>
-            </div>
-            <div class="source">
-                출처: <a href="https://www.iea.org/reports/global-ev-outlook-2025" target="_blank">IEA Global EV Outlook 2025</a>
-            </div>
-        </div>
-        
     </div>
     
     <script>
+        // 페이지 네비게이션 JavaScript
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const pages = document.querySelectorAll('.page-content');
+
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetPage = tab.dataset.page;
+                
+                // 모든 탭과 페이지에서 active 클래스 제거
+                navTabs.forEach(t => t.classList.remove('active'));
+                pages.forEach(p => p.classList.remove('active'));
+                
+                // 클릭된 탭과 해당 페이지에 active 클래스 추가
+                tab.classList.add('active');
+                document.getElementById(targetPage + 'Page').classList.add('active');
+            });
+        });
+
         // 뉴스 데이터 배열
         const newsData = [
             {
@@ -820,70 +725,6 @@
                 source: "Virta Global",
                 date: "2025.01.20",
                 url: "https://virta.global/resources/blog/ev-market-uk"
-            },
-            {
-                category: "breaking",
-                title: "BMW 비전 노이에 클라세 X, 2025년 말 iX3로 양산 예정",
-                summary: "BMW의 혁신적인 비전 노이에 클라세 X 컨셉트카가 2025년 말 iX3 모델명으로 양산될 예정입니다. 차세대 전기 파워트레인 기술이 적용될 것으로 알려져 업계의 주목을 받고 있습니다.",
-                source: "BMW Blog",
-                date: "2025.01.05",
-                url: "https://www.bmwblog.com/2025/01/05/bmw-neue-klasse-x-concept-ix3/"
-            },
-            {
-                category: "tech",
-                title: "차세대 EV 트레일시커, 듀얼 모터로 375마력 구현",
-                summary: "새로 공개된 전기차 트레일시커가 듀얼 모터 시스템으로 375마력을 발휘하며 강력한 성능을 보여줍니다. 이는 고성능 EV 모터 기술 발전의 사례입니다.",
-                source: "U.S. News",
-                date: "2024.12.21",
-                url: "https://www.usnews.com/news/automotive/articles/2024-ev-trailseeker-first-drive-review"
-            },
-            {
-                category: "market",
-                title: "2025년 EV 기술 혁신, 소비자 선택권 확대로 이어져",
-                summary: "2025년을 맞아 전기차 기술 혁신이 가속화되고 있습니다. 신규 진입업체와 확장된 제품 라인업으로 소비자들의 선택권이 다양해졌으며, 이는 EV 모터 기술 발전의 새로운 동력이 되고 있습니다.",
-                source: "Green Mountain Energy",
-                date: "2025.02.07",
-                url: "https://greenmountainenergy.com/why-renewable-energy/evs/the-future-of-electric-vehicle-technology-innovations-in-2025/"
-            },
-            {
-                category: "tech",
-                title: "고체 배터리와 AI 기반 모터 제어 시스템 연구 가속화",
-                summary: "고체 배터리 기술과 AI 기반 모터 제어 시스템의 통합 연구가 활발히 진행되고 있습니다. 이러한 기술 융합은 EV의 효율성과 안전성을 획기적으로 향상시킬 것으로 기대됩니다.",
-                source: "SemiAnalysis",
-                date: "2025.03.10",
-                url: "https://www.semianalysis.com/p/google-quantum-computing-research"
-            },
-            {
-                category: "korea",
-                title: "LG마그나이파워트레인, 북미시장서 12억달러 수주 달성",
-                summary: "LG전자와 마그나의 합작법인인 LG마그나이파워트레인이 북미 시장에서 12억달러 규모의 새로운 수주를 확보했습니다. 이는 글로벌 전기차 부품 시장에서의 경쟁력을 입증한 것으로 평가됩니다.",
-                source: "매일경제",
-                date: "2024.08.22",
-                url: "https://www.mk.co.kr/news/business/10942286"
-            },
-            {
-                category: "market",
-                title: "테슬라 미국 EV 시장 점유율 44% 유지하며 여전히 압도적 1위",
-                summary: "2024년 말 기준 테슬라는 여전히 미국 EV 시장에서 44%의 강력한 점유율을 보이고 있습니다. 경쟁사들의 도전이 거세지고 있지만, 테슬라의 기술력과 네트워크가 경쟁 우위를 지속시키고 있습니다.",
-                source: "Green Mountain Energy",
-                date: "2025.01.30",
-                url: "https://greenmountainenergy.com/why-renewable-energy/evs/the-us-ev-market-continues-to-grow/"
-            },
-            {
-                category: "tech",
-                title: "GM, AI 기반 전기차 모터 제어 시스템 특허 출원",
-                summary: "GM이 인공지능을 활용해 전기차 모터의 효율성을 최적화하는 새로운 제어 시스템 특허를 출원했습니다. 이 기술은 주행 패턴을 학습하여 모터 성능을 실시간으로 조절합니다.",
-                source: "TechCrunch",
-                date: "2024.05.22",
-                url: "https://techcrunch.com/2024/05/22/gm-patents-ai-powered-ev-motor-control/"
-            },
-            {
-                category: "market",
-                title: "글로벌 충전 인프라 투자, 2025년 500억 달러 돌파",
-                summary: "전 세계 전기차 충전 인프라에 대한 투자가 2025년 500억 달러를 넘어설 것으로 전망됩니다. 메가와트급 초고속 충전 스테이션 구축이 가속화되며 EV 생태계 확장을 이끌고 있습니다.",
-                source: "IEA Global EV Outlook",
-                date: "2025.06.12",
-                url: "https://www.iea.org/reports/global-ev-outlook-2025"
             }
         ];
 

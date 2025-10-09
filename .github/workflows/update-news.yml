@@ -2,9 +2,8 @@ name: Update News Data
 
 on:
   schedule:
-    # KST 06:00 - 23:00 (UTC 21:00 previous day - 14:00)
-    - cron: '0 21-23 * * *'  # UTC 21:00-23:00 (KST 06:00-08:00)
-    - cron: '0 0-14 * * *'   # UTC 00:00-14:00 (KST 09:00-23:00)
+    # KST 06:00 매일 (UTC 21:00 전날 - 한국시간이 UTC+9이므로 21:00 UTC = 06:00 KST)
+    - cron: '0 21 * * *'  # UTC 21:00 (KST 06:00 다음날)
   workflow_dispatch:  # Allow manual triggers
 
 jobs:

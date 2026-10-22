@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-21T23:54:04.776Z",
+  "lastUpdated": "2026-10-22T23:52:55.753Z",
   "articles": [
     {
       "title": "Subaru unveils 1st in-house EV prototype as it moves to go solo from Toyota - Automotive News",
@@ -7,14 +7,6 @@
       "source": "news.google.com",
       "date": "2026-10-19",
       "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNSVpzQTJYcnp3c0tMMVdKdnlsWFhlR1hNOTBGU3ZDZ21Ic21LWkY5R0VwckJSdFlkV0dEYW5RazRNZklZWWlNTDNUT253TjJuTG9mVnhzUTM0UzktU0dSUFRMOGFzTUxfMHZ2ZVdWd0hyS1lJN01uUmpTQTA5bVBEZGpfWDhlNFpXTUhV?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "Electric Vehicle Technology Overview – Federal Fleet Training - Department of Energy (.gov)",
-      "summary": "Electric Vehicle Technology Overview – Federal Fleet Training  Department of Energy (.gov)",
-      "source": "news.google.com",
-      "date": "2026-10-16",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPby1WWkxBRE1RNVNOS19SalhyUEtmZkVVN0FWa3kydEt1aF9xOVB5NEg1eHRPZUJLcXM0dDdYaHI1Tl9iSG1aRVlMeUpNRUVYUHFXWF83SlYxeS1TeUpUclU3S3Qwa2dNMVJscnRwcVFBQWpoejBQWlhfTzZPV3VvY3VPZ0JrNUZEWkVHXzdMeXozOGk0WGloYUp5X0lEdGN0UGt3?oc=5",
       "category": "tech"
     },
     {
@@ -26,6 +18,14 @@
       "category": "tech"
     },
     {
+      "title": "Electric Vehicle Technology Overview – Federal Fleet Training - Department of Energy (.gov)",
+      "summary": "Electric Vehicle Technology Overview – Federal Fleet Training  Department of Energy (.gov)",
+      "source": "news.google.com",
+      "date": "2026-10-16",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPby1WWkxBRE1RNVNOS19SalhyUEtmZkVVN0FWa3kydEt1aF9xOVB5NEg1eHRPZUJLcXM0dDdYaHI1Tl9iSG1aRVlMeUpNRUVYUHFXWF83SlYxeS1TeUpUclU3S3Qwa2dNMVJscnRwcVFBQWpoejBQWlhfTzZPV3VvY3VPZ0JrNUZEWkVHXzdMeXozOGk0WGloYUp5X0lEdGN0UGt3?oc=5",
+      "category": "tech"
+    },
+    {
       "title": "Subaru Is Developing Its Own EVs, and It Starts With a 510-HP AWD Station Wagon Prototype - Road & Track",
       "summary": "Subaru Is Developing Its Own EVs, and It Starts With a 510-HP AWD Station Wagon Prototype  Road & Track",
       "source": "news.google.com",
@@ -34,11 +34,11 @@
       "category": "tech"
     },
     {
-      "title": "BYD’s new high-tech 5-seat electric SUV revealed with 690 hp and dual 30″ screens - Electrek",
-      "summary": "BYD’s new high-tech 5-seat electric SUV revealed with 690 hp and dual 30″ screens  Electrek",
+      "title": "From Mine to Magnet to Motor: How GM Is Building Critical Supply Chains for the Long Term - CleanTechnica",
+      "summary": "From Mine to Magnet to Motor: How GM Is Building Critical Supply Chains for the Long Term  CleanTechnica",
       "source": "news.google.com",
       "date": "2026-10-19",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaXVWbFhfdFNkd203OU1TV3NQWGhlOVA0QkdNMG5OMjVQOGhqSzduSkt6aXVlNDhzWlllcUJ6N3o2Wkc0cWlHZ3ZtVHI5d2lHM0FJTDhWWjFWaVo3NXMxQUJxS3BhdF9UYkZRWWxqVXdGMWNpZUlQamViUmJVd3VmNF9ZN2pQdm5jMlVzSklOdjM0dw?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPYThPRTBZQXpQMVIxQ296bzdTTmYxcDZzaVRSYmNucXAwaXcyY2ZIMlpfdkJuNExQMFRFeG1ER1ItLTg4NkRCM0NMYnB1dlhGYjNqREt0TEg2TXV5WnFob1RXWXd1QWQyNXhlal90T19lbWlhdTlFbFZnMThJcExHaklIalZGZTBDelVCbjRpRWdvb1U5c2RENmFHMmtEU18wZ1BXN25NcTVtSlFLNmRUaHU1enRNZmhDcndVVmxYblYzSkNu?oc=5",
       "category": "tech"
     },
     {
@@ -48,38 +48,6 @@
       "date": "2026-09-06",
       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxONFBLZnVuUWFGOERHMUVNRVVyUXV3XzdWTUVUbzE2WG9hTndsc2ZybThwcFZqS1pfSG54cjBmYU9sTEk2dlJPSlB4d2pjTGo1TUNJa3hyTDI5SzRuci1pU1lsZGJaZVpzcUh6VnBwN1p5VEdZOG56Mm15RFVlY3BROWxNbG0yMDNXM3Y0ejZKT2QyaGc4UmNoZ0hBV0x0OEFGLXhNMUZjZw?oc=5",
       "category": "tech"
-    },
-    {
-      "title": "New ZVS Inverter Technology Cuts EV Motor Voltage Overshoot by Over 90% - ELE Times",
-      "summary": "New ZVS Inverter Technology Cuts EV Motor Voltage Overshoot by Over 90%  ELE Times",
-      "source": "news.google.com",
-      "date": "2026-10-19",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOMWVPRnBWWDdoVlVYWDVFLUZpdGRyVEdYQ3NycnpRZHJqYmJ2U2pZcVZoRmJNMkJnNVFOUVUzMjctZ3pJdGx0UkpXRW1Bcjl4SHktUnZzTkpfX3drYjNMamRfMWhTdV9kcTJCcUx0cXJ1RkFsd0x6QnNqQjlZN2RacktNY0drd3NSdFItWm9fNzlPdU9hNVhOZU1R?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "From mine to magnet to motor: How GM is building critical supply chains for the long term - General Motors",
-      "summary": "From mine to magnet to motor: How GM is building critical supply chains for the long term  General Motors",
-      "source": "news.google.com",
-      "date": "2026-10-02",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPd0I0Nk9MUzNyWDFXdDEtWm9sUEZzVmNnMVF4dDdfbHQ2UVV3TXg3LVo2dHV2eDlFV3BOQ1Y0bEdRY1owZ3RpWjFJSlItdlUxXzVzSkF6R1pIQ1RKNWdPb0d5YWZDZXBaTU5QMTlONV9qTGJSZnBPeHlaVndoR18ydHp2VWo2MzBYVjB2TDBmdE5ab1RDZ2c?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "New tool targets rare-earths' shortages to boost electric motor manufacturing - Interesting Engineering",
-      "summary": "New tool targets rare-earths' shortages to boost electric motor manufacturing  Interesting Engineering",
-      "source": "news.google.com",
-      "date": "2026-10-15",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQamJwSEF1am5pd3hvWnA4c1R5NE5IYW1jbUVWZ0pfMWFZWVItUF9JcndQODd5RkpsbE1jaVFyNENvYWItOW9hV1lxNXhrR09VNnJFRWh2WEVUbS0ySWpNTmFzRWhXY0liX1hkaTI4cFdUM1R6Q0pBMDk5czZBUHlyLVc3eXdOZw?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "Electric Vehicle Motor Market Accelerates as - GlobeNewswire",
-      "summary": "Electric Vehicle Motor Market Accelerates as  GlobeNewswire",
-      "source": "news.google.com",
-      "date": "2026-09-18",
-      "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxPWXdPMGZfbkhuRlFHQ1hhcWhKWVJGN2o0Mzc2aGctN3pfbmxGR3k0ZDNsRVZ0bkpITHMtenlXMlFtTE9SZ3E4dWxaSWpMMjFzNE5UTXEyUlh6NUpCeUNvMXlnby1kajNYcEl0M0paSlk4cDV6aHl6RnRGVFAxdTdnMEV2Sm5LdlByY2I1ZzRBSVRBVmk5ZGdaZTg2V3U5amlzUWxDZlc2MENXMzhvSXUtdVY2UGhTZ3o2Z2x0LVhzQUpZcTBYUHF4aGpmaWRyYkJaMHZDalUxVkdmNVFMejNUTlV0bkw4cUlLSmdJN2RySTZpNExybDJEdVJtRjdDdDJ0cE9OVUROeXlncW9qX0hoRzB4MFZjV0FyanJkNWR3WkdWZ1M5?oc=5",
-      "category": "market"
     },
     {
       "title": "Chinese auto companies race ahead on EV technology, achieving 5-minute ultrafast charging - AP News",
@@ -106,6 +74,14 @@
       "category": "tech"
     },
     {
+      "title": "What Is An EREV? Why Automakers Are Putting Gas Engines Back In EVs - Motor1.com",
+      "summary": "What Is An EREV? Why Automakers Are Putting Gas Engines Back In EVs  Motor1.com",
+      "source": "news.google.com",
+      "date": "2026-09-09",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE44LXhmenAtdGZxOFBjVEdsWGpDQnJEY1hrdC1lMXlMZmltZk02UGxCSll3SEFkSWZtQTNha0tuYmk4Z3llbkU3blBUcDBXRUcyb2ZKaWNRNGZRbGs0bHlyMlZlR2Rldw?oc=5",
+      "category": "tech"
+    },
+    {
       "title": "citroën revives the iconic 2 CV as a compact electric concept with a roll-up fabric roof - Designboom",
       "summary": "citroën revives the iconic 2 CV as a compact electric concept with a roll-up fabric roof  Designboom",
       "source": "news.google.com",
@@ -114,12 +90,12 @@
       "category": "tech"
     },
     {
-      "title": "A Humble 3-Wheel Electric Vehicle Lands Toyota in Federal Court - The New York Times",
-      "summary": "A Humble 3-Wheel Electric Vehicle Lands Toyota in Federal Court  The New York Times",
+      "title": "The American E.V. Has Been Crushed. Will It Take the U.S. Auto Industry With It? - The New York Times",
+      "summary": "The American E.V. Has Been Crushed. Will It Take the U.S. Auto Industry With It?  The New York Times",
       "source": "news.google.com",
-      "date": "2026-06-20",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNa0d4WjhFX293RlNLWXZuajJabG53c1E1VjR3QWducmZzN29aVVBjYjQzN3FLN0o5QXpGdzVFNnRzeWZ3MGZab21WOFF2NkowWkJWMGVIWXZMbHpsbi1Ea3ZRR0NHajgzdGl6a292a3V2NFlBTF9aT1YtRW5KTG5aczQ1cnRRLU9vSUZMQUhoR1JDUQ?oc=5",
-      "category": "tech"
+      "date": "2026-07-15",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQRi1keWlrLWVHNmVWbHBWUHRBckFIN0EyamRzSmRWbW9OTGFiLUIySmlHQ1hYSVpRTzA2OHNPYVVrcjhqeGllY2RYTmNpa0p1eHphNkVQZGJLRU15UG9sdkZXeTVEbjFqYUx0Y1BTVHMxV0R4WU9XVGNHbC1QU2lGcg?oc=5",
+      "category": "market"
     },
     {
       "title": "Ford’s secret EV unit emerges from shadows, still bullish on new pickup amid market slowdown - CNBC",
@@ -146,20 +122,12 @@
       "category": "market"
     },
     {
-      "title": "Jeep production returns to China for global export, except to the U.S. - Automotive News",
-      "summary": "Jeep production returns to China for global export, except to the U.S.  Automotive News",
+      "title": "Motion That Starts at the Wheels: The Future of the Automobile Transformed by InWheel Motors - Hyundai Motor Group",
+      "summary": "Motion That Starts at the Wheels: The Future of the Automobile Transformed by InWheel Motors  Hyundai Motor Group",
       "source": "news.google.com",
-      "date": "2026-10-15",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORnlUS2FBLWp5OThuWjRLM0g1MkNPWnY2enRZTk84Rnk3cjJ3dEFtSk5jeEUxZHhfaEFpbjNKeG1IdFBMU2UtSWphR0dEcFppZ21uQmdVSV9nUnF4ZnZMV1lHTDdDaW1SUDFUeWE3MWNueXI4VjZGTEV1X3hIcFZfOENmM1NoTGZkQUNNTFZRem5MSm1CRDFGUk1QMEFBWXYxRjd6SEJUSEotYU0?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "Xpeng weighs hybrid models for Europe to bypass EU levies - Automotive News",
-      "summary": "Xpeng weighs hybrid models for Europe to bypass EU levies  Automotive News",
-      "source": "news.google.com",
-      "date": "2026-07-22",
-      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1aZWtQS2hLSVpoQWdDR2ZtVzhTbncwVUlfaGdzdnVxVHEzVF9QeGF5QVZXbERWTDhJSm90NHlaWl9OdlFlejJDYmVta2p2MFJjT3pWQU5GV0ZoNzZKWkFPS0NWYlVJTnhpei1EYnY0Ti1adFhheHcw?oc=5",
-      "category": "tech"
+      "date": "2026-08-12",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQTXN1RjNMWEV0WnRETzlLNEpSR3VZSkQ2emYtZFo4ckVEN1A4LUpadEpUZE9FUXQ5eTAyN2thU2hBZUpkMmpWcGpsMHZpVk9ESV9sMTNnTFU5RTVtYXhGVlRqNy1tUzVMM01haVZqSTN6MHJoNUNmZzZKcGFpNHNDWGxUOVF3WnVhYy1DSF9MOWU?oc=5",
+      "category": "korea"
     },
     {
       "title": "16 Range-Extender (EREV) vehicles expected in the U.S. (2026-2029) - TopElectricSUV",
@@ -170,19 +138,35 @@
       "category": "tech"
     },
     {
-      "title": "Motion That Starts at the Wheels: The Future of the Automobile Transformed by InWheel Motors - Hyundai Motor Group",
-      "summary": "Motion That Starts at the Wheels: The Future of the Automobile Transformed by InWheel Motors  Hyundai Motor Group",
+      "title": "Jeep production returns to China for global export, except to the U.S. - Automotive News",
+      "summary": "Jeep production returns to China for global export, except to the U.S.  Automotive News",
       "source": "news.google.com",
-      "date": "2026-08-12",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQTXN1RjNMWEV0WnRETzlLNEpSR3VZSkQ2emYtZFo4ckVEN1A4LUpadEpUZE9FUXQ5eTAyN2thU2hBZUpkMmpWcGpsMHZpVk9ESV9sMTNnTFU5RTVtYXhGVlRqNy1tUzVMM01haVZqSTN6MHJoNUNmZzZKcGFpNHNDWGxUOVF3WnVhYy1DSF9MOWU?oc=5",
-      "category": "korea"
+      "date": "2026-10-15",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORnlUS2FBLWp5OThuWjRLM0g1MkNPWnY2enRZTk84Rnk3cjJ3dEFtSk5jeEUxZHhfaEFpbjNKeG1IdFBMU2UtSWphR0dEcFppZ21uQmdVSV9nUnF4ZnZMV1lHTDdDaW1SUDFUeWE3MWNueXI4VjZGTEV1X3hIcFZfOENmM1NoTGZkQUNNTFZRem5MSm1CRDFGUk1QMEFBWXYxRjd6SEJUSEotYU0?oc=5",
+      "category": "tech"
     },
     {
-      "title": "Jeep returns to China manufacturing with electric models; first exports of iconic American brand planned for 2027 - Automotive News",
-      "summary": "Jeep returns to China manufacturing with electric models; first exports of iconic American brand planned for 2027  Automotive News",
+      "title": "A Humble 3-Wheel Electric Vehicle Lands Toyota in Federal Court - The New York Times",
+      "summary": "A Humble 3-Wheel Electric Vehicle Lands Toyota in Federal Court  The New York Times",
       "source": "news.google.com",
-      "date": "2026-08-25",
-      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNZ3NrZlBpT1FwVkpiZ0JvOHRKSXNEYmN1OTk4T1N5cndRb01id1lEZEJ3dmZVbXFZTWJlVmJuZ0tLTjgtUGh5SWxmaHVqNWlmZlN0amhKU0hlQm9JaGt4RVR0eTlBR29Gczh6bHJKWllNWDlKeXlzMnJlUzk3c3d0a2x6UGMwdEpsVFVlaWgyZ1dVT1l0Vzg5V0I5cDBGUzNhTzBXQ2RKQ2V5NzZVMFI4V2k3dE0?oc=5",
+      "date": "2026-06-20",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNa0d4WjhFX293RlNLWXZuajJabG53c1E1VjR3QWducmZzN29aVVBjYjQzN3FLN0o5QXpGdzVFNnRzeWZ3MGZab21WOFF2NkowWkJWMGVIWXZMbHpsbi1Ea3ZRR0NHajgzdGl6a292a3V2NFlBTF9aT1YtRW5KTG5aczQ1cnRRLU9vSUZMQUhoR1JDUQ?oc=5",
+      "category": "tech"
+    },
+    {
+      "title": "U.S. Automakers Risk Being Reduced to Niche Producers of Gas Vehicles - The New York Times",
+      "summary": "U.S. Automakers Risk Being Reduced to Niche Producers of Gas Vehicles  The New York Times",
+      "source": "news.google.com",
+      "date": "2026-03-03",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOUWtKVUlIalRFa0hBT2VNdndwc3lmdXBiUkFoR1NHNDBTTUtJTEZaM1hveGxpYlZ1bUU2dGYwYlNjcFBfaDNpWUY2RmhaOTVMclVKTUNRN2NyUTRDa2E3LWFfbzF1NVc0dVR5aFE1dm84T2hGYlpta1FpM0hmZlhGWU9Ia1RuTFItRmxV?oc=5",
+      "category": "tech"
+    },
+    {
+      "title": "Range Extender: More Than Just Extra Range - ZF Friedrichshafen",
+      "summary": "Range Extender: More Than Just Extra Range  ZF Friedrichshafen",
+      "source": "news.google.com",
+      "date": "2026-08-10",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNbTJVQ1E1ZVp6TjA0VmVlS1BxQ2J3cnRfVlpvdkxfMXdqYWFJNVdxc3ZodnFiX2tlcDhGNFhadC1mVDlMdFFEdlA2emp3WkZGY2ZDUmdsdnRjb0dOeFdrRGFZZjBnNmVwRXhDdFVvTnBzdXEzXy1laGs2UjJwWlE0Vkl1WjgzSG05SUc3aW9n?oc=5",
       "category": "tech"
     },
     {
@@ -199,14 +183,6 @@
       "source": "news.google.com",
       "date": "2026-08-27",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOM3JqMjREbk9Vd2JPY1pZWlRUUEtHNGRNaDlMU1VxTVFOb1NlcUhRemotMzdPUFNYMVZOd1ZHbHRmSVBSempGX3Q0a2x5aDZlOGtlZGFRRFltX2p1NFR2MjN6Q0RZRHNCdF82Q1hCdDZZMW9lcWptQkxudXhBRjVycGxSVXRmaXRldkpMSmRJbEd3SDVKU0xZVmU5WnUzbU9ScnQ2UDdn?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "U.S. Automakers Risk Being Reduced to Niche Producers of Gas Vehicles - The New York Times",
-      "summary": "U.S. Automakers Risk Being Reduced to Niche Producers of Gas Vehicles  The New York Times",
-      "source": "news.google.com",
-      "date": "2026-03-03",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOUWtKVUlIalRFa0hBT2VNdndwc3lmdXBiUkFoR1NHNDBTTUtJTEZaM1hveGxpYlZ1bUU2dGYwYlNjcFBfaDNpWUY2RmhaOTVMclVKTUNRN2NyUTRDa2E3LWFfbzF1NVc0dVR5aFE1dm84T2hGYlpta1FpM0hmZlhGWU9Ia1RuTFItRmxV?oc=5",
       "category": "tech"
     },
     {
@@ -242,11 +218,11 @@
       "category": "tech"
     },
     {
-      "title": "Ford's advanced EV-and-tech chief to leave the company - Reuters",
-      "summary": "Ford's advanced EV-and-tech chief to leave the company  Reuters",
+      "title": "World premiere: The most powerful Mercedes AMG ever is electric - Electrek",
+      "summary": "World premiere: The most powerful Mercedes AMG ever is electric  Electrek",
       "source": "news.google.com",
-      "date": "2026-04-15",
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQRE1qRWpfdV9oOWI1N01ESnZPMUlBdWNrTDFFbEU2MVItZVgydTk0NURXa0N5M0MwbnpTTVI5NktUaGVob3F0YmpUM2JJeXBYb1lPal85UzBnLTQ4QzIxenR3RTVLNDJhRFpXdEFRc2x4a1BDaWp1dVVRNXhiU1pVQTZlMm02UFItZS1PS0lTSjNnNFRlT2pFeG5lUGkxLWJvN0RPckhBWWJTRWVlaWhtY1lB?oc=5",
+      "date": "2026-05-19",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPSUhiVU9uMVhJZkI3bkx0dzBkQmwxdTNvRGJmTy1DTlhQVUFET1I0eW5pM2lNdnJTVk5FeXJ4QkpKVHBZTWlCa1ItYnFNZTFhSWc1aTNlQ3Z4OVJ2Q0h2ZzVwRmk4cW85a3FzY2tLMjZrY1Bndy1tMVRxMlRKS2FSeW9KeXhhRjBDS014NWZCcUVTSDkzY01KQXBiUHNjTXZIcGxVSjJR?oc=5",
       "category": "tech"
     },
     {
@@ -255,22 +231,6 @@
       "source": "news.google.com",
       "date": "2026-05-21",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNZXFzRW5IeDg3QXg5MGRtMVlKLWk5WFZYUF85NWxtS2Y4U2d1ZEs3cnRFVl9sbFRYV0RVb2dwY0swYlN2WFJOWTFLWnYzdmQ4S1R5MHBOZmdIOFdXVzNBbVF4N2tGY3lpQm9kX3dfajdPa1hZWFNVQ3lYX0tPMjBuZlJON3JRdERJY3VIc3ltTzctSTI0M3dMRTBKRnhleWx1?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "Large‑scale production of electric axial flux motor. - Mercedes-Benz Group",
-      "summary": "Large‑scale production of electric axial flux motor.  Mercedes-Benz Group",
-      "source": "news.google.com",
-      "date": "2026-06-09",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNVzlKNnl6bUxFWEFaaEkyOUw1OFh4c0t4TUoweFBxaTNkZmE0TmZxWTg1Q2VOZTlNbGlpb3ZRN2NTTlR2SlpDY3pJdmRnaFhDM0UtTnNlMnN1dDJhTDFfR1k1YTlMU0ZMZk1PY21oRmoxcHZhVUppWFMyTjIzUzF2WEpyLUVHYm13NVlHbA?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "World premiere: The most powerful Mercedes AMG ever is electric - Electrek",
-      "summary": "World premiere: The most powerful Mercedes AMG ever is electric  Electrek",
-      "source": "news.google.com",
-      "date": "2026-05-19",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPSUhiVU9uMVhJZkI3bkx0dzBkQmwxdTNvRGJmTy1DTlhQVUFET1I0eW5pM2lNdnJTVk5FeXJ4QkpKVHBZTWlCa1ItYnFNZTFhSWc1aTNlQ3Z4OVJ2Q0h2ZzVwRmk4cW85a3FzY2tLMjZrY1Bndy1tMVRxMlRKS2FSeW9KeXhhRjBDS014NWZCcUVTSDkzY01KQXBiUHNjTXZIcGxVSjJR?oc=5",
       "category": "tech"
     },
     {
@@ -298,14 +258,6 @@
       "category": "breaking"
     },
     {
-      "title": "Tech-ready - Renault Group",
-      "summary": "Tech-ready  Renault Group",
-      "source": "news.google.com",
-      "date": "2026-03-10",
-      "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFAtbTk4YUVhYTJCenRzQi1xdkQ2eTBDV05fYmFoUTlRWVpFTy05dTJhVklYY1h1YmZZdGNCbU8xWlo1MTBqMnYzQU5jXy1kVG44ZzNGekt0TTd6NFJMdWc?oc=5",
-      "category": "tech"
-    },
-    {
       "title": "A New Lightweight EV Platform Takes Shape with In-Wheel Motor Technology - Vicarious Magazine",
       "summary": "A New Lightweight EV Platform Takes Shape with In-Wheel Motor Technology  Vicarious Magazine",
       "source": "news.google.com",
@@ -314,11 +266,11 @@
       "category": "tech"
     },
     {
-      "title": "A New Challenge in Electric Technology (3) - Yamaha Motor Co., Ltd.",
-      "summary": "A New Challenge in Electric Technology (3)  Yamaha Motor Co., Ltd.",
+      "title": "Ford's advanced EV-and-tech chief to leave the company - Reuters",
+      "summary": "Ford's advanced EV-and-tech chief to leave the company  Reuters",
       "source": "news.google.com",
-      "date": "2026-03-25",
-      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5fMHFZUFJFQ1ByaU9iNHFTMlhpQ1JRdGRFdE9vVy1XeU14RVFsbEUtZ2xmN2MxSTdmRmlZQTNEV252TU1DNHJCVklRSUFXZ1RsQlZIRzZUeDExS2V5RDVFSHA1ZXZLWEx1NGJyT004ZnBkR01TVGowUWdR?oc=5",
+      "date": "2026-04-15",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQRE1qRWpfdV9oOWI1N01ESnZPMUlBdWNrTDFFbEU2MVItZVgydTk0NURXa0N5M0MwbnpTTVI5NktUaGVob3F0YmpUM2JJeXBYb1lPal85UzBnLTQ4QzIxenR3RTVLNDJhRFpXdEFRc2x4a1BDaWp1dVVRNXhiU1pVQTZlMm02UFItZS1PS0lTSjNnNFRlT2pFeG5lUGkxLWJvN0RPckhBWWJTRWVlaWhtY1lB?oc=5",
       "category": "tech"
     },
     {
@@ -330,11 +282,43 @@
       "category": "tech"
     },
     {
+      "title": "Inside the Chaos That Turned Tesla Into an Actual Car Manufacturer - IEEE Spectrum",
+      "summary": "Inside the Chaos That Turned Tesla Into an Actual Car Manufacturer  IEEE Spectrum",
+      "source": "news.google.com",
+      "date": "2026-09-15",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1mMzBER3lDTUd0azhIenhnajE5VlhSeGJFYmtEY05pMER1djBpaWVKY1lRM29lbHpRbjZ1S0FpTy1ONFp2YklIZTRnZnB4UUp4YTE0?oc=5",
+      "category": "tech"
+    },
+    {
       "title": "At 17, a Florida teen built an EV motor that could reduce rare-earth dependence - The Times of India",
       "summary": "At 17, a Florida teen built an EV motor that could reduce rare-earth dependence  The Times of India",
       "source": "news.google.com",
       "date": "2026-05-23",
       "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNcFhUYkJrbUwxalRSRWNheW9mdFZRYmZxTjk3MHJlNHU0UzVBRFBuWkp1TDZ1VzNjNmtiRE5ZUkxDc2VPeXZaSmdtc29lY0RjZnlXQ3NDQnNoS3llUE1CZk40TmU5aXJRMkVmdlg3cndrNTB4SEtJNGRrVlJUekNCa1NNSlV3Y3dWbXRTRjlnU29IQ2Z0YkRtUkFoN0RfT3lwdnZsazVIaHNVYlhUcGV1b1BLeVotSV95MXpRU1VaSkxhU2VIaXJiemNkd2ZheHdxbWhxVzRfVUU2bE1GTDl1dUl30gHnAUFVX3lxTE4wSmF2bnIzaFVVSkoyQ3RTdnd5ZWN6RjI0dHJFTXd1SURoY2pmVW1WMUdiUjA2WXc4WnlHTEtYYUEzcU9zTEt5WWUtd2tXN1BiekpZRl91eVNFYUR4dkVFVnhjUFkxTXQ4TzlzemduT2lyeWNBOVRMUlV5QVhscnpaR3otNlVLeXQwSmxFcEFDQ1RaX0FELUJSNTY3U1U2V1VwNjQwM01NMkxUXzBNMEtVMTJ5M3dyRGZJQXFwMENCUFFYY1d4aElvZ2tNMjF1QWVTVHNSSUVBR0tmclNROFQyXzBKMkFGVQ?oc=5",
+      "category": "tech"
+    },
+    {
+      "title": "Electric Vehicle Motor Market Accelerates as - GlobeNewswire",
+      "summary": "Electric Vehicle Motor Market Accelerates as  GlobeNewswire",
+      "source": "news.google.com",
+      "date": "2026-09-18",
+      "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxPWXdPMGZfbkhuRlFHQ1hhcWhKWVJGN2o0Mzc2aGctN3pfbmxGR3k0ZDNsRVZ0bkpITHMtenlXMlFtTE9SZ3E4dWxaSWpMMjFzNE5UTXEyUlh6NUpCeUNvMXlnby1kajNYcEl0M0paSlk4cDV6aHl6RnRGVFAxdTdnMEV2Sm5LdlByY2I1ZzRBSVRBVmk5ZGdaZTg2V3U5amlzUWxDZlc2MENXMzhvSXUtdVY2UGhTZ3o2Z2x0LVhzQUpZcTBYUHF4aGpmaWRyYkJaMHZDalUxVkdmNVFMejNUTlV0bkw4cUlLSmdJN2RySTZpNExybDJEdVJtRjdDdDJ0cE9OVUROeXlncW9qX0hoRzB4MFZjV0FyanJkNWR3WkdWZ1M5?oc=5",
+      "category": "market"
+    },
+    {
+      "title": "Yasa motors: Without heavy rare earths at Mercedes - All-About-Industries",
+      "summary": "Yasa motors: Without heavy rare earths at Mercedes  All-About-Industries",
+      "source": "news.google.com",
+      "date": "2026-08-19",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPSjZJWTQzaVZZZjBQTHF1X2IyQS1CTFZGZEVYYmh0MC1oOTVkeEFIcVlYbEhjOXVvNXV3MEQ0VThhU2F2bnFFQ0tiNGxNNlhoQnJZeUd3ZnFpSWRIOVlCOVpSaHZ2SXBHa1MzcmhiTmlHWVlnbnVfZEVxNmtwOUdFSEl5MlI2VjJKTXpHY2J1VDllRzdtcm5BRW1ULTYteUs2dmJPS2Q2Tm9ER0RGQm9fXzJvUkFkaDJTd1l2Q3dYdw?oc=5",
+      "category": "tech"
+    },
+    {
+      "title": "A New Challenge in Electric Technology (3) - Yamaha Motor Co., Ltd.",
+      "summary": "A New Challenge in Electric Technology (3)  Yamaha Motor Co., Ltd.",
+      "source": "news.google.com",
+      "date": "2026-03-25",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5fMHFZUFJFQ1ByaU9iNHFTMlhpQ1JRdGRFdE9vVy1XeU14RVFsbEUtZ2xmN2MxSTdmRmlZQTNEV252TU1DNHJCVklRSUFXZ1RsQlZIRzZUeDExS2V5RDVFSHA1ZXZLWEx1NGJyT004ZnBkR01TVGowUWdR?oc=5",
       "category": "tech"
     },
     {
@@ -346,27 +330,11 @@
       "category": "korea"
     },
     {
-      "title": "Yasa motors: Without heavy rare earths at Mercedes - All-About-Industries",
-      "summary": "Yasa motors: Without heavy rare earths at Mercedes  All-About-Industries",
-      "source": "news.google.com",
-      "date": "2026-08-19",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPSjZJWTQzaVZZZjBQTHF1X2IyQS1CTFZGZEVYYmh0MC1oOTVkeEFIcVlYbEhjOXVvNXV3MEQ0VThhU2F2bnFFQ0tiNGxNNlhoQnJZeUd3ZnFpSWRIOVlCOVpSaHZ2SXBHa1MzcmhiTmlHWVlnbnVfZEVxNmtwOUdFSEl5MlI2VjJKTXpHY2J1VDllRzdtcm5BRW1ULTYteUs2dmJPS2Q2Tm9ER0RGQm9fXzJvUkFkaDJTd1l2Q3dYdw?oc=5",
-      "category": "tech"
-    },
-    {
       "title": "Nissan cuts rare earths used in Leaf EV motor by 90% - Nikkei Asia",
       "summary": "Nissan cuts rare earths used in Leaf EV motor by 90%  Nikkei Asia",
       "source": "news.google.com",
       "date": "2026-04-18",
       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNUFY5UjNlVXpMODZyd1V3dm9NeGxmR0tIWllzbXlwVUpKTlhnRFg2SFd3d3pxZ0djam9pTmU2a1JyTjgxLU9UTDdEcTRyNjlGUFJwV0hkQVVSSkdNNU80T3RVWVFfcUFjVTcxWXQ4NFBna0xESUcxcW4yWDlGdHRGMDVmTUFuQl9QV1RNOGhVY0NHWWFWNVZyUVFCemFERUJKZTJ2RktqTjN4dFVrdmlMaWxubEU?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "Ford Will Use Apple Maps in New Self-Driving System - The New York Times",
-      "summary": "Ford Will Use Apple Maps in New Self-Driving System  The New York Times",
-      "source": "news.google.com",
-      "date": "2026-07-23",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaElLa1NpMFZLay1yNWFGZ0JJZDh5cnRjUkwwMzl6OFFWR3o3cllQbWtsOTdESGMtWWItaW5sVzJsOFpobFVLcUZkYTBNQUxoWnQxVmhLd2VQN19NT2RoMWtzZ0NpTXhXbTdpR0ZVUXpGbThaOVppbW4tM2Y5WGxjMy03TjByTzlR?oc=5",
       "category": "tech"
     },
     {
@@ -400,6 +368,38 @@
       "date": "2026-06-18",
       "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPSThTZDF1UWJKRTlZQW82a3pRQ0VjTGYxSGdQTWFDWDNhR19ZczFRVVFNLWY2dlhlcGh0Nk5sVURleFVBNmpWMXZTZGhYc0hWN2pEMS1BSS1hYjBmbEtFUXljTHpSZjkwR25CcTRlQnZiQ3EyRS03ZDJEeWVyQTBWYnN2ek9HNDZGUE9KZGFuOA?oc=5",
       "category": "market"
+    },
+    {
+      "title": "Electric Vehicle Traction Motor Market: Growth, Trends, and Future Outlook - Vocal",
+      "summary": "Electric Vehicle Traction Motor Market: Growth, Trends, and Future Outlook  Vocal",
+      "source": "news.google.com",
+      "date": "2026-05-06",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOZ0J4WWVDd1dLY3pER1NCVlIwZnNnOE9tSEs2NlBjblRNY3kzdGZ2YXF1ODZGTUk1dU90TW84N3loZ3RpX2N5cGxXRTF4QVNsY05yRW4wS0ZHYUpONGR5MFMtb0MzUnFZTjZ2TUJlSHNEOVFNWi1NU05WTnZac09mZUNPYnE0OGM2OGpvODkxb3YxUE9ScVBEYTVwWVJGazZ0?oc=5",
+      "category": "market"
+    },
+    {
+      "title": "Hyundai Motor's tech bets face headwinds as core business loses steam - The Korea Times",
+      "summary": "Hyundai Motor's tech bets face headwinds as core business loses steam  The Korea Times",
+      "source": "news.google.com",
+      "date": "2026-10-14",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOVFpkekZqSldCS0VqS3E1di0yZVZVLWdzN2lEQTJpX0wySVNfODY4dXVINF9TUG5IbFY0MTR0akZNWXBfaDlBZmpfaUJPQVFZQ29aWTRQLTFkOG5yX1ZMcUJ4VXpMbHdramdQLWwzSlU0Nnk0ZDJLdXBzenFIU2taSnI2RENyMld5YUQ5NDU5OVlUcXRldTZlcmc3OVN4OFVrcmpmekc5b1psT0xGYmRIMXdQYkpDVnBIYjFpcDFGWEQ2V0nSAcgBQVVfeXFMUE9TMzQxR3lWN1VhUjdEN19sTW9PVGpDcllKMjdsWGVndGo4WnpKM2phRG5LY25IVl9aU1BITVl2MHVlakgwWTdOOXhjUjVtRENEd2czcTJHRDJ2djdOb1NBS21NQldYR09STVhCek9sY0EtSWJlSzFlbU9lM3J5LTcyems1eTBSRGEyeWdyT08yT05LSjloQXVaNlNQYkxBdkJROV9mV0JGaGQwUkZlSUFGS0sxakRYNjdaVTF0bDA4Wms1RjFYd0U?oc=5",
+      "category": "korea"
+    },
+    {
+      "title": "Axial Flux Motors: Understanding Their Benefits and Application Uses - Hydraulics & Pneumatics",
+      "summary": "Axial Flux Motors: Understanding Their Benefits and Application Uses  Hydraulics & Pneumatics",
+      "source": "news.google.com",
+      "date": "2026-02-16",
+      "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxQS3JMaFY3bFVVQ3hRSWxRXy1nS3BTRHlmMnJhbnVUWGx2VXNXdzl0VHpBanYwdmttYndBVkhCSURmVmJFUlU1c0JqR01tYzlibWl3MlNIeWducmlpeU1VaVpzNWFudzJNRVE2REhjUWUwRVl5V29ZM1dpekdwRFdXMUt3TFlsYWQ2SWY1NFZ1UmY0LU5pT2xUMTlDeTdqdktJY1B6b0lvN2lpNlRiRXJuV3dsc2JTU0k1OXZpbVcwWkMwWTZFSEhqMjJsVHNveUR0YzVxV3U2UU04ZXJIMUFDVHN5Y0Z6bFZ4c1FXLUlNUXE0Zw?oc=5",
+      "category": "tech"
+    },
+    {
+      "title": "Ford Establishes New Product Creation and Industrialization Organization to Scale Next-Gen Vehicles and Technology - Ford From the Road",
+      "summary": "Ford Establishes New Product Creation and Industrialization Organization to Scale Next-Gen Vehicles and Technology  Ford From the Road",
+      "source": "news.google.com",
+      "date": "2026-04-15",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPNThMekRBOVpLR1pPUktTb2J6X3lweEc3RUFabl95bTEyN2stRjBvUkhVSlUway14MEREMjNZOW00YWhjbFBjTU1nZ2N3M2RFcTVDa29Kak4xejQ5OF8yS0RlS3FKOTZUcGUxSVdGMG94ZWZ0NlRFTlRGM3dlenBzWGluRnNyNlNtS0EyVUJVcktTeFFyLWtnMDcxbUVfbk5GcDZhaXlyV3prTkxGZk94TXc4d2JySEky?oc=5",
+      "category": "tech"
     }
   ],
   "insights": {
@@ -411,18 +411,18 @@
       },
       {
         "keyword": "희토류 없는 모터 기술",
-        "summary": "최근 4건의 관련 뉴스가 보고됨",
-        "relevance": 4
-      },
-      {
-        "keyword": "인휠 모터 기술",
         "summary": "최근 6건의 관련 뉴스가 보고됨",
         "relevance": 6
       },
       {
+        "keyword": "인휠 모터 기술",
+        "summary": "최근 7건의 관련 뉴스가 보고됨",
+        "relevance": 7
+      },
+      {
         "keyword": "AI 기반 모터 제어 시스템",
-        "summary": "최근 15건의 관련 뉴스가 보고됨",
-        "relevance": 15
+        "summary": "최근 18건의 관련 뉴스가 보고됨",
+        "relevance": 18
       },
       {
         "keyword": "고체 배터리 기술",

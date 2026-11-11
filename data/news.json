@@ -1,14 +1,6 @@
 {
-  "lastUpdated": "2026-11-10T03:09:30.206Z",
+  "lastUpdated": "2026-11-11T01:00:05.911Z",
   "articles": [
-    {
-      "title": "Subaru unveils 1st in-house EV prototype as it moves to go solo from Toyota - Automotive News",
-      "summary": "Subaru unveils 1st in-house EV prototype as it moves to go solo from Toyota  Automotive News",
-      "source": "news.google.com",
-      "date": "2026-10-19",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNSVpzQTJYcnp3c0tMMVdKdnlsWFhlR1hNOTBGU3ZDZ21Ic21LWkY5R0VwckJSdFlkV0dEYW5RazRNZklZWWlNTDNUT253TjJuTG9mVnhzUTM0UzktU0dSUFRMOGFzTUxfMHZ2ZVdWd0hyS1lJN01uUmpTQTA5bVBEZGpfWDhlNFpXTUhV?oc=5",
-      "category": "tech"
-    },
     {
       "title": "Hot, New Electric Cars That Are Coming Soon - Consumer Reports",
       "summary": "Hot, New Electric Cars That Are Coming Soon  Consumer Reports",
@@ -37,7 +29,7 @@
       "title": "Electric Vehicle Market Size, Share & Global Analysis, 2034 - Fortune Business Insights",
       "summary": "Electric Vehicle Market Size, Share & Global Analysis, 2034  Fortune Business Insights",
       "source": "news.google.com",
-      "date": "2026-10-19",
+      "date": "2026-10-26",
       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPbDdPM0VwRXE3dDlfTTJFS3BVX2FmU0ZLWVVDR2JLcWk5UjVnUmJQaDJ2N2E1Z1VkMWdIUzdnWXVrSFc3cHBLWmhSb3dodGpOTlZzejhjaFRBcm5fRi1jMzhzTV9CcFRqVVRVUVdWUWliWkdiMXdzLXpFMWY3M1doOW1hTHBaUnlnYV81YmMyLTU?oc=5",
       "category": "market"
     },
@@ -146,6 +138,14 @@
       "category": "tech"
     },
     {
+      "title": "How did China come to dominate the world of electric cars? - MIT Technology Review",
+      "summary": "How did China come to dominate the world of electric cars?  MIT Technology Review",
+      "source": "news.google.com",
+      "date": "2023-02-21",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNR29EaW9ZWUdjM09CaE04VENLM2VLcGxiM3VEM05ub0VSdDl3ZHMzV0dEaUVkRmFqWTRwU1dCTkFob1Rpb3ZteFFtaEprVHI2VkNXNXBDeEFDR09rOU8xQmNJa3RLblNGSXA5QUVFaWwxLXdoMC1sWmY4aTVQYkVEeEN4VjZ5Ylh2eG8xZTEyR1EzSmhJUWpHN2lKb3LSAaIBQVVfeXFMUFRJdF9wUFlaUVhaMVBDYlRfWGM1anZJYWZoZ2Y1QmFNc29RZEhybWplT25rM0lZY1RVRTI3R3k3bkJyV0YwaUxuR0o5NnNTQzNtZ0dZakpYMkl2NWN4QjRwc3NzemFMa2VrWmgwUmd6ODUweEVQMk8zOXE3UTNLcXh2Y0cyeGhBT21fQ1hNMFVqODBTSlBfN1lPQlhJdjRlc3J3?oc=5",
+      "category": "tech"
+    },
+    {
       "title": "Want a good EV? Here are the 25 best electric cars on sale right now - Top Gear",
       "summary": "Want a good EV? Here are the 25 best electric cars on sale right now  Top Gear",
       "source": "news.google.com",
@@ -159,14 +159,6 @@
       "source": "news.google.com",
       "date": "2025-04-12",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE51OWNocEhfRFhQVUtfQXZaTnlhV2Q1U2xJaUdTUi1pRE1YcTF3ZW9yaUhsVnZpNlI5eWtFZ0dxXzZydnpxRlo2QmVORDZ1MlZFaHZxbWNvNnRlbzlsUjRn?oc=5",
-      "category": "tech"
-    },
-    {
-      "title": "How did China come to dominate the world of electric cars? - MIT Technology Review",
-      "summary": "How did China come to dominate the world of electric cars?  MIT Technology Review",
-      "source": "news.google.com",
-      "date": "2023-02-21",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNR29EaW9ZWUdjM09CaE04VENLM2VLcGxiM3VEM05ub0VSdDl3ZHMzV0dEaUVkRmFqWTRwU1dCTkFob1Rpb3ZteFFtaEprVHI2VkNXNXBDeEFDR09rOU8xQmNJa3RLblNGSXA5QUVFaWwxLXdoMC1sWmY4aTVQYkVEeEN4VjZ5Ylh2eG8xZTEyR1EzSmhJUWpHN2lKb3LSAaIBQVVfeXFMUFRJdF9wUFlaUVhaMVBDYlRfWGM1anZJYWZoZ2Y1QmFNc29RZEhybWplT25rM0lZY1RVRTI3R3k3bkJyV0YwaUxuR0o5NnNTQzNtZ0dZakpYMkl2NWN4QjRwc3NzemFMa2VrWmgwUmd6ODUweEVQMk8zOXE3UTNLcXh2Y0cyeGhBT21fQ1hNMFVqODBTSlBfN1lPQlhJdjRlc3J3?oc=5",
       "category": "tech"
     },
     {
@@ -202,6 +194,14 @@
       "category": "tech"
     },
     {
+      "title": "How a power outage revealed the value of Renault Scenic’s vehicle-to-load technology - Automotive News",
+      "summary": "How a power outage revealed the value of Renault Scenic’s vehicle-to-load technology  Automotive News",
+      "source": "news.google.com",
+      "date": "2026-11-10",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBNNWtMeWhJWUtiVmNHX2ZQRVV5Qi1nNy1PU3NxZ0lucXBOMmkzWWMwU0FndWxIS2ZrZXdSV3F0LThpR3VMT2JzRDVfSmZhVTFOQUVKdW95Z09yTUUtZ3I3bEN4dVlYeGx4anhuaVhwME9fSExPRVhfcw?oc=5",
+      "category": "tech"
+    },
+    {
       "title": "Hyundai Motor Group’s Dedicated EV And Its Ultra-Speed Motor - Hyundai Motor Group",
       "summary": "Hyundai Motor Group’s Dedicated EV And Its Ultra-Speed Motor  Hyundai Motor Group",
       "source": "news.google.com",
@@ -234,6 +234,14 @@
       "category": "tech"
     },
     {
+      "title": "ProLogium and Rimac Technology Advance Next-Generation EV Battery Development - Batteries News",
+      "summary": "ProLogium and Rimac Technology Advance Next-Generation EV Battery Development  Batteries News",
+      "source": "news.google.com",
+      "date": "2026-11-10",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNSjJqU1NzQmQwYUIyQnNzOHFTZk5iN1BiUzJCS1p3dlF4NUJFMUFJV1hKQ3dHbVJNN1lpc3ZTaFpwTjJBcE9RcnJBR3R5ZWwwdHJab2hWZzZpaGM3MjFDYmVzYjZUN1NJZDNoU1RUanJaUWJxM3otdkpnRVZQWElMYkxpVThjbmxkMjBQTkk0UW5KVlpUaHJfWV9yRl9BS0ZpNTQ0ZTRkRQ?oc=5",
+      "category": "tech"
+    },
+    {
       "title": "How Electric Cars Work - HowStuffWorks",
       "summary": "How Electric Cars Work  HowStuffWorks",
       "source": "news.google.com",
@@ -242,36 +250,36 @@
       "category": "tech"
     },
     {
-      "title": "BYD's Yangwang Enters Ultra-Luxury EV Space, Unveils Altior With 1,000 Km Range - BW Auto World",
-      "summary": "BYD's Yangwang Enters Ultra-Luxury EV Space, Unveils Altior With 1,000 Km Range  BW Auto World",
+      "title": "IM6 Performance: This kind of performance and technology should cost a lot more - CarExpert",
+      "summary": "IM6 Performance: This kind of performance and technology should cost a lot more  CarExpert",
       "source": "news.google.com",
-      "date": "2026-11-09",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRFdZOHFVdmRldV9xRWhjaWs3T1l4SmJjTGltM3pwb1RWLUljVm5lZHBlU2wzMThPQ09ST2NvQnJoYU9KeWRYR0tGdHlVSWNrMEpTRGItQlFkUUZfeklPbEdVMDJJZ2trTXExb2tnSDQ0TjFrR2ZhNjRYR085Uk1hZjZ4LUEtTmgwQlBLV2J1OUNsN3ZmNFM4ZGxPNGdrYjhRWE1peVhIalE3bldxbmxSTnBNNXcweGpK?oc=5",
+      "date": "2026-11-10",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOS09aa0ZQdTZzVDJWMTRUNk5TRF9PVldNNEtSc3BNTjBjQjBzY3h6eGtwalJuQTNmbGMwYlhKTEtmaTR6UmFRaDdpVjIyMWR1R3ZNSlZjN1ktdmRMR2dzektaMjcxdjlITVluZm0yY2s2S2tWMHNEWFFuTVBCM2lCZ3dyd0dWWUtWcHp6ajdZaGlLeUNQNy1fR1l2NFFCRjJtYU1uX0dXOTVZWXBIcHRiUnVNX1drZlE?oc=5",
       "category": "tech"
     },
     {
-      "title": "Geely’s i-HEV Intelligent Hybrid Technology Offers a New Direction for Gasoline-Powered Vehicles - The Manila Times",
-      "summary": "Geely’s i-HEV Intelligent Hybrid Technology Offers a New Direction for Gasoline-Powered Vehicles  The Manila Times",
+      "title": "MG Motor Middle East showcases its new energy vehicle range at EV World Dubai 2026 - Zawya",
+      "summary": "MG Motor Middle East showcases its new energy vehicle range at EV World Dubai 2026  Zawya",
       "source": "news.google.com",
-      "date": "2026-11-09",
-      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNSE1aQkh1NE5yMUEzUWFKRU9mclNQT0M5UUxQM2VYRFpHeDJsRTRTWk15ZzRORG1VN3ZLa0dzS0czclpiWmxsaWhWNno4S0VQaWhqNDI3WkZtX0JqUy1SN0JTOFF3SElYX0xoU296Y1hmQkpaZVB2bmlvNXFBdGhYX1JkSkkwZFF4aWJOdE9BY19YLXFMdGxncEF2bG00d0ZBbG9QQUFIcWV4WTkydXRPcVFCNVBycXdpZzNIT0pDRkxMZjZwYmk2THE0RXd0c1Z6NkVlc21tdm1ySWFqaEFjSFZkRk4tbXU1Y25sM252T1NtREZuWVpxT2RB0gH_AUFVX3lxTFBPeUlNV09sNHVKTmhtU0J5U2ZITVZUMjJjQmF0TmVwM0s2b0MzU1Zpd2NtZHU3WTV5aHFyd2tGYXBhTVF0UzNJQ1VYLVU5Rmd2RjI2eHg5czRjODV3alFuVjhYdGNkTTI1RWRnWU5GZW9wV2lVZVpKdi1WaG5mM0hGaWgtTXNJbV9Qa1o0UXJQYVhyVnFsUi1rS0xsT195VHd4TldhTUdIRXd6d2gwbW5kT1VmbVY0TlkzQ1ZfNVNIcnpoakVtQWdBTDVYUTdtd2E3ZlRHQmlPbFNraDZZXzkza2VZb0xhR2FSejV4THRyRFp6bzgzQ0NEcmRxTXlwQQ?oc=5",
+      "date": "2026-11-10",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQamZod0FSN1F4eXZ5LTlPYWJOc3JuZHJQU3VNTkcwenVPNUN5RGE3dVlFQVF1RVpOTTVOOEhYRzIwYXBzMm5GYzZTekV1R2dfTENuSnhaMllPbFdrNUkwR0lGd3JjNDNhd3NfQVMwS190ZTlJOGNkTVRUY3h5aG9zYVRQMzBsdE1hTWRNdk5FOUNTbVZpSGZQbkdLS2pjWnpMb05VMHQ2OGFpcmJTMm82QnY0bTRvSi11SEowYlVFeTFuTWtnVWV2NTRjcWhvcjNBSTRfdGtRdzlNY1h0?oc=5",
       "category": "tech"
     },
     {
-      "title": "Chery Expands Electric and Hybrid Car Options in Indonesia, Chery Q Prices Start from IDR 249.9 Million - Aktualita.co",
-      "summary": "Chery Expands Electric and Hybrid Car Options in Indonesia, Chery Q Prices Start from IDR 249.9 Million  Aktualita.co",
+      "title": "PROTON CONFIRMS OFFICIAL NAME OF NEW HYBRID TECHNOLOGY DRIVETRAIN - PROTON - INSPIRING CONNECTIONS",
+      "summary": "PROTON CONFIRMS OFFICIAL NAME OF NEW HYBRID TECHNOLOGY DRIVETRAIN  PROTON - INSPIRING CONNECTIONS",
       "source": "news.google.com",
-      "date": "2026-11-09",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPSEJPQnpkV1g2aGNhV0ZjenAxMzhJdjA0UGRlbXRXRjBfN2hQNUQyRG5OVmFZTkRvbVFyYzB2X0c2NUxGemdQWDQzZ1FreFRYdkRzVmtlczRlR29YbGh3c3ZvSXFFMGM3MGQ4REp2cnNBQUF3LVlwVlhjaFlicWVncjVLQU5xeEJvWXYzYUxNYTJ1dXhORlNqZHkyUzBnODN5YV8zbnh4SVVSbGZKLUZnY0M3N2g2Sll1NWtGV0ZWS21HLWlaYU02MXZlcUdVNXV1X2c?oc=5",
+      "date": "2026-11-10",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOWGEwcWpIcFp5T19sdDdUNU8ya3N4aTFLX0VMeDNhUWdIVnRKelJuQkRiaG81NXpPR0FHN0dSX3J3MWJ1ZmtkNk4tQWgzWXY2LTJabTlueU1BYWN5MXhGU28tdlBEWnZKMU9pcjloLWtBbWVDZTEyeFd3dUViUmNyckZmUE11WTRXSXZocDdSa3UwQmdTMUxBMElXU285TjE3ODhMekJ4QW9SU09fRUFnajJ4QQ?oc=5",
       "category": "tech"
     },
     {
-      "title": "[Exclusive] Avoiding the side with children just before a collision… Hyundai Motor Group unveils autonomous driving technology for passenger protection - 머니투데이",
-      "summary": "[Exclusive] Avoiding the side with children just before a collision… Hyundai Motor Group unveils autonomous driving technology for passenger protection  머니투데이",
+      "title": "Geely's I-HEV Intelligent Hybrid Technology Offers A New Direction For Gasoline-Powered Vehicles Arabian Post - Menafn",
+      "summary": "Geely's I-HEV Intelligent Hybrid Technology Offers A New Direction For Gasoline-Powered Vehicles Arabian Post  Menafn",
       "source": "news.google.com",
-      "date": "2026-11-09",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBQbXJXSnMyRG1lYnFvc2ZjUzlhU1ljd3Q4ZGtyLVFwX3o5cmNJenhneWVfa3hMS18wRkpPV0daM0stTUpTaTBjWXpsYkZ1X0NfU2p3M2xLbmNkRHZmMkpQeFBWMTk3ZE1rYXNSMEFDbkU?oc=5",
-      "category": "korea"
+      "date": "2026-11-10",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOanNncEs5dURKbGVyVVdOMzFBR1RvVGltY3UtLXpHdEpIWkFrRTM5ekdGNFVPTDhLcGxKMC1XUElSbUx0YUJqZDB4VlFNbm40WjFZeEVhUFNKNmNhTXdQQWE2UWRFOXdNbVVwdkJaSTFzNWZtcms5Z2hQdEYyb0FUMm54RW9nNXZwSDVPR3VXMU5aanN6SWZGQzJUWVpNYnNhU3ZXcjctZjRYcVNSUDl4SnlVUGhsSlhPdmEydnJGOGY5RjhFT2Q5enNybXRONUtoSGpGUQ?oc=5",
+      "category": "tech"
     },
     {
       "title": "Ford Motor Company - Britannica",
@@ -354,14 +362,6 @@
       "category": "market"
     },
     {
-      "title": "From mine to magnet to motor: How GM is building critical supply chains for the long term - General Motors",
-      "summary": "From mine to magnet to motor: How GM is building critical supply chains for the long term  General Motors",
-      "source": "news.google.com",
-      "date": "2026-10-02",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPd0I0Nk9MUzNyWDFXdDEtWm9sUEZzVmNnMVF4dDdfbHQ2UVV3TXg3LVo2dHV2eDlFV3BOQ1Y0bEdRY1owZ3RpWjFJSlItdlUxXzVzSkF6R1pIQ1RKNWdPb0d5YWZDZXBaTU5QMTlONV9qTGJSZnBPeHlaVndoR18ydHp2VWo2MzBYVjB2TDBmdE5ab1RDZ2c?oc=5",
-      "category": "tech"
-    },
-    {
       "title": "Saietta to construct novel electric motor manufacturing facility in Sunderland - Innovation News Network",
       "summary": "Saietta to construct novel electric motor manufacturing facility in Sunderland  Innovation News Network",
       "source": "news.google.com",
@@ -378,20 +378,20 @@
       "category": "tech"
     },
     {
-      "title": "China’s electric vehicle revolution reshapes global auto market - HSBC Corporate and Institutional Banking",
-      "summary": "China’s electric vehicle revolution reshapes global auto market  HSBC Corporate and Institutional Banking",
+      "title": "Ford Establishes New Product Creation and Industrialization Organization to Scale Next-Gen Vehicles and Technology - Ford From the Road",
+      "summary": "Ford Establishes New Product Creation and Industrialization Organization to Scale Next-Gen Vehicles and Technology  Ford From the Road",
       "source": "news.google.com",
-      "date": "2025-04-14",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxON0J5Qlg3WmRkRTRqSEZzR2JfWHhaTFFPSHVIOEhCWUpGM0pOalZ4WGVhb29wMDA5aG5IaWVwaHFnWVJpNzEyclgzUldaQU5ndUlZQ2laTXloYXVZRE9TOVJuM29RSEQzMkl3c0xNbDVNUy1VU253aHNJbFRRZUFhM25naTBIYmlTcmRSZFJvdnJPTnRtcGRwd3B3UEpnNnZDcDRnZnZTeUduQ1E?oc=5",
-      "category": "market"
+      "date": "2026-04-15",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPNThMekRBOVpLR1pPUktTb2J6X3lweEc3RUFabl95bTEyN2stRjBvUkhVSlUway14MEREMjNZOW00YWhjbFBjTU1nZ2N3M2RFcTVDa29Kak4xejQ5OF8yS0RlS3FKOTZUcGUxSVdGMG94ZWZ0NlRFTlRGM3dlenBzWGluRnNyNlNtS0EyVUJVcktTeFFyLWtnMDcxbUVfbk5GcDZhaXlyV3prTkxGZk94TXc4d2JySEky?oc=5",
+      "category": "tech"
     },
     {
-      "title": "Ford is Reinventing Vehicle Assembly and Why America Should Care - Ford From the Road",
-      "summary": "Ford is Reinventing Vehicle Assembly and Why America Should Care  Ford From the Road",
+      "title": "How China’s BYD surpassed Tesla with production and battery tech - reshaping the global EV market - Automotive Manufacturing Solutions",
+      "summary": "How China’s BYD surpassed Tesla with production and battery tech - reshaping the global EV market  Automotive Manufacturing Solutions",
       "source": "news.google.com",
-      "date": "2025-08-11",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOamFuRzlpR2YzWEVoY0tkM2ZCMWY0NmgtRFlUS1h5Tnl4d1ZkSk1ia1ZtaDZTS1QyWUllaHAxZFVXWk8xX2VHcFJaLV9YbHZIbXhWSDVua2Z3S2RVbWpqQUI0bDJsOW4wcGtMWlBCUTBQem9mLWFvblVuNzQ2aUdtNkRuQVZaSHNaWE1uZGZOVDFMeHdjTzhPb0JvX1FqOHpuSjc3SDFhYzF6S0tCbG0xTHBrQlkxdw?oc=5",
-      "category": "tech"
+      "date": "2025-02-25",
+      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNbUlwV0p6bXBOajBqdUVkMF93dEdfR0IyNmwxVnJXRUpDMG0zeDkzNXFsMEZwX0xYRGZldzdxaUxnTFZYQzY4MndLNzFObHl3QkJFcEktVXBGSmNyMTE0VERKUXl6UGlmNmVYakJVNGZHQ1RjazE3UmF6bFJmWUdsNkpDN3BTblBQQ05EcHIxVlF6c1p5TjMwNzR1YllvaE0wRVU4bFZyZmpta2M4V0YwNjRlX2k0T0RKdHR2ZzZsM0tlNGl3RV9iMzRZTkZPQWpuNE5sM0w4UjZQakJuSFU0WW1JMERZaDVmaTh6Q3hSVXo1ZFFZMkFHU2l3?oc=5",
+      "category": "market"
     },
     {
       "title": "Inside the Future of Manufacturing Innovation | Hyundai Motor Group E–FOREST TECH DAY - Hyundai Motor Group",
@@ -411,8 +411,8 @@
       },
       {
         "keyword": "희토류 없는 모터 기술",
-        "summary": "최근 22건의 관련 뉴스가 보고됨",
-        "relevance": 22
+        "summary": "최근 23건의 관련 뉴스가 보고됨",
+        "relevance": 23
       },
       {
         "keyword": "인휠 모터 기술",
